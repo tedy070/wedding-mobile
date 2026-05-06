@@ -3,9 +3,8 @@
 <html lang="id"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Seserahan &amp; Mahar Management</title>
+<title>Persyaratan Legal - Serene Nuptials</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
   tailwind.config = {
@@ -146,9 +145,7 @@
   }
 </script>
 <style>
-        .material-symbols-outlined {
-          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;700&display=swap');
     </style>
 <style>
     body {
@@ -156,158 +153,123 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-surface to-secondary-container/30 text-on-surface font-body-md text-body-md antialiased md:hidden pb-[88px]">
-<!-- Top App Bar -->
-<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center px-6 py-4 w-full border-b border-outline-variant/20">
+<body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col relative pb-[100px]">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
+<div class="font-headline-md text-headline-md text-primary tracking-tight">Union &amp; Grace</div>
 <div class="flex items-center gap-4">
-<button class="text-primary cursor-pointer transition-opacity active:opacity-80">
-<span class="material-symbols-outlined text-2xl">arrow_back</span>
-</button>
-<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Seserahan &amp; Mahar</h1>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" data-icon="search">search</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" data-icon="notifications">notifications</span>
+<a class="inline-flex items-center" href="{{DATA:SCREEN:SCREEN_72}}"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" data-icon="account_circle">account_circle</span></a>
 </div>
-<button class="text-primary cursor-pointer transition-opacity active:opacity-80">
-<span class="material-symbols-outlined text-2xl">more_vert</span>
-</button>
 </header>
-<main class="px-6 py-gutter flex flex-col gap-section-gap">
-<!-- Summary Dashboard (Bento Style) -->
-<section class="flex flex-col gap-4">
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-outline-variant/30 flex flex-col gap-4 shadow-[0_8px_30px_rgb(121,84,101,0.06)]">
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile py-gutter flex flex-col gap-10 max-w-container-max mx-auto w-full md:px-margin-desktop md:py-margin-desktop">
+<!-- Header Section -->
+<section class="flex flex-col gap-unit">
+<h1 class="font-headline-display text-headline-display text-primary">Persyaratan Legal</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Lengkapi dokumen penting untuk pendaftaran administrasi pernikahan KUA.</p>
+</section>
+<!-- Progress Indicator -->
+<section class="flex flex-col gap-unit">
 <div class="flex justify-between items-end">
-<div>
-<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Progress Keseluruhan</h2>
-<p class="font-body-lg text-body-lg font-medium text-primary">18 / 24 Item Siap</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Progress Kelengkapan</span>
+<span class="font-body-md text-body-md text-primary font-medium">2 / 6 Selesai</span>
 </div>
-<span class="font-label-sm text-label-sm text-secondary">75%</span>
-</div>
-<div class="w-full h-1 bg-primary-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-3/4 rounded-full"></div>
-</div>
-</div>
-<div class="bg-gradient-to-br from-primary-container to-secondary-container/50 rounded-xl p-6 border border-primary-fixed-dim/30 flex flex-col gap-2 shadow-[0_8px_30px_rgb(121,84,101,0.08)]">
-<h2 class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Estimasi Biaya</h2>
-<p class="font-headline-md text-headline-md text-on-primary-container">Rp 25.500.000</p>
-<div class="flex items-center gap-2 mt-2">
-<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-<p class="font-label-sm text-label-sm text-secondary">Sesuai Anggaran</p>
-</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary-fixed-dim to-secondary-fixed w-1/3 rounded-full"></div>
 </div>
 </section>
-<!-- List Section -->
-<section class="flex flex-col gap-6">
-<!-- Tabs -->
-<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide -mx-6 px-6">
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm">Semua</button>
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white/60 border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm backdrop-blur-sm">Pihak Pria</button>
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white/60 border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm backdrop-blur-sm">Pihak Wanita</button>
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white/60 border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm backdrop-blur-sm">Mahar</button>
+<!-- Document List (Bento-style list) -->
+<section class="flex flex-col gap-4">
+<!-- Completed Item -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-start gap-4 shadow-sm">
+<div class="mt-1 flex-shrink-0 text-secondary">
+<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
-<!-- Items -->
-<div class="flex flex-col gap-4">
-<!-- Item 1 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-3xl">diamond</span>
-</div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Cincin Kawin &amp; Kalung</h3>
-<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-1 rounded">Siap</span>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Perhiasan • Mahar</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 15.000.000</p>
+<div class="flex-grow flex flex-col gap-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Formulir N1</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Surat Pengantar Nikah dari Kelurahan.</p>
 </div>
 </div>
-<!-- Item 2 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden relative">
-<img alt="" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A beautifully wrapped wedding gift box with soft silk ribbons, styled in a minimalist, high-key lighting environment. The aesthetic is modern editorial, featuring a pale champagne and white color palette. Subtle natural shadows anchor the box, creating a serene, premium wedding preparation mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2dqVcD0harG_bSZruBwSDKo7FRm9cc-QHHvaaBfRy08wPEtRstbTYIwLiyQjRpVQ-utTFlFAaGlY-06HgDLxW2KHonXoN2z8aP6xk8pzVPccWXZ7oBOMqXVfsXgDA_TOWNyJx_7g--E1a3yiRV1qnKHEqTBAFkrpu7DQyxF9vIdzXOJe7nj4_Rp7vaQ62NPnad38nk1hKZD0CE6qePjSUdzRJJ6fyrVs7c3AQShYk7lA3SfkbPRmJ3pMRxmDQkmf1Hqa3v4aD763l"/>
+<!-- Completed Item -->
+<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-start gap-4 shadow-sm">
+<div class="mt-1 flex-shrink-0 text-secondary">
+<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Seperangkat Alat Sholat</h3>
-<span class="font-label-sm text-label-sm bg-primary-container text-on-primary-container px-2 py-1 rounded">Sedang Dikemas</span>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Perlengkapan Ibadah • Pria</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 1.500.000</p>
+<div class="flex-grow flex flex-col gap-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Fotokopi KTP &amp; KK</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Identitas diri kedua calon mempelai.</p>
 </div>
 </div>
-<!-- Item 3 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-3xl">shopping_bag</span>
+<!-- In Progress Item -->
+<div class="bg-primary-container border border-outline-variant p-4 rounded-xl flex items-start gap-4 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.05)]">
+<div class="mt-1 flex-shrink-0 text-primary">
+<span class="material-symbols-outlined" data-icon="pending">pending</span>
 </div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Tas &amp; Sepatu</h3>
-<span class="font-label-sm text-label-sm bg-surface-variant text-on-surface-variant px-2 py-1 rounded">Sudah Dibeli</span>
+<div class="flex-grow flex flex-col gap-2">
+<div>
+<h3 class="font-body-lg text-body-lg text-primary font-semibold">Formulir N2 &amp; N3</h3>
+<p class="font-body-md text-[14px] text-on-primary-container leading-tight">Permohonan &amp; Persetujuan Mempelai.</p>
 </div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Fashion • Pria</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 4.000.000</p>
+<button class="self-start text-label-sm font-label-sm uppercase text-primary border-b border-primary pb-0.5 mt-2 hover:opacity-80 transition-opacity">Unggah Dokumen</button>
 </div>
 </div>
-<!-- Item 4 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-3xl">face</span>
+<!-- Pending Item -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex items-start gap-4 opacity-80">
+<div class="mt-1 flex-shrink-0 text-outline">
+<span class="material-symbols-outlined" data-icon="radio_button_unchecked">radio_button_unchecked</span>
 </div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Skincare Set</h3>
-<span class="font-label-sm text-label-sm border border-outline-variant text-on-surface-variant px-2 py-1 rounded">Belum Dibeli</span>
+<div class="flex-grow flex flex-col gap-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Formulir N4</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Surat Keterangan Tentang Orang Tua.</p>
 </div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Perawatan • Pria</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 2.500.000</p>
 </div>
+<!-- Pending Item -->
+<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex items-start gap-4 opacity-80">
+<div class="mt-1 flex-shrink-0 text-outline">
+<span class="material-symbols-outlined" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</div>
+<div class="flex-grow flex flex-col gap-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Pasfoto 2x3 &amp; 3x4</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Latar belakang biru, masing-masing 4 lembar.</p>
 </div>
 </div>
 </section>
 </main>
-<!-- FAB -->
-<a class="fixed right-6 bottom-[104px] w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-[0_10px_25px_rgb(121,84,101,0.3)] z-40 transition-transform active:scale-95" href="#">
-<span class="material-symbols-outlined text-3xl">add</span>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant flex justify-around items-center pt-3 pb-6 px-2 z-50">
+<!-- Inactive: Overview -->
+<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_30}}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-[10px] uppercase">Ringkasan</span>
 </a>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 w-full bg-surface-container-lowest/90 backdrop-blur-md pt-2 pb-6 px-2 flex justify-between items-center z-50 border-t border-outline-variant/20 shadow-[0_-4px_20px_rgb(121,84,101,0.05)]"><!-- Overview -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_30}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">dashboard</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Ringkasan</span>
+<!-- Inactive: Budget -->
+<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_23}}">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-[10px] uppercase">Anggaran</span>
 </a>
-<!-- Budget -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_23}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">payments</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Anggaran</span>
+<!-- Inactive: Seserahan -->
+<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_32}}">
+<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
+<span class="font-label-sm text-[10px] uppercase">Seserahan</span>
 </a>
-<!-- Seserahan (Active) -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_32}}">
-<div class="px-3 py-1 rounded-full transition-colors duration-200 cursor-pointer active:opacity-80 text-on-surface-variant">
-<span class="material-symbols-outlined text-2xl text-on-surface-variant">redeem</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider uppercase text-center w-full truncate px-1 text-on-surface-variant">Seserahan</span>
+<!-- Inactive: Guest List -->
+<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_60}}">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-[10px] uppercase">Tamu</span>
 </a>
-<!-- Guest List -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_60}}">
-<div class="px-3 py-1 rounded-full transition-colors duration-200 cursor-pointer active:opacity-80 bg-secondary-container text-on-secondary-container shadow-sm">
-<span class="material-symbols-outlined text-2xl font-bold text-on-surface" style="font-variation-settings: 'FILL' 1;">group</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider uppercase text-center w-full truncate px-1 font-bold text-on-surface">Tamu</span>
+<!-- Active: Documents -->
+<a class="flex flex-col items-center gap-1 bg-secondary-container text-on-secondary-container rounded-xl px-3 py-2 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_44}}">
+<span class="material-symbols-outlined" data-icon="description" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-sm text-[10px] uppercase">Dokumen</span>
 </a>
-<!-- Documents -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_44}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">description</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Dokumen</span>
+<!-- Inactive: Vendors -->
+<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_9}}">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-sm text-[10px] uppercase">Vendor</span>
 </a>
-<!-- Vendors -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_9}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">storefront</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Vendor</span>
-</a></nav>
-</body></html>
+</nav>
+<a aria-label="Tambah Dokumen" class="fixed bottom-[100px] right-margin-mobile md:right-margin-desktop z-40 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:bg-primary-fixed-dim active:scale-95 transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:TAMBAH_DOKUMEN}}">
+<span class="material-symbols-outlined text-[32px]" data-icon="add">add</span>
+</a></body></html>
