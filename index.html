@@ -3,293 +3,180 @@
 <html lang="id"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Direktori Vendor</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<title>Tambah Vendor - Union &amp; Grace</title>
+<!-- Google Fonts: Noto Serif & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
 <script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        "colors": {
-                "primary-fixed": "#ffd8e7",
-                "on-primary": "#ffffff",
-                "surface-container-lowest": "#ffffff",
-                "on-tertiary-fixed-variant": "#454747",
-                "inverse-primary": "#e9bacd",
-                "secondary-fixed-dim": "#9fcfd5",
-                "surface-container-high": "#eae8e7",
-                "on-error": "#ffffff",
-                "background": "#fbf9f8",
-                "surface": "#fbf9f8",
-                "on-tertiary": "#ffffff",
-                "secondary": "#37656b",
-                "surface-tint": "#795465",
-                "on-secondary-fixed-variant": "#1d4d53",
-                "on-primary-fixed": "#2e1221",
-                "on-primary-fixed-variant": "#5f3c4d",
-                "secondary-container": "#b8e8ee",
-                "tertiary-fixed-dim": "#c6c6c7",
-                "outline-variant": "#d2c3c7",
-                "primary-fixed-dim": "#e9bacd",
-                "surface-container-low": "#f5f3f3",
-                "on-tertiary-fixed": "#1a1c1c",
-                "on-primary-container": "#765162",
-                "on-surface-variant": "#4f4448",
-                "on-error-container": "#93000a",
-                "inverse-surface": "#303030",
-                "outline": "#817478",
-                "inverse-on-surface": "#f2f0f0",
-                "error-container": "#ffdad6",
-                "error": "#ba1a1a",
-                "on-secondary-fixed": "#001f23",
-                "on-secondary": "#ffffff",
-                "surface-bright": "#fbf9f8",
-                "primary": "#795465",
-                "surface-dim": "#dbd9d9",
-                "surface-container": "#efeded",
-                "on-tertiary-container": "#5a5c5c",
-                "surface-container-highest": "#e4e2e2",
-                "on-secondary-container": "#3b6a6f",
-                "tertiary-container": "#d4d5d5",
-                "tertiary-fixed": "#e2e2e2",
-                "tertiary": "#5d5f5f",
-                "secondary-fixed": "#bbebf1",
-                "primary-container": "#f8c8dc",
-                "on-background": "#1b1c1c",
-                "surface-variant": "#e4e2e2",
-                "on-surface": "#1b1c1c"
-        },
-        "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-        },
-        "spacing": {
-                "section-gap": "80px",
-                "margin-desktop": "40px",
-                "margin-mobile": "16px",
-                "container-max": "1200px",
-                "unit": "8px",
-                "gutter": "24px"
-        },
-        "fontFamily": {
-                "headline-md": [
-                        "Noto Serif"
-                ],
-                "headline-display": [
-                        "Noto Serif"
-                ],
-                "label-sm": [
-                        "Inter"
-                ],
-                "body-md": [
-                        "Inter"
-                ],
-                "body-lg": [
-                        "Inter"
-                ],
-                "headline-lg": [
-                        "Noto Serif"
-                ]
-        },
-        "fontSize": {
-                "headline-md": [
-                        "24px",
-                        {
-                                "lineHeight": "1.4",
-                                "fontWeight": "400"
-                        }
-                ],
-                "headline-display": [
-                        "48px",
-                        {
-                                "lineHeight": "1.2",
-                                "letterSpacing": "-0.02em",
-                                "fontWeight": "400"
-                        }
-                ],
-                "label-sm": [
-                        "12px",
-                        {
-                                "lineHeight": "1",
-                                "letterSpacing": "0.05em",
-                                "fontWeight": "600"
-                        }
-                ],
-                "body-md": [
-                        "16px",
-                        {
-                                "lineHeight": "1.6",
-                                "fontWeight": "400"
-                        }
-                ],
-                "body-lg": [
-                        "18px",
-                        {
-                                "lineHeight": "1.6",
-                                "fontWeight": "400"
-                        }
-                ],
-                "headline-lg": [
-                        "32px",
-                        {
-                                "lineHeight": "1.3",
-                                "fontWeight": "400"
-                        }
-                ]
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fbf9f8",
+                    "surface-bright": "#fbf9f8",
+                    "surface-container": "#efeded",
+                    "secondary-container": "#b8e8ee",
+                    "primary-fixed-dim": "#e9bacd",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#d4d5d5",
+                    "surface-container-high": "#eae8e7",
+                    "on-surface": "#1b1c1c",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1b1c1c",
+                    "primary-fixed": "#ffd8e7",
+                    "surface-container-highest": "#e4e2e2",
+                    "primary": "#795465",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f5f3f3",
+                    "on-primary-fixed": "#2e1221",
+                    "surface-variant": "#e4e2e2",
+                    "on-secondary-fixed": "#001f23",
+                    "surface-dim": "#dbd9d9",
+                    "inverse-primary": "#e9bacd",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#817478",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-surface-variant": "#4f4448",
+                    "secondary-fixed-dim": "#9fcfd5",
+                    "error-container": "#ffdad6",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-primary-container": "#765162",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "secondary": "#37656b",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#303030",
+                    "tertiary-fixed": "#e2e2e2",
+                    "tertiary": "#5d5f5f",
+                    "on-secondary-fixed-variant": "#1d4d53",
+                    "secondary-fixed": "#bbebf1",
+                    "on-tertiary-container": "#5a5c5c",
+                    "primary-container": "#f8c8dc",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-secondary-container": "#3b6a6f",
+                    "on-primary-fixed-variant": "#5f3c4d",
+                    "surface-tint": "#795465",
+                    "background": "#fbf9f8",
+                    "outline-variant": "#d2c3c7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "headline-display": ["Noto Serif"],
+                    "headline-lg": ["Noto Serif"],
+                    "headline-md": ["Noto Serif"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                    "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                    "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                    "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+            }
+          }
         }
-},
-    },
-  }
-</script>
+      }
+    </script>
+<style>
+        /* Custom styles to handle specific minimal input focus effects */
+        .minimal-input:focus {
+            border-image: linear-gradient(to right, #ffd8e7, #bbebf1) 1;
+        }
+    </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
-</head>
-<body class="bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/30 text-on-surface font-body-md text-body-md antialiased md:hidden pb-[80px]">
-<!-- TopAppBar -->
-<header class="w-full sticky top-0 z-50 bg-surface/80 backdrop-blur-md dark:bg-surface-dim/80 border-b border-outline-variant/50 dark:border-outline/50 flex justify-between items-center px-margin-mobile py-4">
-<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">
-            Union &amp; Grace
-        </div>
-<div class="flex items-center gap-3 text-primary dark:text-primary-fixed-dim">
-<span class="material-symbols-outlined cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200">notifications</span>
-<a class="material-symbols-outlined cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_72}}">account_circle</a>
+  </head>
+<body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Ambient Background Element -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute -top-[20%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-br from-primary-fixed/20 to-secondary-fixed/20 blur-[80px]"></div>
 </div>
+<!-- Task-focused Top App Bar (Replaces global nav for transactional screen) -->
+<header class="flex items-center justify-between px-margin-mobile py-4 sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300">
+<button class="text-on-surface p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 cursor-pointer flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight absolute left-1/2 -translate-x-1/2">Tambah Vendor</h1>
+<div class="w-10"></div> <!-- Spacer to ensure title centering -->
 </header>
-<main class="px-margin-mobile py-gutter flex flex-col gap-section-gap">
-<!-- Header Section -->
-<section class="flex flex-col gap-2">
-<h1 class="font-headline-display text-headline-display text-on-surface">Direktori Vendor</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Kelola daftar rekanan dan biaya untuk hari istimewa Anda.</p>
-</section>
-<!-- Summary Widget (Bento Style) -->
-<section class="grid grid-cols-2 gap-unit">
-<div class="bg-surface/60 backdrop-blur-sm border border-outline-variant/50 shadow-sm rounded-xl p-gutter flex flex-col justify-between">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Vendor</span>
-<span class="font-headline-md text-headline-md text-primary mt-3">12</span>
+<!-- Main Form Area -->
+<main class="flex-grow px-margin-mobile py-6 pb-32">
+<div class="bg-surface-container-lowest/70 backdrop-blur-xl border border-secondary-fixed-dim/30 rounded-xl p-6 shadow-[0_8px_32px_rgba(176,224,230,0.15)] max-w-lg mx-auto">
+<form class="space-y-6">
+<!-- Vendor Name Input -->
+<div class="relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1 uppercase tracking-widest transition-colors group-focus-within:text-primary" for="vendor_name">Nama Vendor</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/40 focus:ring-0 focus:border-primary transition-colors minimal-input" id="vendor_name" placeholder="Misal: The Grand Blooming" type="text"/>
 </div>
-<div class="bg-primary-container border border-outline-variant/50 shadow-sm rounded-xl p-gutter flex flex-col justify-between">
-<span class="font-label-sm text-label-sm text-on-primary-container uppercase">Total Biaya</span>
-<span class="font-body-lg text-body-lg font-medium text-on-primary-container mt-3">Rp 125.000.000</span>
-</div>
-</section>
-<!-- Search & Filter -->
-<section class="flex gap-2">
-<div class="relative flex-grow shadow-sm rounded-lg overflow-hidden border border-outline-variant/50">
-<span class="material-symbols-outlined absolute left-unit top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full bg-surface/80 border-none focus:ring-2 focus:ring-secondary pl-10 py-unit font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant transition-all" placeholder="Cari vendor..." type="text"/>
-</div>
-<button class="p-unit border border-outline-variant/50 shadow-sm rounded-lg bg-surface/80 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined">filter_list</span>
-</button>
-</section>
-<!-- Vendor List -->
-<section class="flex flex-col gap-gutter">
-<!-- Vendor Card 1 -->
-<article class="bg-surface/80 backdrop-blur-sm border border-outline-variant/50 shadow-md rounded-xl overflow-hidden flex flex-col">
-<div class="h-32 w-full bg-surface-container-high relative">
-<img alt="Vendor Cover" class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="A soft, desaturated photo of an elegant wedding venue hall with floral arrangements. The setting is bright and airy, reflecting a serene and premium modern aesthetic. The color palette is muted with champagne and soft white tones, emphasizing a clean, luxurious atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmV5noRCdBUj0rcYcUplMqD_RsA7UwXA5ydtnj7u230XGG55jbLssAJqPsy_fWCo368LZXvZ9Z8cAsNjMzS6X_dWskifRhY_mIdoQOE2mXUoTHvp4vSl0RCvJPUGY-8WUNOPXcKrvhXvtPxyt6twqR_5PeJOJV24SCJcXNVrCX180V6vfKiCq5tQWTZBuZhJglX5fmgsx0zhQuIwyRFPjlXHzr5F3RSOIEhbeul-Xf5iqhgJhy4DPFeaiJNze6il7_HcXH6tzWQ2ZT"/>
-<div class="absolute top-unit right-unit bg-surface/90 backdrop-blur-sm px-unit py-1 rounded-DEFAULT border border-outline-variant/50">
-<span class="font-label-sm text-label-sm text-primary uppercase">Katering</span>
+<!-- Category Dropdown -->
+<div class="relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1 uppercase tracking-widest transition-colors group-focus-within:text-primary" for="vendor_category">Kategori</label>
+<div class="relative">
+<select class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 pr-8 text-body-md font-body-md text-on-surface appearance-none focus:ring-0 focus:border-primary transition-colors minimal-input cursor-pointer" id="vendor_category">
+<option class="text-on-surface-variant" disabled="" selected="" value="">Pilih Kategori</option>
+<option value="venue">Venue &amp; Lokasi</option>
+<option value="catering">Katering</option>
+<option value="photography">Fotografi &amp; Videografi</option>
+<option value="decoration">Dekorasi &amp; Florist</option>
+<option value="attire">Gaun &amp; Jas</option>
+<option value="makeup">Make Up Artist</option>
+<option value="entertainment">Hiburan &amp; Musik</option>
+<option value="other">Lainnya</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
 </div>
 </div>
-<div class="p-gutter flex flex-col gap-3">
-<div class="flex justify-between items-start">
-<div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Rasa Nusantara Catering</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Paket Prasmanan Mewah</p>
+<!-- Phone Input -->
+<div class="relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1 uppercase tracking-widest transition-colors group-focus-within:text-primary" for="vendor_phone">No. Telepon / WhatsApp</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/40 focus:ring-0 focus:border-primary transition-colors minimal-input" id="vendor_phone" placeholder="+62 812 3456 7890" type="tel"/>
 </div>
-<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shadow-sm">
-<span class="material-symbols-outlined text-sm">check</span>
+<!-- Email Input -->
+<div class="relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1 uppercase tracking-widest transition-colors group-focus-within:text-primary" for="vendor_email">Email</label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/40 focus:ring-0 focus:border-primary transition-colors minimal-input" id="vendor_email" placeholder="hello@vendor.com" type="email"/>
 </div>
+<!-- Notes Textarea -->
+<div class="relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-1 uppercase tracking-widest transition-colors group-focus-within:text-primary" for="vendor_notes">Catatan Tambahan</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/40 focus:ring-0 focus:border-primary transition-colors minimal-input resize-none" id="vendor_notes" placeholder="Informasi detail mengenai paket atau kontak person..." rows="3"></textarea>
 </div>
-<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
-<div class="flex flex-col gap-2 font-body-md text-body-md">
-<div class="flex justify-between items-center">
-<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span> 0812-3456-7890</span>
+</form>
 </div>
-<div class="flex justify-between items-center">
-<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> hello@rasanusantara.com</span>
-</div>
-</div>
-<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
-<div class="flex justify-between items-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Estimasi Biaya</span>
-<span class="font-body-lg text-body-lg font-medium text-on-surface">Rp 45.000.000</span>
-</div>
-</div>
-</article>
-<!-- Vendor Card 2 -->
-<article class="bg-surface/80 backdrop-blur-sm border border-outline-variant/50 shadow-md rounded-xl overflow-hidden flex flex-col">
-<div class="h-32 w-full bg-surface-container-high relative">
-<img alt="Vendor Cover" class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="A soft, desaturated close-up of a bridal bouquet featuring white roses and subtle greenery. The mood is calm and elegant, fitting a high-end editorial wedding theme. Lighting is soft and natural, enhancing the sophisticated, minimalist color palette of whites and muted greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgeSlvnUXjlyqlaKejuNCRiB1R00umfB7EhqajLMam0sG2YZ8dP7Zu88mnMem-gDn86-D388X5S7v1QaUjdtq_dN1dKWNZdQHYVOulGZC4MUw9T23vRLOxlgUh0JrudI__hYc-uHbXb4QQJ03rEYm5tdt2lYxU2rrAqAVlflufSp5UwHTu091omu0vQypQgN_iiZojo6LDTyNUl6D4TYySnlMlpFAO_39lw4-DJFrj9WxXmvEDePzbtmECzvI28SPkZxNbXi07iehU"/>
-<div class="absolute top-unit right-unit bg-surface/90 backdrop-blur-sm px-unit py-1 rounded-DEFAULT border border-outline-variant/50">
-<span class="font-label-sm text-label-sm text-primary uppercase">Dekorasi</span>
-</div>
-</div>
-<div class="p-gutter flex flex-col gap-3">
-<div class="flex justify-between items-start">
-<div>
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Bloom &amp; Co.</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Dekorasi Pelaminan &amp; Bunga</p>
-</div>
-<div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant bg-surface">
-<span class="material-symbols-outlined text-sm">pending</span>
-</div>
-</div>
-<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
-<div class="flex flex-col gap-2 font-body-md text-body-md">
-<div class="flex justify-between items-center">
-<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span> 0898-7654-3210</span>
-</div>
-<div class="flex justify-between items-center">
-<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> info@bloomco.id</span>
-</div>
-</div>
-<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
-<div class="flex justify-between items-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Estimasi Biaya</span>
-<span class="font-body-lg text-body-lg font-medium text-on-surface">Rp 30.000.000</span>
-</div>
-</div>
-</article>
-</section>
 </main>
-<!-- Floating Action Button -->
-<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:bg-on-primary-container transition-colors z-40">
-<span class="material-symbols-outlined">add</span>
-</button>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="fixed bottom-0 w-full bg-surface/90 backdrop-blur-md dark:bg-surface-dim/90 border-t border-outline-variant/30 flex justify-around items-center px-4 py-3 z-50">
-<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_30}}">
-<span class="material-symbols-outlined text-[24px]">dashboard</span>
-<span class="font-label-sm text-[10px]">Ringkasan</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_23}}">
-<span class="material-symbols-outlined text-[24px]">payments</span>
-<span class="font-label-sm text-[10px]">Anggaran</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_32}}">
-<span class="material-symbols-outlined text-[24px]">redeem</span>
-<span class="font-label-sm text-[10px]">Seserahan</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_60}}">
-<span class="material-symbols-outlined text-[24px]">group</span>
-<span class="font-label-sm text-[10px]">Tamu</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_44}}">
-<span class="material-symbols-outlined text-[24px]">description</span>
-<span class="font-label-sm text-[10px]">Dokumen</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-primary font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_9}}">
-<span class="material-symbols-outlined text-[24px]">storefront</span>
-<span class="font-label-sm text-[10px]">Vendor</span>
-</a>
-</nav>
+<!-- Bottom Action Area -->
+<div class="fixed bottom-0 left-0 right-0 p-margin-mobile bg-gradient-to-t from-surface via-surface/90 to-transparent pb-8 pt-12 z-40 max-w-lg mx-auto">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-body-lg text-body-lg py-4 rounded-full shadow-[0_8px_20px_rgba(121,84,101,0.25)] flex justify-center items-center gap-2 hover:opacity-90 active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+            Simpan Vendor
+        </button>
+</div>
 </body></html>
