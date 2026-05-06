@@ -1,197 +1,295 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html lang="id"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Add Document - Ethereal Union</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
+<title>Direktori Vendor</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#c6c6c7",
-                        "surface-container-lowest": "#ffffff",
-                        "primary-container": "#f8c8dc",
-                        "surface-tint": "#795465",
-                        "secondary-fixed-dim": "#9fcfd5",
-                        "secondary": "#37656b",
-                        "on-surface": "#1b1c1c",
-                        "inverse-surface": "#303030",
-                        "surface-variant": "#e4e2e2",
-                        "surface-bright": "#fbf9f8",
-                        "on-error-container": "#93000a",
-                        "on-secondary": "#ffffff",
-                        "on-primary-fixed-variant": "#5f3c4d",
-                        "inverse-on-surface": "#f2f0f0",
-                        "primary-fixed": "#ffd8e7",
-                        "on-tertiary-container": "#5a5c5c",
-                        "primary": "#795465",
-                        "surface-container": "#efeded",
-                        "on-primary-container": "#765162",
-                        "on-primary": "#ffffff",
-                        "background": "#fbf9f8",
-                        "surface-container-highest": "#e4e2e2",
-                        "surface": "#fbf9f8",
-                        "on-tertiary": "#ffffff",
-                        "on-tertiary-fixed": "#1a1c1c",
-                        "inverse-primary": "#e9bacd",
-                        "error-container": "#ffdad6",
-                        "on-secondary-container": "#3b6a6f",
-                        "tertiary-container": "#d4d5d5",
-                        "on-secondary-fixed-variant": "#1d4d53",
-                        "error": "#ba1a1a",
-                        "on-background": "#1b1c1c",
-                        "surface-dim": "#dbd9d9",
-                        "surface-container-high": "#eae8e7",
-                        "primary-fixed-dim": "#e9bacd",
-                        "on-secondary-fixed": "#001f23",
-                        "on-surface-variant": "#4f4448",
-                        "secondary-fixed": "#bbebf1",
-                        "outline": "#817478",
-                        "on-tertiary-fixed-variant": "#454747",
-                        "tertiary": "#5d5f5f",
-                        "outline-variant": "#d2c3c7",
-                        "tertiary-fixed": "#e2e2e2",
-                        "surface-container-low": "#f5f3f3",
-                        "on-primary-fixed": "#2e1221",
-                        "secondary-container": "#b8e8ee",
-                        "on-error": "#ffffff"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "24px",
-                        "container-max": "1200px",
-                        "unit": "8px",
-                        "section-gap": "80px",
-                        "margin-mobile": "16px",
-                        "margin-desktop": "40px"
-                    },
-                    "fontFamily": {
-                        "label-sm": ["Inter"],
-                        "headline-md": ["Noto Serif"],
-                        "headline-display": ["Noto Serif"],
-                        "body-md": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "headline-lg": ["Noto Serif"]
-                    },
-                    "fontSize": {
-                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
-                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }]
-                    }
-                }
-            }
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "primary-fixed": "#ffd8e7",
+                "on-primary": "#ffffff",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-fixed-variant": "#454747",
+                "inverse-primary": "#e9bacd",
+                "secondary-fixed-dim": "#9fcfd5",
+                "surface-container-high": "#eae8e7",
+                "on-error": "#ffffff",
+                "background": "#fbf9f8",
+                "surface": "#fbf9f8",
+                "on-tertiary": "#ffffff",
+                "secondary": "#37656b",
+                "surface-tint": "#795465",
+                "on-secondary-fixed-variant": "#1d4d53",
+                "on-primary-fixed": "#2e1221",
+                "on-primary-fixed-variant": "#5f3c4d",
+                "secondary-container": "#b8e8ee",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "outline-variant": "#d2c3c7",
+                "primary-fixed-dim": "#e9bacd",
+                "surface-container-low": "#f5f3f3",
+                "on-tertiary-fixed": "#1a1c1c",
+                "on-primary-container": "#765162",
+                "on-surface-variant": "#4f4448",
+                "on-error-container": "#93000a",
+                "inverse-surface": "#303030",
+                "outline": "#817478",
+                "inverse-on-surface": "#f2f0f0",
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "on-secondary-fixed": "#001f23",
+                "on-secondary": "#ffffff",
+                "surface-bright": "#fbf9f8",
+                "primary": "#795465",
+                "surface-dim": "#dbd9d9",
+                "surface-container": "#efeded",
+                "on-tertiary-container": "#5a5c5c",
+                "surface-container-highest": "#e4e2e2",
+                "on-secondary-container": "#3b6a6f",
+                "tertiary-container": "#d4d5d5",
+                "tertiary-fixed": "#e2e2e2",
+                "tertiary": "#5d5f5f",
+                "secondary-fixed": "#bbebf1",
+                "primary-container": "#f8c8dc",
+                "on-background": "#1b1c1c",
+                "surface-variant": "#e4e2e2",
+                "on-surface": "#1b1c1c"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "section-gap": "80px",
+                "margin-desktop": "40px",
+                "margin-mobile": "16px",
+                "container-max": "1200px",
+                "unit": "8px",
+                "gutter": "24px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Noto Serif"
+                ],
+                "headline-display": [
+                        "Noto Serif"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Noto Serif"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-display": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "1",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "400"
+                        }
+                ]
         }
-    </script>
-<style type="text/tailwindcss">
-        @layer utilities {
-            .glass-panel {
-                @apply bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/50;
-            }
-            .ambient-shadow {
-                box-shadow: 0 8px 32px rgba(176, 224, 230, 0.15);
-            }
-        }
-    </style>
+},
+    },
+  }
+</script>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
 </head>
-<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
-<!-- Header (Task-Focused, Nav Shell Suppressed) -->
-<header class="sticky top-0 z-50 flex items-center justify-between px-margin-mobile py-4 bg-surface/80 backdrop-blur-xl border-b border-surface-container-highest">
-<!-- Back Action -->
-<a aria-label="Go back to Legal Requirements" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low active:bg-surface-container transition-colors text-on-surface" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
-</a>
-<!-- Screen Title -->
-<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Add Document</h1>
-<!-- Spacer for centering -->
-<div class="w-10 h-10"></div>
+<body class="bg-gradient-to-br from-primary-fixed/30 to-secondary-fixed/30 text-on-surface font-body-md text-body-md antialiased md:hidden pb-[80px]">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 bg-surface/80 backdrop-blur-md dark:bg-surface-dim/80 border-b border-outline-variant/50 dark:border-outline/50 flex justify-between items-center px-margin-mobile py-4">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">
+            Union &amp; Grace
+        </div>
+<div class="flex items-center gap-3 text-primary dark:text-primary-fixed-dim">
+<span class="material-symbols-outlined cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200">notifications</span>
+<a class="material-symbols-outlined cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_72}}">account_circle</a>
+</div>
 </header>
-<!-- Main Content Canvas -->
-<main class="flex-1 flex flex-col px-margin-mobile py-8 pb-32 max-w-md mx-auto w-full relative">
-<!-- Form Container -->
-<form class="flex flex-col gap-10">
-<!-- Document Name Input Group -->
-<div class="flex flex-col gap-2 relative group">
-<label class="font-label-sm text-label-sm text-on-surface-variant" for="doc-name">Document Name</label>
-<div class="relative">
-<input class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-0 focus:border-primary transition-colors peer" id="doc-name" placeholder="e.g., Surat Pengantar Nikah" type="text"/>
-<!-- Subtle focus gradient underline effect -->
-<div class="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-primary to-secondary transition-all duration-300 peer-focus:w-full"></div>
+<main class="px-margin-mobile py-gutter flex flex-col gap-section-gap">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<h1 class="font-headline-display text-headline-display text-on-surface">Direktori Vendor</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Kelola daftar rekanan dan biaya untuk hari istimewa Anda.</p>
+</section>
+<!-- Summary Widget (Bento Style) -->
+<section class="grid grid-cols-2 gap-unit">
+<div class="bg-surface/60 backdrop-blur-sm border border-outline-variant/50 shadow-sm rounded-xl p-gutter flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Total Vendor</span>
+<span class="font-headline-md text-headline-md text-primary mt-3">12</span>
+</div>
+<div class="bg-primary-container border border-outline-variant/50 shadow-sm rounded-xl p-gutter flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-primary-container uppercase">Total Biaya</span>
+<span class="font-body-lg text-body-lg font-medium text-on-primary-container mt-3">Rp 125.000.000</span>
+</div>
+</section>
+<!-- Search & Filter -->
+<section class="flex gap-2">
+<div class="relative flex-grow shadow-sm rounded-lg overflow-hidden border border-outline-variant/50">
+<span class="material-symbols-outlined absolute left-unit top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface/80 border-none focus:ring-2 focus:ring-secondary pl-10 py-unit font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant transition-all" placeholder="Cari vendor..." type="text"/>
+</div>
+<button class="p-unit border border-outline-variant/50 shadow-sm rounded-lg bg-surface/80 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</section>
+<!-- Vendor List -->
+<section class="flex flex-col gap-gutter">
+<!-- Vendor Card 1 -->
+<article class="bg-surface/80 backdrop-blur-sm border border-outline-variant/50 shadow-md rounded-xl overflow-hidden flex flex-col">
+<div class="h-32 w-full bg-surface-container-high relative">
+<img alt="Vendor Cover" class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="A soft, desaturated photo of an elegant wedding venue hall with floral arrangements. The setting is bright and airy, reflecting a serene and premium modern aesthetic. The color palette is muted with champagne and soft white tones, emphasizing a clean, luxurious atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmV5noRCdBUj0rcYcUplMqD_RsA7UwXA5ydtnj7u230XGG55jbLssAJqPsy_fWCo368LZXvZ9Z8cAsNjMzS6X_dWskifRhY_mIdoQOE2mXUoTHvp4vSl0RCvJPUGY-8WUNOPXcKrvhXvtPxyt6twqR_5PeJOJV24SCJcXNVrCX180V6vfKiCq5tQWTZBuZhJglX5fmgsx0zhQuIwyRFPjlXHzr5F3RSOIEhbeul-Xf5iqhgJhy4DPFeaiJNze6il7_HcXH6tzWQ2ZT"/>
+<div class="absolute top-unit right-unit bg-surface/90 backdrop-blur-sm px-unit py-1 rounded-DEFAULT border border-outline-variant/50">
+<span class="font-label-sm text-label-sm text-primary uppercase">Katering</span>
 </div>
 </div>
-<!-- Document Status Selection Group -->
-<div class="flex flex-col gap-4">
-<label class="font-label-sm text-label-sm text-on-surface-variant">Document Status</label>
-<!-- Custom Chip Selection -->
-<div class="flex flex-wrap gap-3">
-<!-- Option 1 -->
-<label class="relative cursor-pointer">
-<input checked="" class="peer sr-only" name="status" type="radio" value="belum_diurus"/>
-<div class="px-5 py-2.5 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md bg-surface-container-lowest peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all duration-200 shadow-sm peer-checked:shadow-none hover:bg-surface-container-low">
-                            Belum Diurus
-                        </div>
-</label>
-<!-- Option 2 -->
-<label class="relative cursor-pointer">
-<input class="peer sr-only" name="status" type="radio" value="sedang_diproses"/>
-<div class="px-5 py-2.5 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md bg-surface-container-lowest peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all duration-200 shadow-sm peer-checked:shadow-none hover:bg-surface-container-low">
-                            Sedang Diproses
-                        </div>
-</label>
-<!-- Option 3 -->
-<label class="relative cursor-pointer">
-<input class="peer sr-only" name="status" type="radio" value="selesai"/>
-<div class="px-5 py-2.5 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md bg-surface-container-lowest peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all duration-200 shadow-sm peer-checked:shadow-none hover:bg-surface-container-low">
-                            Selesai
-                        </div>
-</label>
+<div class="p-gutter flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Rasa Nusantara Catering</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Paket Prasmanan Mewah</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-sm">check</span>
 </div>
 </div>
-<!-- Optional Notes Textarea -->
-<div class="flex flex-col gap-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant" for="doc-notes">Notes (Optional)</label>
-<div class="relative glass-panel rounded-xl overflow-hidden ambient-shadow">
-<textarea class="w-full bg-transparent border-0 p-4 font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all resize-none" id="doc-notes" placeholder="Add specific requirements, deadlines, or office locations..." rows="4"></textarea>
+<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
+<div class="flex flex-col gap-2 font-body-md text-body-md">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span> 0812-3456-7890</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> hello@rasanusantara.com</span>
 </div>
 </div>
-</form>
+<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Estimasi Biaya</span>
+<span class="font-body-lg text-body-lg font-medium text-on-surface">Rp 45.000.000</span>
+</div>
+</div>
+</article>
+<!-- Vendor Card 2 -->
+<article class="bg-surface/80 backdrop-blur-sm border border-outline-variant/50 shadow-md rounded-xl overflow-hidden flex flex-col">
+<div class="h-32 w-full bg-surface-container-high relative">
+<img alt="Vendor Cover" class="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" data-alt="A soft, desaturated close-up of a bridal bouquet featuring white roses and subtle greenery. The mood is calm and elegant, fitting a high-end editorial wedding theme. Lighting is soft and natural, enhancing the sophisticated, minimalist color palette of whites and muted greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgeSlvnUXjlyqlaKejuNCRiB1R00umfB7EhqajLMam0sG2YZ8dP7Zu88mnMem-gDn86-D388X5S7v1QaUjdtq_dN1dKWNZdQHYVOulGZC4MUw9T23vRLOxlgUh0JrudI__hYc-uHbXb4QQJ03rEYm5tdt2lYxU2rrAqAVlflufSp5UwHTu091omu0vQypQgN_iiZojo6LDTyNUl6D4TYySnlMlpFAO_39lw4-DJFrj9WxXmvEDePzbtmECzvI28SPkZxNbXi07iehU"/>
+<div class="absolute top-unit right-unit bg-surface/90 backdrop-blur-sm px-unit py-1 rounded-DEFAULT border border-outline-variant/50">
+<span class="font-label-sm text-label-sm text-primary uppercase">Dekorasi</span>
+</div>
+</div>
+<div class="p-gutter flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Bloom &amp; Co.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Dekorasi Pelaminan &amp; Bunga</p>
+</div>
+<div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant bg-surface">
+<span class="material-symbols-outlined text-sm">pending</span>
+</div>
+</div>
+<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
+<div class="flex flex-col gap-2 font-body-md text-body-md">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">call</span> 0898-7654-3210</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> info@bloomco.id</span>
+</div>
+</div>
+<div class="w-full h-[0.5px] bg-outline-variant/50 my-1"></div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Estimasi Biaya</span>
+<span class="font-body-lg text-body-lg font-medium text-on-surface">Rp 30.000.000</span>
+</div>
+</div>
+</article>
+</section>
 </main>
-<!-- Fixed Bottom Action Area -->
-<div class="fixed bottom-0 left-0 right-0 p-margin-mobile bg-surface/90 backdrop-blur-xl border-t border-surface-container pb-safe">
-<div class="max-w-md mx-auto w-full">
-<a class="w-full relative group overflow-hidden rounded-full font-body-md text-body-md font-medium text-white h-[56px] shadow-[0_8px_20px_rgba(176,224,230,0.3)] transition-transform active:scale-[0.98] inline-block" href="{{DATA:SCREEN:SCREEN_54}}">
-<!-- Gradient Background -->
-<div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary transition-opacity group-hover:opacity-90"></div>
-<!-- Content -->
-<div class="relative flex items-center justify-center gap-2 h-full">
-<span>Simpan Dokumen</span>
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">save</span>
-</div>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-margin-mobile w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:bg-on-primary-container transition-colors z-40">
+<span class="material-symbols-outlined">add</span>
+</button>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full bg-surface/90 backdrop-blur-md dark:bg-surface-dim/90 border-t border-outline-variant/30 flex justify-around items-center px-4 py-3 z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_30}}">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-sm text-[10px]">Ringkasan</span>
 </a>
-</div>
-</div>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_23}}">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+<span class="font-label-sm text-[10px]">Anggaran</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_32}}">
+<span class="material-symbols-outlined text-[24px]">redeem</span>
+<span class="font-label-sm text-[10px]">Seserahan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_60}}">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<span class="font-label-sm text-[10px]">Tamu</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_44}}">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<span class="font-label-sm text-[10px]">Dokumen</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary font-medium cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_9}}">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+<span class="font-label-sm text-[10px]">Vendor</span>
+</a>
+</nav>
 </body></html>
