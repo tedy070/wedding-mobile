@@ -1,71 +1,66 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="id"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Wedding Details - Union &amp; Grace</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
+<title>Pengaturan Notifikasi - Union &amp; Grace</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     "colors": {
-                        "tertiary": "#5d5f5f",
-                        "surface-bright": "#fbf9f8",
+                        "tertiary-fixed-dim": "#c6c6c7",
                         "surface-container-low": "#f5f3f3",
                         "surface-container-highest": "#e4e2e2",
-                        "tertiary-container": "#d4d5d5",
-                        "secondary-fixed": "#bbebf1",
-                        "surface-dim": "#dbd9d9",
-                        "on-tertiary-container": "#5a5c5c",
-                        "on-surface": "#1b1c1c",
-                        "surface": "#fbf9f8",
-                        "on-tertiary": "#ffffff",
-                        "primary-fixed": "#ffd8e7",
-                        "on-primary-container": "#765162",
-                        "error-container": "#ffdad6",
-                        "on-surface-variant": "#4f4448",
-                        "on-secondary-fixed": "#001f23",
-                        "tertiary-fixed": "#e2e2e2",
-                        "secondary-fixed-dim": "#9fcfd5",
-                        "surface-tint": "#795465",
-                        "on-secondary-fixed-variant": "#1d4d53",
-                        "background": "#fbf9f8",
-                        "on-primary": "#ffffff",
-                        "secondary-container": "#b8e8ee",
-                        "secondary": "#37656b",
-                        "inverse-primary": "#e9bacd",
+                        "surface-bright": "#fbf9f8",
                         "inverse-on-surface": "#f2f0f0",
+                        "primary-container": "#f8c8dc",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#9fcfd5",
+                        "surface-variant": "#e4e2e2",
                         "on-primary-fixed": "#2e1221",
-                        "on-tertiary-fixed": "#1a1c1c",
-                        "on-background": "#1b1c1c",
+                        "secondary": "#37656b",
+                        "primary-fixed": "#ffd8e7",
                         "on-tertiary-fixed-variant": "#454747",
                         "on-primary-fixed-variant": "#5f3c4d",
-                        "surface-container-lowest": "#ffffff",
-                        "primary-container": "#f8c8dc",
-                        "primary": "#795465",
-                        "error": "#ba1a1a",
-                        "outline": "#817478",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface": "#fbf9f8",
+                        "tertiary": "#5d5f5f",
+                        "on-tertiary-container": "#5a5c5c",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#4f4448",
+                        "on-secondary-fixed": "#001f23",
                         "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#1d4d53",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#d4d5d5",
+                        "inverse-primary": "#e9bacd",
+                        "surface-container-high": "#eae8e7",
+                        "primary-fixed-dim": "#e9bacd",
+                        "on-primary-container": "#765162",
+                        "on-secondary-container": "#3b6a6f",
+                        "secondary-fixed": "#bbebf1",
+                        "secondary-container": "#b8e8ee",
+                        "primary": "#795465",
+                        "surface-dim": "#dbd9d9",
+                        "on-primary": "#ffffff",
+                        "outline": "#817478",
+                        "surface-tint": "#795465",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container": "#efeded",
                         "inverse-surface": "#303030",
                         "on-error-container": "#93000a",
-                        "surface-variant": "#e4e2e2",
-                        "on-secondary-container": "#3b6a6f",
-                        "surface-container-high": "#eae8e7",
-                        "on-secondary": "#ffffff",
-                        "tertiary-fixed-dim": "#c6c6c7",
-                        "primary-fixed-dim": "#e9bacd",
-                        "surface-container": "#efeded",
-                        "outline-variant": "#d2c3c7"
+                        "on-background": "#1b1c1c",
+                        "outline-variant": "#d2c3c7",
+                        "error": "#ba1a1a"
                     },
                     "borderRadius": {
                         "DEFAULT": "0.25rem",
@@ -75,43 +70,43 @@
                     },
                     "spacing": {
                         "margin-mobile": "16px",
-                        "margin-desktop": "40px",
-                        "section-gap": "80px",
-                        "container-max": "1200px",
                         "unit": "8px",
-                        "gutter": "24px"
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px"
                     },
                     "fontFamily": {
-                        "label-sm": ["Inter"],
-                        "headline-display": ["Noto Serif"],
                         "body-md": ["Inter"],
-                        "body-lg": ["Inter"],
                         "headline-lg": ["Noto Serif"],
-                        "headline-md": ["Noto Serif"]
+                        "headline-display": ["Noto Serif"],
+                        "headline-md": ["Noto Serif"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"]
                     },
                     "fontSize": {
-                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
                         "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
                         "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
-                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
                     }
                 }
             }
         }
     </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        .glass-panel {
+            background: rgba(251, 249, 248, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            cursor: pointer;
-            opacity: 0.6;
-            transition: 0.2s;
+        .ethereal-gradient {
+            background: linear-gradient(135deg, rgba(248, 200, 220, 0.4) 0%, rgba(184, 232, 238, 0.4) 100%);
         }
-        input[type="date"]::-webkit-calendar-picker-indicator:hover {
-            opacity: 1;
+        .ambient-shadow {
+            box-shadow: 0 8px 32px rgba(176, 224, 230, 0.2);
         }
     </style>
 <style>
@@ -120,123 +115,137 @@
     }
   </style>
   </head>
-<body class="bg-surface text-on-surface min-h-screen font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
-<!-- TopAppBar -->
-<header class="w-full sticky top-0 z-50 bg-surface/80 backdrop-blur-md shadow-[0_4px_30px_rgba(176,224,230,0.1)] flex justify-between items-center px-margin-mobile py-4 transition-all">
-<div class="font-headline-md text-headline-md text-primary font-bold tracking-tight">
-            Union &amp; Grace
-        </div>
-<div class="flex gap-4 items-center">
-<button class="hover:text-primary transition-colors duration-200 cursor-pointer text-on-surface-variant active:opacity-80">
-<span class="material-symbols-outlined">notifications</span>
+<body class="bg-surface-container-low flex justify-center min-h-screen">
+<!-- Mobile Device Simulator Container -->
+<div class="w-full max-w-[400px] bg-background relative shadow-2xl flex flex-col h-[884px] overflow-hidden ethereal-gradient">
+<!-- Header / TopAppBar (Adapted for Settings Context) -->
+<header class="w-full sticky top-0 z-50 glass-panel border-b border-outline-variant/30 px-margin-mobile py-4 flex items-center gap-4">
+<button class="text-on-surface hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
 </button>
-<button class="hover:text-primary transition-colors duration-200 cursor-pointer text-on-surface-variant active:opacity-80">
-<span class="material-symbols-outlined">account_circle</span>
-</button>
-</div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight flex-1">Pengaturan Notifikasi</h1>
 </header>
-<!-- Main Content Canvas -->
-<main class="px-margin-mobile py-8 pb-32 flex flex-col gap-8 max-w-lg mx-auto">
-<div class="flex flex-col gap-2">
-<h1 class="font-headline-lg text-headline-lg text-on-surface">Edit Details</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Update the foundational information for your special day.</p>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto px-margin-mobile py-6 pb-24 space-y-6">
+<p class="font-body-md text-body-md text-on-surface-variant mb-2">
+                Pilih bagaimana Anda ingin menerima pembaruan untuk perjalanan pernikahan Anda.
+            </p>
+<!-- Card: Budget Reminders -->
+<section class="bg-surface/80 backdrop-blur-sm rounded-xl border border-outline-variant/50 p-5 ambient-shadow">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/20 pb-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">payments</span>
+<h2 class="font-headline-md text-[20px] leading-tight text-on-surface">Pengingat Anggaran</h2>
 </div>
-<!-- Cover Image Module (Glassmorphism card base) -->
-<div class="bg-white/70 backdrop-blur-[15px] border border-secondary-fixed-dim/20 rounded-xl overflow-hidden shadow-[0_8px_32px_rgba(176,224,230,0.15)] flex flex-col">
-<div class="relative w-full h-48 group">
-<img alt="Wedding Cover" class="w-full h-full object-cover rounded-t-xl opacity-90 group-hover:opacity-100 transition-opacity duration-300" data-alt="A bright, ethereal digital photograph showing an elegant table setting at a high-end modern wedding. The lighting is soft and natural, pouring through unseen large windows to create a luminous, airy atmosphere. Delicate white orchids and blush pink ranunculus sit gracefully in minimalist glass vases. The overall palette is dominated by pristine whites, soft creams, and hints of warm mauve, reflecting a sophisticated, light-mode design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyJyGm-ElnG8XlYFEWmW-i196nMa7nfh159sSS4jEXNhHNGrkjo6rCgqkMarAXmaKyORvap-7QSdCpeSVBK3d747DC84iTkSd4FKjFdGOHNOB6hY8ZAMmOHXt2JIeoK5PH6y7D-1eChlEPslNc0gzLVWoBZQZSuWXPvoStsFPRxApLsl3T7Uuo4bhqHn_t_cEDkoxvn0ChYvnzO3bYyPJecC0-mLPhEnTmYkwXFktHb2Vk9zTB3ODGHPTR_bRV5wzpsK6Uef3Y8d70"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent flex items-end p-4">
-<button class="bg-surface/80 backdrop-blur-md border border-outline-variant/30 text-primary px-4 py-2 rounded-full font-label-sm text-label-sm flex items-center gap-2 hover:bg-surface transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[16px]">edit</span> Edit Cover
-                    </button>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Email</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
 </div>
-</div>
-</div>
-<!-- Form Details Grid -->
-<div class="bg-white/70 backdrop-blur-[15px] border border-secondary-fixed-dim/20 rounded-xl p-6 shadow-[0_8px_32px_rgba(176,224,230,0.15)] flex flex-col gap-8">
-<!-- Couple Names -->
-<div class="flex flex-col gap-6">
-<h3 class="font-label-sm text-label-sm text-primary uppercase tracking-[0.1em]">The Couple</h3>
-<div class="grid grid-cols-1 gap-6">
-<div class="relative">
-<input class="w-full bg-transparent border-0 border-b border-outline-variant text-on-surface font-body-lg text-body-lg focus:ring-0 focus:border-primary pb-2 px-0 transition-colors peer" id="partner1" placeholder=" " type="text" value="Sarah"/>
-<label class="absolute left-0 -top-4 font-label-sm text-[10px] text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary transition-all" for="partner1">Partner 1</label>
-</div>
-<div class="relative">
-<input class="w-full bg-transparent border-0 border-b border-outline-variant text-on-surface font-body-lg text-body-lg focus:ring-0 focus:border-primary pb-2 px-0 transition-colors peer" id="partner2" placeholder=" " type="text" value="James"/>
-<label class="absolute left-0 -top-4 font-label-sm text-[10px] text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary transition-all" for="partner2">Partner 2</label>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Notifikasi Push</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
 </div>
 </div>
+</section>
+<!-- Card: Guest RSVP Updates -->
+<section class="bg-surface/80 backdrop-blur-sm rounded-xl border border-outline-variant/50 p-5 ambient-shadow">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/20 pb-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">group</span>
+<h2 class="font-headline-md text-[20px] leading-tight text-on-surface">Pembaruan RSVP Tamu</h2>
 </div>
-<!-- Date & Time -->
-<div class="flex flex-col gap-6">
-<h3 class="font-label-sm text-label-sm text-primary uppercase tracking-[0.1em]">When</h3>
-<div class="relative">
-<input class="w-full bg-transparent border-0 border-b border-outline-variant text-on-surface font-body-lg text-body-lg focus:ring-0 focus:border-primary pb-2 px-0 transition-colors" type="date" value="2024-10-12"/>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Email</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
 </div>
-</div>
-<!-- Location -->
-<div class="flex flex-col gap-6">
-<h3 class="font-label-sm text-label-sm text-primary uppercase tracking-[0.1em]">Where</h3>
-<div class="relative">
-<input class="w-full bg-transparent border-0 border-b border-outline-variant text-on-surface font-body-lg text-body-lg focus:ring-0 focus:border-primary pb-2 px-0 transition-colors peer" id="location" placeholder=" " type="text" value="The Glasshouse, New York"/>
-<label class="absolute left-0 -top-4 font-label-sm text-[10px] text-on-surface-variant peer-placeholder-shown:text-body-md peer-placeholder-shown:top-0 peer-focus:-top-4 peer-focus:text-[10px] peer-focus:text-primary transition-all" for="location">Venue Name &amp; City</label>
-</div>
-</div>
-<!-- Aesthetic / Theme Chip Selection (Example of high-end UI pattern) -->
-<div class="flex flex-col gap-4">
-<h3 class="font-label-sm text-label-sm text-primary uppercase tracking-[0.1em]">Theme Atmosphere</h3>
-<div class="flex flex-wrap gap-2">
-<button class="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary font-label-sm text-label-sm transition-colors">Ethereal Minimal</button>
-<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-colors font-label-sm text-label-sm">Classic Romance</button>
-<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary transition-colors font-label-sm text-label-sm">Modern Chic</button>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Notifikasi Push</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
 </div>
 </div>
+</section>
+<!-- Card: Document Reminders -->
+<section class="bg-surface/80 backdrop-blur-sm rounded-xl border border-outline-variant/50 p-5 ambient-shadow">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/20 pb-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">description</span>
+<h2 class="font-headline-md text-[20px] leading-tight text-on-surface">Pengingat Dokumen</h2>
 </div>
-<!-- Prominent Save Button -->
-<button class="mt-4 w-full bg-gradient-to-r from-primary to-[#8b6576] text-on-primary font-body-lg text-body-lg py-4 rounded-xl shadow-[0_8px_20px_rgba(121,84,101,0.25)] hover:shadow-[0_12px_24px_rgba(121,84,101,0.35)] hover:-translate-y-0.5 transition-all duration-300 font-semibold flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">check</span> Save Details
-        </button>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Email</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Notifikasi Push</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Card: Vendor News -->
+<section class="bg-surface/80 backdrop-blur-sm rounded-xl border border-outline-variant/50 p-5 ambient-shadow">
+<div class="flex items-center gap-3 mb-4 border-b border-outline-variant/20 pb-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<h2 class="font-headline-md text-[20px] leading-tight text-on-surface">Berita Vendor</h2>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Email</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Notifikasi Push</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
 </main>
-<!-- BottomNavBar (Adapted from SideNavBar JSON for Mobile Semantic Shell) -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-low/95 backdrop-blur-[20px] shadow-[0_-4px_30px_rgba(176,224,230,0.15)] z-50 pb-safe">
-<div class="flex justify-around items-center px-2 py-3">
-<!-- Active Tab: Overview -->
-<a class="flex flex-col items-center gap-1 min-w-[64px]" href="#">
-<div class="bg-secondary-container rounded-xl px-5 py-1 transition-all duration-300">
-<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface font-semibold mt-1">Overview</span>
-</a>
-<!-- Inactive Tabs -->
-<a class="flex flex-col items-center gap-1 min-w-[64px] group" href="#">
-<div class="px-5 py-1 group-hover:bg-surface-variant rounded-xl transition-all duration-300">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">payments</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface-variant group-hover:text-primary mt-1 transition-colors">Budget</span>
-</a>
-<a class="flex flex-col items-center gap-1 min-w-[64px] group" href="#">
-<div class="px-5 py-1 group-hover:bg-surface-variant rounded-xl transition-all duration-300">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">group</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface-variant group-hover:text-primary mt-1 transition-colors">Guest List</span>
-</a>
-<a class="flex flex-col items-center gap-1 min-w-[64px] group" href="#">
-<div class="px-5 py-1 group-hover:bg-surface-variant rounded-xl transition-all duration-300">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">description</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface-variant group-hover:text-primary mt-1 transition-colors">Documents</span>
-</a>
-<a class="flex flex-col items-center gap-1 min-w-[64px] group" href="#">
-<div class="px-5 py-1 group-hover:bg-surface-variant rounded-xl transition-all duration-300">
-<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">storefront</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface-variant group-hover:text-primary mt-1 transition-colors">Vendors</span>
-</a>
-</div>
+<!-- Mobile Bottom Navigation (Adapted from SideNavBar JSON) -->
+<nav class="w-full absolute bottom-0 left-0 glass-panel border-t border-outline-variant/30 flex justify-between items-center px-4 py-3 pb-safe z-50">
+<!-- All items inactive as this is a Settings screen (Rule: Settings suppress nav highlighting/relevance) -->
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors duration-200 flex-1 cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="font-label-sm text-[10px]">Overview</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors duration-200 flex-1 cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+<span class="font-label-sm text-[10px]">Budget</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors duration-200 flex-1 cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">group</span>
+<span class="font-label-sm text-[10px]">Guest List</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors duration-200 flex-1 cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">description</span>
+<span class="font-label-sm text-[10px]">Documents</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors duration-200 flex-1 cursor-pointer">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+<span class="font-label-sm text-[10px]">Vendors</span>
+</button>
 </nav>
-<!-- Safe area padding for newer mobile devices -->
-<style>
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-    </style>
+</div>
 </body></html>
