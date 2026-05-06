@@ -1,153 +1,121 @@
 <!DOCTYPE html>
 
-<html lang="id"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Seserahan &amp; Mahar Management</title>
+<title>Add Seserahan/Mahar</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        "colors": {
-                "primary-fixed": "#ffd8e7",
-                "on-primary": "#ffffff",
-                "surface-container-lowest": "#ffffff",
-                "on-tertiary-fixed-variant": "#454747",
-                "inverse-primary": "#e9bacd",
-                "secondary-fixed-dim": "#9fcfd5",
-                "surface-container-high": "#eae8e7",
-                "on-error": "#ffffff",
-                "background": "#fbf9f8",
-                "surface": "#fbf9f8",
-                "on-tertiary": "#ffffff",
-                "secondary": "#37656b",
-                "surface-tint": "#795465",
-                "on-secondary-fixed-variant": "#1d4d53",
-                "on-primary-fixed": "#2e1221",
-                "on-primary-fixed-variant": "#5f3c4d",
-                "secondary-container": "#b8e8ee",
-                "tertiary-fixed-dim": "#c6c6c7",
-                "outline-variant": "#d2c3c7",
-                "primary-fixed-dim": "#e9bacd",
-                "surface-container-low": "#f5f3f3",
-                "on-tertiary-fixed": "#1a1c1c",
-                "on-primary-container": "#765162",
-                "on-surface-variant": "#4f4448",
-                "on-error-container": "#93000a",
-                "inverse-surface": "#303030",
-                "outline": "#817478",
-                "inverse-on-surface": "#f2f0f0",
-                "error-container": "#ffdad6",
-                "error": "#ba1a1a",
-                "on-secondary-fixed": "#001f23",
-                "on-secondary": "#ffffff",
-                "surface-bright": "#fbf9f8",
-                "primary": "#795465",
-                "surface-dim": "#dbd9d9",
-                "surface-container": "#efeded",
-                "on-tertiary-container": "#5a5c5c",
-                "surface-container-highest": "#e4e2e2",
-                "on-secondary-container": "#3b6a6f",
-                "tertiary-container": "#d4d5d5",
-                "tertiary-fixed": "#e2e2e2",
-                "tertiary": "#5d5f5f",
-                "secondary-fixed": "#bbebf1",
-                "primary-container": "#f8c8dc",
-                "on-background": "#1b1c1c",
-                "surface-variant": "#e4e2e2",
-                "on-surface": "#1b1c1c"
-        },
-        "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-        },
-        "spacing": {
-                "section-gap": "80px",
-                "margin-desktop": "40px",
-                "margin-mobile": "16px",
-                "container-max": "1200px",
-                "unit": "8px",
-                "gutter": "24px"
-        },
-        "fontFamily": {
-                "headline-md": [
-                        "Noto Serif"
-                ],
-                "headline-display": [
-                        "Noto Serif"
-                ],
-                "label-sm": [
-                        "Inter"
-                ],
-                "body-md": [
-                        "Inter"
-                ],
-                "body-lg": [
-                        "Inter"
-                ],
-                "headline-lg": [
-                        "Noto Serif"
-                ]
-        },
-        "fontSize": {
-                "headline-md": [
-                        "24px",
-                        {
-                                "lineHeight": "1.4",
-                                "fontWeight": "400"
-                        }
-                ],
-                "headline-display": [
-                        "48px",
-                        {
-                                "lineHeight": "1.2",
-                                "letterSpacing": "-0.02em",
-                                "fontWeight": "400"
-                        }
-                ],
-                "label-sm": [
-                        "12px",
-                        {
-                                "lineHeight": "1",
-                                "letterSpacing": "0.05em",
-                                "fontWeight": "600"
-                        }
-                ],
-                "body-md": [
-                        "16px",
-                        {
-                                "lineHeight": "1.6",
-                                "fontWeight": "400"
-                        }
-                ],
-                "body-lg": [
-                        "18px",
-                        {
-                                "lineHeight": "1.6",
-                                "fontWeight": "400"
-                        }
-                ],
-                "headline-lg": [
-                        "32px",
-                        {
-                                "lineHeight": "1.3",
-                                "fontWeight": "400"
-                        }
-                ]
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#eae8e7",
+                        "on-secondary-container": "#3b6a6f",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed-dim": "#e9bacd",
+                        "surface-container": "#efeded",
+                        "outline-variant": "#d2c3c7",
+                        "inverse-primary": "#e9bacd",
+                        "inverse-on-surface": "#f2f0f0",
+                        "secondary": "#37656b",
+                        "on-primary-fixed": "#2e1221",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed-variant": "#5f3c4d",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-background": "#1b1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#f8c8dc",
+                        "primary": "#795465",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "outline": "#817478",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "surface-variant": "#e4e2e2",
+                        "primary-fixed": "#ffd8e7",
+                        "surface": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#765162",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f23",
+                        "on-surface-variant": "#4f4448",
+                        "secondary-fixed-dim": "#9fcfd5",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-secondary-fixed-variant": "#1d4d53",
+                        "background": "#fbf9f8",
+                        "surface-tint": "#795465",
+                        "secondary-container": "#b8e8ee",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "tertiary": "#5d5f5f",
+                        "tertiary-container": "#d4d5d5",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed": "#bbebf1",
+                        "on-surface": "#1b1c1c",
+                        "surface-dim": "#dbd9d9",
+                        "on-tertiary-container": "#5a5c5c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-display": ["Noto Serif"],
+                        "headline-lg": ["Noto Serif"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                }
+            }
         }
-},
-    },
-  }
-</script>
+    </script>
 <style>
-        .material-symbols-outlined {
-          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(184, 232, 238, 0.5);
+            box-shadow: 0 4px 30px rgba(176, 224, 230, 0.3);
+        }
+        .ethereal-gradient {
+            background: linear-gradient(135deg, #f8c8dc 0%, #b8e8ee 100%);
+        }
+        .ethereal-gradient-text {
+            background: linear-gradient(135deg, #795465 0%, #37656b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .input-border-transition {
+            transition: border-color 0.3s ease;
+        }
+        .input-border-transition:focus-within {
+            border-bottom: 2px solid #795465; /* Primary color */
         }
     </style>
 <style>
@@ -156,158 +124,93 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-surface to-secondary-container/30 text-on-surface font-body-md text-body-md antialiased md:hidden pb-[88px]">
-<!-- Top App Bar -->
-<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center px-6 py-4 w-full border-b border-outline-variant/20">
-<div class="flex items-center gap-4">
-<button class="text-primary cursor-pointer transition-opacity active:opacity-80">
-<span class="material-symbols-outlined text-2xl">arrow_back</span>
-</button>
-<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Seserahan &amp; Mahar</h1>
-</div>
-<a class="text-primary cursor-pointer transition-opacity active:opacity-80" href="{{DATA:SCREEN:SCREEN_72}}">
-<span class="material-symbols-outlined text-2xl">account_circle</span>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-background antialiased relative overflow-x-hidden">
+<!-- Ambient Background Element -->
+<div class="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-primary-fixed to-transparent opacity-40 pointer-events-none z-0"></div>
+<div class="absolute top-[-50px] right-[-50px] w-64 h-64 rounded-full bg-secondary-fixed blur-3xl opacity-30 pointer-events-none z-0"></div>
+<!-- Top Navigation (Transactional - minimal) -->
+<header class="w-full sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-4 py-4 md:px-margin-desktop md:max-w-container-max md:mx-auto">
+<a class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors cursor-pointer group" href="{{DATA:SCREEN:SCREEN_54}}">
+<span class="material-symbols-outlined group-active:opacity-80">arrow_back</span>
 </a>
+<div class="font-headline-md text-headline-md text-on-surface tracking-tight text-center flex-grow">
+            Add Item
+        </div>
+<div class="w-6"></div> <!-- Spacer for centering -->
 </header>
-<main class="px-6 py-gutter flex flex-col gap-section-gap">
-<!-- Summary Dashboard (Bento Style) -->
-<section class="flex flex-col gap-4">
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-outline-variant/30 flex flex-col gap-4 shadow-[0_8px_30px_rgb(121,84,101,0.06)]">
-<div class="flex justify-between items-end">
-<div>
-<h2 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Progress Keseluruhan</h2>
-<p class="font-body-lg text-body-lg font-medium text-primary">18 / 24 Item Siap</p>
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-[600px] mx-auto px-4 py-8 z-10 flex flex-col gap-6">
+<div class="text-center mb-4">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">New Seserahan</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Add details for your upcoming gift or dowry item.</p>
 </div>
-<span class="font-label-sm text-label-sm text-secondary">75%</span>
-</div>
-<div class="w-full h-1 bg-primary-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-3/4 rounded-full"></div>
-</div>
-</div>
-<div class="bg-gradient-to-br from-primary-container to-secondary-container/50 rounded-xl p-6 border border-primary-fixed-dim/30 flex flex-col gap-2 shadow-[0_8px_30px_rgb(121,84,101,0.08)]">
-<h2 class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider">Estimasi Biaya</h2>
-<p class="font-headline-md text-headline-md text-on-primary-container">Rp 25.500.000</p>
-<div class="flex items-center gap-2 mt-2">
-<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
-<p class="font-label-sm text-label-sm text-secondary">Sesuai Anggaran</p>
+<form class="glass-panel rounded-xl p-6 flex flex-col gap-6">
+<!-- Nama Barang -->
+<div class="flex flex-col gap-2 relative">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="nama_barang">Nama Barang</label>
+<div class="input-border-transition border-b border-outline-variant relative">
+<input class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-lg text-body-lg text-on-surface placeholder-outline" id="nama_barang" placeholder="e.g., Mukena, Perhiasan" required="" type="text"/>
 </div>
 </div>
-</section>
-<!-- List Section -->
-<section class="flex flex-col gap-6">
-<!-- Tabs -->
-<div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide -mx-6 px-6">
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm">Semua</button>
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white/60 border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm backdrop-blur-sm">Pihak Pria</button>
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white/60 border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm backdrop-blur-sm">Pihak Wanita</button>
-<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white/60 border border-outline-variant/50 text-on-surface-variant font-label-sm text-label-sm backdrop-blur-sm">Mahar</button>
-</div>
-<!-- Items -->
-<div class="flex flex-col gap-4">
-<!-- Item 1 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-3xl">diamond</span>
-</div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Cincin Kawin &amp; Kalung</h3>
-<span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-1 rounded">Siap</span>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Perhiasan • Mahar</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 15.000.000</p>
+<!-- Kategori -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="kategori">Kategori</label>
+<div class="input-border-transition border-b border-outline-variant relative">
+<select class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-lg text-body-lg text-on-surface appearance-none pr-8 cursor-pointer" id="kategori">
+<option class="text-on-surface bg-surface" value="seserahan">Seserahan</option>
+<option class="text-on-surface bg-surface" value="mahar">Mahar</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
 </div>
 </div>
-<!-- Item 2 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden relative">
-<img alt="" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A beautifully wrapped wedding gift box with soft silk ribbons, styled in a minimalist, high-key lighting environment. The aesthetic is modern editorial, featuring a pale champagne and white color palette. Subtle natural shadows anchor the box, creating a serene, premium wedding preparation mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2dqVcD0harG_bSZruBwSDKo7FRm9cc-QHHvaaBfRy08wPEtRstbTYIwLiyQjRpVQ-utTFlFAaGlY-06HgDLxW2KHonXoN2z8aP6xk8pzVPccWXZ7oBOMqXVfsXgDA_TOWNyJx_7g--E1a3yiRV1qnKHEqTBAFkrpu7DQyxF9vIdzXOJe7nj4_Rp7vaQ62NPnad38nk1hKZD0CE6qePjSUdzRJJ6fyrVs7c3AQShYk7lA3SfkbPRmJ3pMRxmDQkmf1Hqa3v4aD763l"/>
-</div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Seperangkat Alat Sholat</h3>
-<span class="font-label-sm text-label-sm bg-primary-container text-on-primary-container px-2 py-1 rounded">Sedang Dikemas</span>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Perlengkapan Ibadah • Pria</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 1.500.000</p>
+<!-- Harga/Estimasi -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="harga">Harga/Estimasi</label>
+<div class="input-border-transition border-b border-outline-variant relative flex items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant pr-2">Rp</span>
+<input class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-lg text-body-lg text-on-surface placeholder-outline" id="harga" placeholder="0" required="" type="number"/>
 </div>
 </div>
-<!-- Item 3 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-3xl">shopping_bag</span>
-</div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Tas &amp; Sepatu</h3>
-<span class="font-label-sm text-label-sm bg-surface-variant text-on-surface-variant px-2 py-1 rounded">Sudah Dibeli</span>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Fashion • Pria</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 4.000.000</p>
-</div>
-</div>
-<!-- Item 4 -->
-<div class="bg-white/80 backdrop-blur-sm rounded-xl p-5 border border-outline-variant/30 flex gap-4 items-start shadow-[0_4px_20px_rgb(121,84,101,0.04)]">
-<div class="w-16 h-16 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-3xl">face</span>
-</div>
-<div class="flex-1 flex flex-col gap-1">
-<div class="flex justify-between items-start">
-<h3 class="font-body-lg text-body-lg font-medium text-on-surface">Skincare Set</h3>
-<span class="font-label-sm text-label-sm border border-outline-variant text-on-surface-variant px-2 py-1 rounded">Belum Dibeli</span>
-</div>
-<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">Perawatan • Pria</p>
-<p class="font-label-sm text-label-sm text-primary font-semibold mt-1">Rp 2.500.000</p>
+<!-- Status -->
+<div class="flex flex-col gap-3">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</label>
+<div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="status" type="radio" value="belum_dibeli"/>
+<div class="rounded-full px-4 py-2 border border-outline-variant text-center font-body-md text-body-md text-on-surface peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all">
+                            Belum Dibeli
+                        </div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="status" type="radio" value="sudah_dibeli"/>
+<div class="rounded-full px-4 py-2 border border-outline-variant text-center font-body-md text-body-md text-on-surface peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all">
+                            Sudah Dibeli
+                        </div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="status" type="radio" value="sudah_dihias"/>
+<div class="rounded-full px-4 py-2 border border-outline-variant text-center font-body-md text-body-md text-on-surface peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all">
+                            Sudah Dihias
+                        </div>
+</label>
 </div>
 </div>
+<!-- Notes -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="notes">Notes (Optional)</label>
+<div class="input-border-transition border-b border-outline-variant relative">
+<textarea class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-md text-body-md text-on-surface placeholder-outline resize-none" id="notes" placeholder="Add any special instructions or details..." rows="3"></textarea>
 </div>
-</section>
+</div>
+</form>
 </main>
-<!-- FAB -->
-<button class="fixed right-6 bottom-[104px] w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-[0_10px_25px_rgb(121,84,101,0.3)] z-40 transition-transform active:scale-95">
-<span class="material-symbols-outlined text-3xl">add</span>
-</button>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 w-full bg-surface-container-lowest/90 backdrop-blur-md pt-2 pb-6 px-2 flex justify-between items-center z-50 border-t border-outline-variant/20 shadow-[0_-4px_20px_rgb(121,84,101,0.05)]"><!-- Overview -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_30}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">dashboard</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Ringkasan</span>
+<!-- Bottom Sticky CTA -->
+<div class="w-full sticky bottom-0 z-50 bg-surface/90 backdrop-blur-md border-t border-outline-variant px-4 py-4 md:px-margin-desktop shadow-[0_-4px_20px_rgba(176,224,230,0.2)]">
+<div class="max-w-[600px] mx-auto">
+<a class="w-full ethereal-gradient rounded-full py-4 px-8 flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(248,200,220,0.4)] hover:shadow-[0_6px_20px_rgba(248,200,220,0.6)] transition-all active:scale-95 cursor-pointer" href="{{DATA:SCREEN:SCREEN_54}}">
+<span class="font-label-sm text-label-sm text-on-primary uppercase tracking-wider">Simpan Seserahan</span>
+<span class="material-symbols-outlined text-on-primary text-xl">check_circle</span>
 </a>
-<!-- Budget -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_23}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">payments</span>
 </div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Anggaran</span>
-</a>
-<!-- Seserahan (Active) -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_32}}">
-<div class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container transition-colors duration-200 cursor-pointer active:opacity-80 shadow-sm">
-<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">redeem</span>
 </div>
-<span class="font-label-sm text-[9px] tracking-wider font-bold text-on-surface uppercase text-center w-full truncate px-1">Seserahan</span>
-</a>
-<!-- Guest List -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_60}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">group</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Tamu</span>
-</a>
-<!-- Documents -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_44}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">description</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Dokumen</span>
-</a>
-<!-- Vendors -->
-<a class="flex flex-col items-center justify-center gap-1 flex-1 min-w-0" href="{{DATA:SCREEN:SCREEN_9}}">
-<div class="px-3 py-1 rounded-full text-on-surface-variant transition-colors duration-200 cursor-pointer active:opacity-80">
-<span class="material-symbols-outlined text-2xl">storefront</span>
-</div>
-<span class="font-label-sm text-[9px] tracking-wider text-on-surface-variant uppercase text-center w-full truncate px-1">Vendor</span>
-</a></nav>
 </body></html>
