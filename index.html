@@ -1,151 +1,116 @@
 <!DOCTYPE html>
 
-<html lang="id"><head>
+<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Persyaratan Legal - Serene Nuptials</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<title>Add Document - Ethereal Union</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
 <script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        "colors": {
-                "primary-fixed": "#ffd8e7",
-                "on-primary": "#ffffff",
-                "surface-container-lowest": "#ffffff",
-                "on-tertiary-fixed-variant": "#454747",
-                "inverse-primary": "#e9bacd",
-                "secondary-fixed-dim": "#9fcfd5",
-                "surface-container-high": "#eae8e7",
-                "on-error": "#ffffff",
-                "background": "#fbf9f8",
-                "surface": "#fbf9f8",
-                "on-tertiary": "#ffffff",
-                "secondary": "#37656b",
-                "surface-tint": "#795465",
-                "on-secondary-fixed-variant": "#1d4d53",
-                "on-primary-fixed": "#2e1221",
-                "on-primary-fixed-variant": "#5f3c4d",
-                "secondary-container": "#b8e8ee",
-                "tertiary-fixed-dim": "#c6c6c7",
-                "outline-variant": "#d2c3c7",
-                "primary-fixed-dim": "#e9bacd",
-                "surface-container-low": "#f5f3f3",
-                "on-tertiary-fixed": "#1a1c1c",
-                "on-primary-container": "#765162",
-                "on-surface-variant": "#4f4448",
-                "on-error-container": "#93000a",
-                "inverse-surface": "#303030",
-                "outline": "#817478",
-                "inverse-on-surface": "#f2f0f0",
-                "error-container": "#ffdad6",
-                "error": "#ba1a1a",
-                "on-secondary-fixed": "#001f23",
-                "on-secondary": "#ffffff",
-                "surface-bright": "#fbf9f8",
-                "primary": "#795465",
-                "surface-dim": "#dbd9d9",
-                "surface-container": "#efeded",
-                "on-tertiary-container": "#5a5c5c",
-                "surface-container-highest": "#e4e2e2",
-                "on-secondary-container": "#3b6a6f",
-                "tertiary-container": "#d4d5d5",
-                "tertiary-fixed": "#e2e2e2",
-                "tertiary": "#5d5f5f",
-                "secondary-fixed": "#bbebf1",
-                "primary-container": "#f8c8dc",
-                "on-background": "#1b1c1c",
-                "surface-variant": "#e4e2e2",
-                "on-surface": "#1b1c1c"
-        },
-        "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-        },
-        "spacing": {
-                "section-gap": "80px",
-                "margin-desktop": "40px",
-                "margin-mobile": "16px",
-                "container-max": "1200px",
-                "unit": "8px",
-                "gutter": "24px"
-        },
-        "fontFamily": {
-                "headline-md": [
-                        "Noto Serif"
-                ],
-                "headline-display": [
-                        "Noto Serif"
-                ],
-                "label-sm": [
-                        "Inter"
-                ],
-                "body-md": [
-                        "Inter"
-                ],
-                "body-lg": [
-                        "Inter"
-                ],
-                "headline-lg": [
-                        "Noto Serif"
-                ]
-        },
-        "fontSize": {
-                "headline-md": [
-                        "24px",
-                        {
-                                "lineHeight": "1.4",
-                                "fontWeight": "400"
-                        }
-                ],
-                "headline-display": [
-                        "48px",
-                        {
-                                "lineHeight": "1.2",
-                                "letterSpacing": "-0.02em",
-                                "fontWeight": "400"
-                        }
-                ],
-                "label-sm": [
-                        "12px",
-                        {
-                                "lineHeight": "1",
-                                "letterSpacing": "0.05em",
-                                "fontWeight": "600"
-                        }
-                ],
-                "body-md": [
-                        "16px",
-                        {
-                                "lineHeight": "1.6",
-                                "fontWeight": "400"
-                        }
-                ],
-                "body-lg": [
-                        "18px",
-                        {
-                                "lineHeight": "1.6",
-                                "fontWeight": "400"
-                        }
-                ],
-                "headline-lg": [
-                        "32px",
-                        {
-                                "lineHeight": "1.3",
-                                "fontWeight": "400"
-                        }
-                ]
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#f8c8dc",
+                        "surface-tint": "#795465",
+                        "secondary-fixed-dim": "#9fcfd5",
+                        "secondary": "#37656b",
+                        "on-surface": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "surface-variant": "#e4e2e2",
+                        "surface-bright": "#fbf9f8",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#5f3c4d",
+                        "inverse-on-surface": "#f2f0f0",
+                        "primary-fixed": "#ffd8e7",
+                        "on-tertiary-container": "#5a5c5c",
+                        "primary": "#795465",
+                        "surface-container": "#efeded",
+                        "on-primary-container": "#765162",
+                        "on-primary": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container-highest": "#e4e2e2",
+                        "surface": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-primary": "#e9bacd",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#3b6a6f",
+                        "tertiary-container": "#d4d5d5",
+                        "on-secondary-fixed-variant": "#1d4d53",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1c",
+                        "surface-dim": "#dbd9d9",
+                        "surface-container-high": "#eae8e7",
+                        "primary-fixed-dim": "#e9bacd",
+                        "on-secondary-fixed": "#001f23",
+                        "on-surface-variant": "#4f4448",
+                        "secondary-fixed": "#bbebf1",
+                        "outline": "#817478",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "tertiary": "#5d5f5f",
+                        "outline-variant": "#d2c3c7",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-low": "#f5f3f3",
+                        "on-primary-fixed": "#2e1221",
+                        "secondary-container": "#b8e8ee",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "unit": "8px",
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Noto Serif"],
+                        "headline-display": ["Noto Serif"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }]
+                    }
+                }
+            }
         }
-},
-    },
-  }
-</script>
-<style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;700&display=swap');
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/50;
+            }
+            .ambient-shadow {
+                box-shadow: 0 8px 32px rgba(176, 224, 230, 0.15);
+            }
+        }
     </style>
 <style>
     body {
@@ -153,123 +118,80 @@
     }
   </style>
 </head>
-<body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col relative pb-[100px]">
-<!-- TopAppBar -->
-<header class="w-full sticky top-0 z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
-<div class="font-headline-md text-headline-md text-primary tracking-tight">Union &amp; Grace</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" data-icon="search">search</span>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" data-icon="notifications">notifications</span>
-<a class="inline-flex items-center" href="{{DATA:SCREEN:SCREEN_72}}"><span class="material-symbols-outlined text-on-surface-variant cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200" data-icon="account_circle">account_circle</span></a>
-</div>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Header (Task-Focused, Nav Shell Suppressed) -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-margin-mobile py-4 bg-surface/80 backdrop-blur-xl border-b border-surface-container-highest">
+<!-- Back Action -->
+<a aria-label="Go back to Legal Requirements" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low active:bg-surface-container transition-colors text-on-surface" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</a>
+<!-- Screen Title -->
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Add Document</h1>
+<!-- Spacer for centering -->
+<div class="w-10 h-10"></div>
 </header>
 <!-- Main Content Canvas -->
-<main class="flex-grow px-margin-mobile py-gutter flex flex-col gap-10 max-w-container-max mx-auto w-full md:px-margin-desktop md:py-margin-desktop">
-<!-- Header Section -->
-<section class="flex flex-col gap-unit">
-<h1 class="font-headline-display text-headline-display text-primary">Persyaratan Legal</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Lengkapi dokumen penting untuk pendaftaran administrasi pernikahan KUA.</p>
-</section>
-<!-- Progress Indicator -->
-<section class="flex flex-col gap-unit">
-<div class="flex justify-between items-end">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Progress Kelengkapan</span>
-<span class="font-body-md text-body-md text-primary font-medium">2 / 6 Selesai</span>
-</div>
-<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full bg-gradient-to-r from-primary-fixed-dim to-secondary-fixed w-1/3 rounded-full"></div>
-</div>
-</section>
-<!-- Document List (Bento-style list) -->
-<section class="flex flex-col gap-4">
-<!-- Completed Item -->
-<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-start gap-4 shadow-sm">
-<div class="mt-1 flex-shrink-0 text-secondary">
-<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<div class="flex-grow flex flex-col gap-1">
-<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Formulir N1</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Surat Pengantar Nikah dari Kelurahan.</p>
+<main class="flex-1 flex flex-col px-margin-mobile py-8 pb-32 max-w-md mx-auto w-full relative">
+<!-- Form Container -->
+<form class="flex flex-col gap-10">
+<!-- Document Name Input Group -->
+<div class="flex flex-col gap-2 relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="doc-name">Document Name</label>
+<div class="relative">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant px-0 py-3 font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-0 focus:border-primary transition-colors peer" id="doc-name" placeholder="e.g., Surat Pengantar Nikah" type="text"/>
+<!-- Subtle focus gradient underline effect -->
+<div class="absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r from-primary to-secondary transition-all duration-300 peer-focus:w-full"></div>
 </div>
 </div>
-<!-- Completed Item -->
-<div class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-start gap-4 shadow-sm">
-<div class="mt-1 flex-shrink-0 text-secondary">
-<span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<div class="flex-grow flex flex-col gap-1">
-<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Fotokopi KTP &amp; KK</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Identitas diri kedua calon mempelai.</p>
-</div>
-</div>
-<!-- In Progress Item -->
-<div class="bg-primary-container border border-outline-variant p-4 rounded-xl flex items-start gap-4 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.05)]">
-<div class="mt-1 flex-shrink-0 text-primary">
-<span class="material-symbols-outlined" data-icon="pending">pending</span>
-</div>
-<div class="flex-grow flex flex-col gap-2">
-<div>
-<h3 class="font-body-lg text-body-lg text-primary font-semibold">Formulir N2 &amp; N3</h3>
-<p class="font-body-md text-[14px] text-on-primary-container leading-tight">Permohonan &amp; Persetujuan Mempelai.</p>
-</div>
-<button class="self-start text-label-sm font-label-sm uppercase text-primary border-b border-primary pb-0.5 mt-2 hover:opacity-80 transition-opacity">Unggah Dokumen</button>
-</div>
-</div>
-<!-- Pending Item -->
-<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex items-start gap-4 opacity-80">
-<div class="mt-1 flex-shrink-0 text-outline">
-<span class="material-symbols-outlined" data-icon="radio_button_unchecked">radio_button_unchecked</span>
-</div>
-<div class="flex-grow flex flex-col gap-1">
-<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Formulir N4</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Surat Keterangan Tentang Orang Tua.</p>
+<!-- Document Status Selection Group -->
+<div class="flex flex-col gap-4">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Document Status</label>
+<!-- Custom Chip Selection -->
+<div class="flex flex-wrap gap-3">
+<!-- Option 1 -->
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="status" type="radio" value="belum_diurus"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md bg-surface-container-lowest peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all duration-200 shadow-sm peer-checked:shadow-none hover:bg-surface-container-low">
+                            Belum Diurus
+                        </div>
+</label>
+<!-- Option 2 -->
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="status" type="radio" value="sedang_diproses"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md bg-surface-container-lowest peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all duration-200 shadow-sm peer-checked:shadow-none hover:bg-surface-container-low">
+                            Sedang Diproses
+                        </div>
+</label>
+<!-- Option 3 -->
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="status" type="radio" value="selesai"/>
+<div class="px-5 py-2.5 rounded-full border border-outline-variant text-on-surface-variant font-body-md text-body-md bg-surface-container-lowest peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all duration-200 shadow-sm peer-checked:shadow-none hover:bg-surface-container-low">
+                            Selesai
+                        </div>
+</label>
 </div>
 </div>
-<!-- Pending Item -->
-<div class="bg-surface-container border border-outline-variant p-4 rounded-xl flex items-start gap-4 opacity-80">
-<div class="mt-1 flex-shrink-0 text-outline">
-<span class="material-symbols-outlined" data-icon="radio_button_unchecked">radio_button_unchecked</span>
-</div>
-<div class="flex-grow flex flex-col gap-1">
-<h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Pasfoto 2x3 &amp; 3x4</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Latar belakang biru, masing-masing 4 lembar.</p>
+<!-- Optional Notes Textarea -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="doc-notes">Notes (Optional)</label>
+<div class="relative glass-panel rounded-xl overflow-hidden ambient-shadow">
+<textarea class="w-full bg-transparent border-0 p-4 font-body-md text-body-md text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all resize-none" id="doc-notes" placeholder="Add specific requirements, deadlines, or office locations..." rows="4"></textarea>
 </div>
 </div>
-</section>
+</form>
 </main>
-<!-- BottomNavBar -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container border-t border-outline-variant flex justify-around items-center pt-3 pb-6 px-2 z-50">
-<!-- Inactive: Overview -->
-<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_30}}">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="font-label-sm text-[10px] uppercase">Ringkasan</span>
+<!-- Fixed Bottom Action Area -->
+<div class="fixed bottom-0 left-0 right-0 p-margin-mobile bg-surface/90 backdrop-blur-xl border-t border-surface-container pb-safe">
+<div class="max-w-md mx-auto w-full">
+<a class="w-full relative group overflow-hidden rounded-full font-body-md text-body-md font-medium text-white h-[56px] shadow-[0_8px_20px_rgba(176,224,230,0.3)] transition-transform active:scale-[0.98] inline-block" href="{{DATA:SCREEN:SCREEN_54}}">
+<!-- Gradient Background -->
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-secondary transition-opacity group-hover:opacity-90"></div>
+<!-- Content -->
+<div class="relative flex items-center justify-center gap-2 h-full">
+<span>Simpan Dokumen</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">save</span>
+</div>
 </a>
-<!-- Inactive: Budget -->
-<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_23}}">
-<span class="material-symbols-outlined" data-icon="payments">payments</span>
-<span class="font-label-sm text-[10px] uppercase">Anggaran</span>
-</a>
-<!-- Inactive: Seserahan -->
-<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_32}}">
-<span class="material-symbols-outlined" data-icon="redeem">redeem</span>
-<span class="font-label-sm text-[10px] uppercase">Seserahan</span>
-</a>
-<!-- Inactive: Guest List -->
-<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_60}}">
-<span class="material-symbols-outlined" data-icon="group">group</span>
-<span class="font-label-sm text-[10px] uppercase">Tamu</span>
-</a>
-<!-- Active: Documents -->
-<a class="flex flex-col items-center gap-1 bg-secondary-container text-on-secondary-container rounded-xl px-3 py-2 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_44}}">
-<span class="material-symbols-outlined" data-icon="description" data-weight="fill" style="font-variation-settings: 'FILL' 1;">description</span>
-<span class="font-label-sm text-[10px] uppercase">Dokumen</span>
-</a>
-<!-- Inactive: Vendors -->
-<a class="flex flex-col items-center gap-1 text-on-surface-variant px-1 py-1 scale-98 active:scale-95 transition-transform" href="{{DATA:SCREEN:SCREEN_9}}">
-<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
-<span class="font-label-sm text-[10px] uppercase">Vendor</span>
-</a>
-</nav>
-<a aria-label="Tambah Dokumen" class="fixed bottom-[100px] right-margin-mobile md:right-margin-desktop z-40 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:bg-primary-fixed-dim active:scale-95 transition-all duration-200 cursor-pointer" href="{{DATA:SCREEN:TAMBAH_DOKUMEN}}">
-<span class="material-symbols-outlined text-[32px]" data-icon="add">add</span>
-</a></body></html>
+</div>
+</div>
+</body></html>
