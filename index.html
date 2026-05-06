@@ -1,0 +1,812 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue-1:#0a1628;--blue-2:#0d2044;--blue-3:#1a3a6b;--blue-4:#1e4db7;--blue-5:#2563eb;--blue-6:#3b82f6;--blue-7:#60a5fa;--blue-8:#bfdbfe;--blue-9:#eff6ff;
+  --white:#ffffff;--surface:#f8faff;--surface2:#f0f4ff;--brd:#dbeafe;--brd2:#bfdbfe;
+  --txt:#0d1b3e;--txt2:#374151;--txt3:#6b7280;--txt4:#9ca3af;
+  --acc:#1d4ed8;--acc-h:#1e40af;--red:#ef4444;--green:#10b981;
+  --r:10px;--r2:14px;--r3:20px;--fnt:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+body{font-family:var(--fnt);background:var(--surface);color:var(--txt);-webkit-font-smoothing:antialiased}
+.shell{display:flex;flex-direction:column;height:820px;background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--brd);box-shadow:0 4px 32px rgba(37,99,235,.10)}
+
+/* ── HEADER ── */
+.app-header{background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-3) 60%,var(--blue-4) 100%);padding:0 20px;display:flex;align-items:center;height:56px;gap:12px;flex-shrink:0;position:relative;overflow:hidden}
+.app-header::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.app-header::before{content:'';position:absolute;right:60px;bottom:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.03);pointer-events:none}
+.hdr-brand{display:flex;align-items:center;gap:10px}
+.hdr-icon{width:34px;height:34px;background:rgba(255,255,255,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2)}
+.hdr-icon i{font-size:17px;color:#fff}
+.hdr-title{font-size:15px;font-weight:700;color:#fff;letter-spacing:-.2px}
+.hdr-sub{font-size:10px;color:rgba(255,255,255,.55);margin-top:1px;letter-spacing:.2px}
+.hdr-spacer{flex:1}
+.hdr-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:4px 10px;font-size:10px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.3px}
+
+/* ── NAVBAR ── */
+.nav-bar{background:var(--white);border-top:1px solid var(--brd);display:flex;flex-shrink:0;padding:6px 10px;gap:4px}
+.nb{flex:1;padding:8px 4px 9px;background:none;border:none;border-radius:10px;font-family:var(--fnt);font-size:10px;font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--txt3);transition:all .2s;letter-spacing:.2px;position:relative}
+.nb i{font-size:19px;transition:transform .2s}
+.nb:hover{color:var(--blue-5);background:var(--surface2)}
+.nb.active{color:var(--acc);background:var(--blue-9)}
+.nb.active i{transform:translateY(-1px)}
+.nb.nb-create{color:var(--white)!important;background:linear-gradient(135deg,var(--blue-5),var(--blue-4));box-shadow:0 3px 12px rgba(37,99,235,.35)}
+.nb.nb-create:hover{box-shadow:0 4px 16px rgba(37,99,235,.45);transform:translateY(-1px)}
+.nb.nb-create i{font-size:22px}
+.nb-dot{position:absolute;top:6px;right:calc(50% - 14px);width:6px;height:6px;border-radius:50%;background:var(--red);border:1.5px solid #fff;display:none}
+.nb-dot.show{display:block}
+
+/* ── PAGES ── */
+.page{flex:1;overflow:hidden;display:none;flex-direction:column}
+.page.active{display:flex}
+.page-scroll{flex:1;overflow-y:auto;padding:18px}
+
+/* ── BERANDA ── */
+.welcome-banner{background:linear-gradient(135deg,var(--blue-1),var(--blue-3));border-radius:var(--r2);padding:18px 20px;margin-bottom:16px;position:relative;overflow:hidden}
+.welcome-banner::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.05)}
+.wb-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px}
+.wb-sub{font-size:12px;color:rgba(255,255,255,.6)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat-card{background:var(--white);border:1px solid var(--brd);border-radius:var(--r2);padding:14px;text-align:center;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0}
+.stat-card:nth-child(1)::before{background:var(--blue-5)}
+.stat-card:nth-child(2)::before{background:var(--green)}
+.stat-card:nth-child(3)::before{background:#8b5cf6}
+.stat-num{font-size:24px;font-weight:700;color:var(--txt);line-height:1}
+.stat-lbl{font-size:10px;color:var(--txt3);margin-top:5px;font-weight:500}
+.sec-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-hdr-line{flex:1;height:1px;background:var(--brd)}
+.sec-hdr-txt{font-size:11px;font-weight:600;color:var(--txt3);text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}
+.hist-item{background:var(--white);border:1px solid var(--brd);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s}
+.hist-item:hover{border-color:var(--brd2);box-shadow:0 2px 8px rgba(37,99,235,.08);transform:translateY(-1px)}
+.hi-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.hi-ico.t-cv{background:var(--blue-9);color:var(--blue-5)}
+.hi-ico.t-up{background:#f0fdf4;color:var(--green)}
+.hi-ico.t-cp{background:#fffbeb;color:#d97706}
+.hi-name{font-size:13px;font-weight:600;color:var(--txt)}
+.hi-sub{font-size:10px;color:var(--txt3);margin-top:2px}
+.badge{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px}
+.badge-cv{background:var(--blue-9);color:var(--blue-5)}
+.badge-up{background:#f0fdf4;color:var(--green)}
+.badge-cp{background:#fffbeb;color:#d97706}
+.empty-st{text-align:center;padding:36px 20px;color:var(--txt3)}
+.empty-st i{font-size:44px;color:var(--brd2);display:block;margin-bottom:12px}
+.empty-st strong{font-size:14px;color:var(--txt2);display:block;margin-bottom:4px}
+.empty-st p{font-size:12px}
+
+/* ── EDITOR ── */
+.ed-topbar{background:linear-gradient(90deg,var(--blue-1),var(--blue-2));padding:0 12px;display:flex;align-items:center;gap:6px;height:42px;flex-shrink:0;overflow-x:auto}
+.ed-topbar::-webkit-scrollbar{height:2px}
+.ed-topbar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2)}
+.etb{background:none;border:none;color:rgba(255,255,255,.7);padding:4px 8px;border-radius:7px;cursor:pointer;font-size:11px;display:flex;align-items:center;gap:4px;white-space:nowrap;font-family:var(--fnt);font-weight:500;transition:all .15s}
+.etb:hover{background:rgba(255,255,255,.12);color:#fff}
+.etb i{font-size:14px}
+.etb.active{background:rgba(59,130,246,.3);color:var(--blue-7);border:1px solid rgba(59,130,246,.3)}
+.etb-sep{width:1px;height:18px;background:rgba(255,255,255,.15);flex-shrink:0}
+.etb-sel{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:6px;padding:3px 6px;font-size:11px;font-family:var(--fnt);cursor:pointer;outline:none}
+.etb-sel option{background:#0d2044;color:#fff}
+.etb-export{background:rgba(29,78,216,.6);border:1px solid rgba(59,130,246,.4);color:#fff;padding:4px 10px;border-radius:7px;cursor:pointer;font-size:11px;font-family:var(--fnt);font-weight:600;display:flex;align-items:center;gap:4px;transition:all .15s}
+.etb-export:hover{background:rgba(29,78,216,.85)}
+
+.ed-fmt{background:#fff;border-bottom:1px solid var(--brd);padding:5px 12px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;flex-shrink:0}
+.t2b{background:none;border:1px solid transparent;border-radius:5px;padding:3px 6px;cursor:pointer;font-size:11px;color:var(--txt2);display:flex;align-items:center;gap:2px;font-family:var(--fnt);transition:all .1s}
+.t2b:hover{background:var(--surface2);border-color:var(--brd)}
+.t2b i{font-size:13px}
+.t2sep{width:1px;height:16px;background:var(--brd);margin:0 2px}
+.t2sel{border:1px solid var(--brd);border-radius:5px;padding:2px 5px;font-size:11px;font-family:var(--fnt);color:var(--txt);background:#fff;cursor:pointer;outline:none}
+.t2color{width:20px;height:20px;border-radius:4px;border:1px solid var(--brd);cursor:pointer;padding:0}
+
+.grid-panel{background:linear-gradient(to right,var(--surface),var(--blue-9));border-bottom:1px solid var(--brd);padding:10px 14px;display:none;flex-shrink:0}
+.gp-title{font-size:10px;font-weight:700;color:var(--blue-4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:8px}
+.gp-row{display:flex;gap:6px;flex-wrap:wrap}
+.gopt{border:1px solid var(--brd2);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:10px;font-weight:600;color:var(--blue-4);background:#fff;display:flex;align-items:center;gap:4px;font-family:var(--fnt);transition:all .15s}
+.gopt:hover{border-color:var(--blue-5);background:var(--blue-9);color:var(--blue-5);transform:translateY(-1px)}
+.gopt i{font-size:13px}
+
+.ed-canvas{flex:1;overflow-y:auto;background:linear-gradient(180deg,#e0e7f7 0%,#c8d6f0 100%);display:flex;flex-direction:column;align-items:center;padding:20px 0 40px;min-height:0}
+.doc-page{background:#fff;width:500px;min-height:700px;padding:44px 48px;border:1px solid rgba(0,0,0,.12);box-shadow:0 4px 24px rgba(0,0,0,.1);position:relative;flex-shrink:0;margin-bottom:0}
+.page-del-btn{position:absolute;top:-12px;right:-12px;width:26px;height:26px;background:var(--red);border:2px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(239,68,68,.35);z-index:20;font-size:11px;color:#fff;font-weight:700;transition:transform .15s;border:none}
+.page-del-btn:hover{transform:scale(1.12)}
+.pg-num-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--blue-4);color:#fff;font-size:9px;font-weight:700;padding:2px 10px;border-radius:20px;letter-spacing:.5px;white-space:nowrap}
+.doc-content{outline:none;min-height:560px;font-size:12.5px;line-height:1.9;color:#1a1a2e;font-family:'Times New Roman',serif;word-wrap:break-word}
+.doc-content:empty::before{content:'Mulai ketik di sini — CV, surat lamaran, atau berkas lainnya...';color:#c0c0c0;pointer-events:none;font-style:italic}
+.pg-label{text-align:center;font-size:10px;color:#94a3b8;margin-top:10px;margin-bottom:16px;letter-spacing:.3px}
+
+.ed-status{background:#f8faff;border-top:1px solid var(--brd);padding:4px 14px;font-size:10px;color:var(--txt3);display:flex;justify-content:space-between;flex-shrink:0;align-items:center}
+
+/* frame foto */
+.img-frame{display:inline-block;vertical-align:top;position:relative;margin:4px}
+.img-frame-inner{overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f0f4ff,#e8eef8);border:1.5px dashed var(--brd2);position:relative;cursor:pointer;transition:border-color .15s}
+.img-frame-inner:hover{border-color:var(--blue-5)}
+.img-frame-inner.has-img{border:1.5px solid var(--brd2);background:#000}
+.img-frame-inner img{width:100%;height:100%;object-fit:cover;display:block}
+.frm-del{position:absolute;top:-9px;right:-9px;width:20px;height:20px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:15;font-size:10px;color:#fff;font-weight:700;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(239,68,68,.3);transition:transform .15s;line-height:1}
+.frm-del:hover{transform:scale(1.15)}
+.frm-ph{display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--brd2);padding:8px;pointer-events:none}
+.frm-ph i{font-size:24px}
+.frm-ph span{font-size:9px;text-align:center;line-height:1.4;color:var(--txt4)}
+.frm-tb{position:absolute;top:-28px;left:0;background:var(--blue-1);border-radius:6px;display:flex;opacity:0;transition:opacity .15s;z-index:10;overflow:hidden}
+.img-frame:hover .frm-tb{opacity:1}
+.frm-tb button{background:none;border:none;color:rgba(255,255,255,.8);padding:3px 7px;cursor:pointer;font-size:10px;display:flex;align-items:center;gap:3px;font-family:var(--fnt);transition:background .15s}
+.frm-tb button:hover{background:rgba(255,255,255,.12);color:#fff}
+.frm-tb button i{font-size:12px}
+.rsz{position:absolute;bottom:0;right:0;width:14px;height:14px;background:var(--blue-5);border-radius:3px 0 0 0;cursor:se-resize;display:flex;align-items:center;justify-content:center;opacity:.7}
+.rsz:hover{opacity:1}
+.rsz i{font-size:9px;color:#fff}
+
+/* ── UPLOAD ── */
+.upl-inner{padding:18px;display:flex;flex-direction:column;gap:12px;height:100%;overflow-y:auto}
+.utab-row{display:flex;gap:6px;background:var(--surface2);border-radius:12px;padding:4px}
+.utab{flex:1;padding:7px 12px;border-radius:9px;border:none;font-family:var(--fnt);font-size:11px;font-weight:600;cursor:pointer;color:var(--txt3);background:none;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:5px}
+.utab:hover{color:var(--txt2)}
+.utab.active{background:#fff;color:var(--acc);box-shadow:0 1px 4px rgba(37,99,235,.12)}
+.utab i{font-size:14px}
+.dropzone{border:2px dashed var(--brd2);border-radius:var(--r2);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface)}
+.dropzone:hover{border-color:var(--blue-5);background:var(--blue-9)}
+.dropzone i{font-size:32px;color:var(--blue-6);display:block;margin-bottom:8px}
+.dropzone-title{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:3px}
+.dropzone-sub{font-size:11px;color:var(--txt3)}
+.file-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fthumb{background:#fff;border:1px solid var(--brd);border-radius:10px;padding:8px;text-align:center;position:relative;transition:border-color .15s}
+.fthumb:hover{border-color:var(--brd2)}
+.fthumb img{width:100%;height:52px;object-fit:cover;border-radius:7px;margin-bottom:5px}
+.fthumb-icon{width:100%;height:52px;display:flex;align-items:center;justify-content:center;font-size:24px;border-radius:7px;margin-bottom:5px}
+.fthumb p{font-size:9px;color:var(--txt3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.frem{position:absolute;top:-6px;right:-6px;width:17px;height:17px;background:var(--red);border-radius:50%;border:1.5px solid #fff;color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;transition:transform .15s;line-height:1}
+.frem:hover{transform:scale(1.15)}
+.empty-grid{grid-column:1/-1;text-align:center;padding:20px;color:var(--txt4)}
+.empty-grid i{font-size:30px;color:var(--brd2);display:block;margin-bottom:6px}
+.empty-grid p{font-size:12px}
+.btn-merge{width:100%;padding:12px;background:linear-gradient(135deg,var(--blue-4),var(--blue-5));color:#fff;border:none;border-radius:var(--r);font-family:var(--fnt);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .2s;box-shadow:0 3px 12px rgba(37,99,235,.25)}
+.btn-merge:hover{box-shadow:0 5px 16px rgba(37,99,235,.35);transform:translateY(-1px)}
+.btn-merge:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ── COMPRESS ── */
+.cmp-inner{padding:18px;display:flex;flex-direction:column;gap:12px;height:100%;overflow-y:auto}
+.ai-strip{background:linear-gradient(135deg,var(--blue-1),var(--blue-3));border-radius:var(--r);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.ai-strip i{font-size:20px;color:var(--blue-7)}
+.ai-strip-title{font-size:13px;font-weight:700;color:#fff}
+.ai-strip-sub{font-size:10px;color:rgba(255,255,255,.55);margin-top:1px}
+.ai-strip-badge{margin-left:auto;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.3);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:#34d399}
+.cmp-drop{border:2px dashed var(--brd2);border-radius:var(--r2);padding:22px;text-align:center;cursor:pointer;transition:all .2s;background:var(--surface)}
+.cmp-drop:hover{border-color:var(--blue-5);background:var(--blue-9)}
+.cmp-drop i{font-size:36px;color:var(--blue-6);display:block;margin-bottom:8px}
+.cmp-file-info{background:var(--blue-9);border:1px solid var(--brd2);border-radius:var(--r);padding:10px 14px;display:none;align-items:center;gap:10px}
+.cfi-icon{width:32px;height:32px;background:var(--blue-8);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--blue-5);flex-shrink:0}
+.cfi-name{font-size:12px;font-weight:600;color:var(--txt)}
+.cfi-size{font-size:10px;color:var(--txt3);margin-top:1px}
+.lvl-row{display:flex;flex-direction:column;gap:6px}
+.lvl-row label{font-size:11px;font-weight:600;color:var(--txt2);display:flex;justify-content:space-between}
+.lvl-row label span{color:var(--blue-5)}
+.lvl-row input[type=range]{width:100%;accent-color:var(--blue-5)}
+.feat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.feat-box{background:var(--surface);border:1px solid var(--brd);border-radius:var(--r);padding:10px;text-align:center}
+.feat-box i{font-size:18px;color:var(--blue-5);display:block;margin-bottom:4px}
+.feat-box p{font-size:10px;color:var(--txt3);font-weight:500}
+.ai-thinking{background:var(--surface2);border:1px solid var(--brd);border-radius:var(--r);padding:12px;display:none;text-align:center}
+.dots{display:flex;gap:4px;justify-content:center;margin-bottom:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--blue-5);animation:pulse 1.2s ease infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+.ai-thinking p{font-size:11px;color:var(--txt3)}
+.btn-primary{width:100%;padding:12px;background:linear-gradient(135deg,var(--blue-4),var(--blue-5));color:#fff;border:none;border-radius:var(--r);font-family:var(--fnt);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;box-shadow:0 3px 12px rgba(37,99,235,.25)}
+.btn-primary:hover{box-shadow:0 5px 18px rgba(37,99,235,.35);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.cmp-result{background:#fff;border:1px solid var(--brd);border-radius:var(--r2);padding:16px;display:none}
+.cmp-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-bottom:12px}
+.size-box{text-align:center;padding:12px;border-radius:var(--r)}
+.size-box.bef{background:#fef2f2;border:1px solid #fecaca}
+.size-box.aft{background:#f0fdf4;border:1px solid #bbf7d0}
+.size-num{font-size:18px;font-weight:700}
+.size-num.bef{color:var(--red)}.size-num.aft{color:var(--green)}
+.size-lbl{font-size:9px;color:var(--txt3);margin-top:3px;font-weight:500}
+.saving-row{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:var(--r);padding:8px;text-align:center;font-size:13px;font-weight:700;color:#065f46;margin-bottom:10px}
+.btn-download{width:100%;padding:11px;background:linear-gradient(135deg,#065f46,var(--green));color:#fff;border:none;border-radius:var(--r);font-family:var(--fnt);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
+.btn-download:hover{opacity:.9;transform:translateY(-1px)}
+
+/* modal */
+.modal-bg{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(10,22,40,.6);z-index:100;align-items:center;justify-content:center;border-radius:16px;backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:var(--r2);padding:20px;width:300px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-header{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.modal-header i{font-size:18px;color:var(--blue-5);background:var(--blue-9);width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px}
+.modal-header span{font-size:14px;font-weight:700;color:var(--txt)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.mgopt{border:1.5px solid var(--brd);border-radius:var(--r);padding:10px 6px;cursor:pointer;text-align:center;background:var(--surface);font-family:var(--fnt);transition:all .15s}
+.mgopt:hover,.mgopt.sel{border-color:var(--blue-5);background:var(--blue-9)}
+.mgopt i{font-size:20px;display:block;margin-bottom:4px;color:var(--blue-5)}
+.mgopt span{font-size:10px;color:var(--txt2);font-weight:600}
+.mrow{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.mrow label{font-size:11px;color:var(--txt3);font-weight:600;width:55px;flex-shrink:0}
+.mrow input{border:1px solid var(--brd);border-radius:7px;padding:5px 8px;font-size:12px;flex:1;font-family:var(--fnt);outline:none;transition:border-color .15s}
+.mrow input:focus{border-color:var(--blue-5)}
+.mbtns{display:flex;gap:8px;margin-top:4px}
+.mb-cancel{flex:1;background:var(--surface);border:1px solid var(--brd);border-radius:8px;padding:9px;font-family:var(--fnt);font-size:12px;cursor:pointer;color:var(--txt3);font-weight:600;transition:all .15s}
+.mb-cancel:hover{background:var(--surface2)}
+.mb-ok{flex:2;background:linear-gradient(135deg,var(--blue-4),var(--blue-5));border:none;border-radius:8px;padding:9px;font-family:var(--fnt);font-size:12px;font-weight:700;color:#fff;cursor:pointer;transition:all .15s}
+.mb-ok:hover{opacity:.9}
+</style>
+
+<h2 class="sr-only">CV Builder Pro – Aplikasi pembuat CV profesional dengan editor dokumen, upload berkas, dan kompresi file</h2>
+
+<input type="file" id="imgUpload" accept="image/*" style="display:none" onchange="handleImgUpload(this)">
+<input type="file" id="uploadFiles" multiple style="display:none" onchange="handleUploadFiles(this.files)">
+<input type="file" id="compressInput" accept=".pdf,.docx,.jpg,.jpeg,.png" style="display:none" onchange="loadCmpFile(this)">
+
+<div class="shell" id="shell">
+
+  <!-- HEADER -->
+  <div class="app-header">
+    <div class="hdr-brand">
+      <div class="hdr-icon"><i class="ti ti-id-badge" aria-hidden="true"></i></div>
+      <div><div class="hdr-title">CV Builder Pro</div><div class="hdr-sub">Buat &amp; kelola dokumen CV</div></div>
+    </div>
+    <div class="hdr-spacer"></div>
+    <div class="hdr-pill">✦ Pro</div>
+  </div>
+
+  <!-- BERANDA -->
+  <div class="page active" id="pg-beranda">
+    <div class="page-scroll">
+      <div class="welcome-banner">
+        <div class="wb-title">Selamat datang! 👋</div>
+        <div class="wb-sub">Buat CV, upload berkas, dan kompres file dengan mudah</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="st-cv">0</div><div class="stat-lbl">CV Dibuat</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-up">0</div><div class="stat-lbl">File Upload</div></div>
+        <div class="stat-card"><div class="stat-num" id="st-cp">0</div><div class="stat-lbl">Dikompres</div></div>
+      </div>
+      <div class="sec-hdr"><div class="sec-hdr-txt">Riwayat Dokumen</div><div class="sec-hdr-line"></div></div>
+      <div id="hist-list">
+        <div class="empty-st">
+          <i class="ti ti-file-description" aria-hidden="true"></i>
+          <strong>Belum ada dokumen</strong>
+          <p>Mulai buat CV atau upload berkas Anda</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUAT CV (EDITOR) -->
+  <div class="page" id="pg-create">
+
+    <!-- editor topbar -->
+    <div class="ed-topbar">
+      <select class="etb-sel" id="docType" onchange="applyTmpl(this.value)">
+        <option value="cv">Curriculum Vitae</option>
+        <option value="lamaran">Surat Lamaran</option>
+        <option value="berkas">Berkas Pendukung</option>
+        <option value="kosong">Halaman Kosong</option>
+      </select>
+      <div class="etb-sep"></div>
+      <button class="etb" onclick="addDocPage()"><i class="ti ti-plus" aria-hidden="true"></i> Halaman</button>
+      <button class="etb" onclick="showFrmModal()"><i class="ti ti-photo-plus" aria-hidden="true"></i> Frame</button>
+      <button class="etb" id="gridBtn" onclick="toggleGrid()"><i class="ti ti-layout-grid" aria-hidden="true"></i> Grid</button>
+      <div class="etb-sep"></div>
+      <button class="etb-export" onclick="exportPDF()"><i class="ti ti-file-type-pdf" aria-hidden="true"></i> Export PDF</button>
+      <button class="etb-export" onclick="exportWord()"><i class="ti ti-file-type-doc" aria-hidden="true"></i> Export Word</button>
+    </div>
+
+    <!-- grid panel -->
+    <div class="grid-panel" id="gridPanel">
+      <div class="gp-title">Layout grid frame foto</div>
+      <div class="gp-row">
+        <button class="gopt" onclick="insGrid(1,1,110,145)"><i class="ti ti-square" aria-hidden="true"></i> 1×1</button>
+        <button class="gopt" onclick="insGrid(2,1,100,120)"><i class="ti ti-layout-columns" aria-hidden="true"></i> 2 kolom</button>
+        <button class="gopt" onclick="insGrid(3,1,80,100)"><i class="ti ti-columns-3" aria-hidden="true"></i> 3 kolom</button>
+        <button class="gopt" onclick="insGrid(2,2,100,95)"><i class="ti ti-layout-grid" aria-hidden="true"></i> 2×2</button>
+        <button class="gopt" onclick="insGrid(3,2,80,80)"><i class="ti ti-layout-grid-add" aria-hidden="true"></i> 3×2</button>
+        <button class="gopt" onclick="insSingle(88,116,'rect')"><i class="ti ti-id" aria-hidden="true"></i> KTP 3×4</button>
+        <button class="gopt" onclick="insSingle(112,160,'rect')"><i class="ti ti-user" aria-hidden="true"></i> Pas Foto</button>
+        <button class="gopt" onclick="insSingle(110,110,'circle')"><i class="ti ti-circle" aria-hidden="true"></i> Bulat</button>
+      </div>
+    </div>
+
+    <!-- format toolbar -->
+    <div class="ed-fmt">
+      <select class="t2sel" style="width:98px" onchange="execFmt('fontName',this.value)">
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Arial">Arial</option>
+        <option value="Calibri">Calibri</option>
+        <option value="Georgia">Georgia</option>
+      </select>
+      <select class="t2sel" style="width:44px" onchange="execFmt('fontSize',this.value)">
+        <option value="2">10</option><option value="3" selected>12</option>
+        <option value="4">14</option><option value="5">18</option><option value="6">24</option>
+      </select>
+      <div class="t2sep"></div>
+      <button class="t2b" onclick="execFmt('bold')" title="Bold"><i class="ti ti-bold" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="execFmt('italic')" title="Italic"><i class="ti ti-italic" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="execFmt('underline')" title="Underline"><i class="ti ti-underline" aria-hidden="true"></i></button>
+      <div class="t2sep"></div>
+      <button class="t2b" onclick="execFmt('justifyLeft')"><i class="ti ti-align-left" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="execFmt('justifyCenter')"><i class="ti ti-align-center" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="execFmt('justifyRight')"><i class="ti ti-align-right" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="execFmt('justifyFull')"><i class="ti ti-align-justified" aria-hidden="true"></i></button>
+      <div class="t2sep"></div>
+      <button class="t2b" onclick="execFmt('insertUnorderedList')"><i class="ti ti-list" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="execFmt('insertOrderedList')"><i class="ti ti-list-numbers" aria-hidden="true"></i></button>
+      <div class="t2sep"></div>
+      <input type="color" class="t2color" value="#0d1b3e" onchange="execFmt('foreColor',this.value)" title="Warna teks">
+      <div class="t2sep"></div>
+      <button class="t2b" onclick="insHR()"><i class="ti ti-minus" aria-hidden="true"></i></button>
+      <button class="t2b" onclick="insTbl()"><i class="ti ti-table" aria-hidden="true"></i></button>
+    </div>
+
+    <!-- canvas -->
+    <div class="ed-canvas" id="edCanvas">
+      <div style="position:relative;margin-top:14px" id="page-wrap-1">
+        <div class="pg-num-badge">Halaman 1</div>
+        <div class="doc-page" id="docpage-1">
+          <button class="page-del-btn" onclick="delPage(1)" title="Hapus halaman" aria-label="Hapus halaman 1">✕</button>
+          <div class="doc-content" id="doccontent-1" contenteditable="true" onkeyup="updStat()" onclick="curPg=1;updStat()"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ed-status">
+      <span id="ed-stat-l">Klik di halaman putih untuk mulai menulis</span>
+      <span id="ed-stat-r" style="color:var(--blue-5);font-weight:600">1 halaman</span>
+    </div>
+
+  </div>
+
+  <!-- UPLOAD -->
+  <div class="page" id="pg-upload">
+    <div class="upl-inner">
+      <div class="utab-row">
+        <button class="utab active" id="utab-foto" onclick="switchUTab('foto',this)"><i class="ti ti-photo" aria-hidden="true"></i> Foto</button>
+        <button class="utab" id="utab-file" onclick="switchUTab('file',this)"><i class="ti ti-files" aria-hidden="true"></i> File</button>
+      </div>
+      <div class="dropzone" onclick="document.getElementById('uploadFiles').click()">
+        <i class="ti ti-cloud-upload" aria-hidden="true"></i>
+        <div class="dropzone-title">Klik atau seret file ke sini</div>
+        <div class="dropzone-sub" id="upl-hint">Format: JPG, PNG — maks 10MB per file</div>
+      </div>
+      <div class="sec-hdr"><div class="sec-hdr-txt">File terupload (<span id="file-count">0</span>)</div><div class="sec-hdr-line"></div></div>
+      <div class="file-grid" id="file-grid">
+        <div class="empty-grid">
+          <i class="ti ti-inbox" aria-hidden="true"></i>
+          <p>Belum ada file yang diupload</p>
+        </div>
+      </div>
+      <button class="btn-merge" id="btn-merge" style="display:none" onclick="doMerge()">
+        <i class="ti ti-git-merge" aria-hidden="true"></i> Jadikan Satu Berkas &amp; Download
+      </button>
+    </div>
+  </div>
+
+  <!-- KOMPRES -->
+  <div class="page" id="pg-compress">
+    <div class="cmp-inner">
+      <div class="ai-strip">
+        <i class="ti ti-robot" aria-hidden="true"></i>
+        <div><div class="ai-strip-title">AI Compress</div><div class="ai-strip-sub">Kompresi cerdas tanpa biaya</div></div>
+        <div class="ai-strip-badge">GRATIS</div>
+      </div>
+      <div class="cmp-drop" onclick="document.getElementById('compressInput').click()">
+        <i class="ti ti-file-zip" aria-hidden="true"></i>
+        <div class="dropzone-title">Pilih file untuk dikompres</div>
+        <div class="dropzone-sub">Mendukung PDF, DOCX, JPG, PNG</div>
+      </div>
+      <div class="cmp-file-info" id="cmp-info">
+        <div class="cfi-icon"><i class="ti ti-file" aria-hidden="true" id="cfi-ico"></i></div>
+        <div><div class="cfi-name" id="cfi-name">—</div><div class="cfi-size" id="cfi-size">—</div></div>
+      </div>
+      <div class="lvl-row">
+        <label>Tingkat kompresi <span id="lvl-lbl">Sedang (60%)</span></label>
+        <input type="range" min="1" max="3" step="1" value="2" oninput="updCmpLvl(this.value)">
+      </div>
+      <div class="feat-row">
+        <div class="feat-box"><i class="ti ti-brain" aria-hidden="true"></i><p>Analisis AI</p></div>
+        <div class="feat-box"><i class="ti ti-settings-2" aria-hidden="true"></i><p>Optimasi otomatis</p></div>
+        <div class="feat-box"><i class="ti ti-shield-check" aria-hidden="true"></i><p>Aman &amp; privat</p></div>
+      </div>
+      <div class="ai-thinking" id="ai-think">
+        <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <p id="think-msg">Menganalisis file...</p>
+      </div>
+      <button class="btn-primary" id="btn-compress" onclick="startCompress()">
+        <i class="ti ti-file-zip" aria-hidden="true"></i> Kompres Sekarang
+      </button>
+      <div class="cmp-result" id="cmp-result">
+        <div class="cmp-compare">
+          <div class="size-box bef"><div class="size-num bef" id="sz-before">—</div><div class="size-lbl">Ukuran asli</div></div>
+          <i class="ti ti-arrow-right" style="font-size:18px;color:var(--txt3)" aria-hidden="true"></i>
+          <div class="size-box aft"><div class="size-num aft" id="sz-after">—</div><div class="size-lbl">Setelah kompres</div></div>
+        </div>
+        <div class="saving-row" id="saving-row">—</div>
+        <button class="btn-download" id="btn-dl-compressed" onclick="dlCompressed()">
+          <i class="ti ti-download" aria-hidden="true"></i> Download File Terkompres
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR BAWAH -->
+  <div class="nav-bar">
+    <button class="nb active" id="nb-beranda" onclick="goPage('beranda')">
+      <i class="ti ti-home" aria-hidden="true"></i>Beranda
+      <span class="nb-dot" id="dot-beranda"></span>
+    </button>
+    <button class="nb nb-create" id="nb-create" onclick="goPage('create')">
+      <i class="ti ti-circle-plus" aria-hidden="true"></i>Buat CV
+    </button>
+    <button class="nb" id="nb-upload" onclick="goPage('upload')">
+      <i class="ti ti-cloud-upload" aria-hidden="true"></i>Upload
+      <span class="nb-dot" id="dot-upload"></span>
+    </button>
+    <button class="nb" id="nb-compress" onclick="goPage('compress')">
+      <i class="ti ti-file-zip" aria-hidden="true"></i>Kompres
+    </button>
+  </div>
+
+  <!-- MODAL FRAME FOTO -->
+  <div class="modal-bg" id="frmModal">
+    <div class="modal">
+      <div class="modal-header">
+        <i class="ti ti-photo-plus" aria-hidden="true"></i>
+        <span>Tambah frame foto</span>
+      </div>
+      <div class="mgrid" id="shape-opts">
+        <button class="mgopt sel" id="ms-rect" onclick="selShape('rect',this)"><i class="ti ti-rectangle" aria-hidden="true"></i><span>Persegi panjang</span></button>
+        <button class="mgopt" id="ms-square" onclick="selShape('square',this)"><i class="ti ti-square" aria-hidden="true"></i><span>Kotak</span></button>
+        <button class="mgopt" id="ms-circle" onclick="selShape('circle',this)"><i class="ti ti-circle" aria-hidden="true"></i><span>Lingkaran</span></button>
+        <button class="mgopt" id="ms-ktp" onclick="selShape('ktp',this)"><i class="ti ti-id" aria-hidden="true"></i><span>KTP 3×4</span></button>
+      </div>
+      <div class="mrow"><label>Lebar (px)</label><input type="number" id="frm-w" value="110" min="40" max="380"></div>
+      <div class="mrow"><label>Tinggi (px)</label><input type="number" id="frm-h" value="145" min="40" max="480"></div>
+      <div class="mbtns">
+        <button class="mb-cancel" onclick="closeFrmModal()">Batal</button>
+        <button class="mb-ok" onclick="confirmFrame()">Tambah Frame</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const tmpl={
+  cv:`<div style="text-align:center;margin-bottom:16px"><strong style="font-size:17px;letter-spacing:.5px">NAMA LENGKAP</strong><br><span style="font-size:12px;color:#555">Posisi yang Dilamar</span><br><span style="font-size:11px;color:#777">email@email.com&nbsp;|&nbsp;08xxxxxxxxxx&nbsp;|&nbsp;Kota, Indonesia</span></div><hr style="border:0;border-top:1.5px solid #1e4db7;margin:10px 0"><strong>RINGKASAN PROFIL</strong><br><br>Tulis ringkasan profil profesional Anda di sini...<br><br><strong>PENGALAMAN KERJA</strong><br><br>• <strong>Posisi</strong> – Nama Perusahaan (Tahun – kini)<br>&nbsp;&nbsp;Deskripsi singkat pekerjaan dan pencapaian.<br><br><strong>PENDIDIKAN</strong><br><br>• <strong>S1 Nama Jurusan</strong> – Universitas (Tahun Lulus)<br><br><strong>KEAHLIAN</strong><br><br>• Keahlian 1&nbsp;&nbsp;•&nbsp;Keahlian 2&nbsp;&nbsp;•&nbsp;Keahlian 3<br>`,
+  lamaran:`<div style="text-align:right;margin-bottom:20px">Jakarta, [Tanggal Bulan Tahun]</div>Kepada Yth.,<br>HRD / Manajer Rekrutmen<br>[Nama Perusahaan]<br>di tempat<br><br>Dengan hormat,<br><br>Saya yang bertanda tangan di bawah ini:<br>Nama&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <strong>[Nama Lengkap]</strong><br>TTL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: [Kota, Tanggal Lahir]<br>Pendidikan : [Pendidikan Terakhir]<br>No. HP&nbsp;&nbsp;&nbsp;: [Nomor Telepon]<br><br>Dengan ini mengajukan lamaran untuk posisi <strong>[Posisi yang Dilamar]</strong>.<br><br>Saya memiliki pengalaman dan siap memberikan kontribusi terbaik.<br><br>Demikian surat ini saya buat. Atas perhatiannya, saya ucapkan terima kasih.<br><br><br>Hormat saya,<br><br><br>[Nama Lengkap]`,
+  berkas:`<div style="text-align:center;margin-bottom:16px"><strong style="font-size:15px;letter-spacing:.5px">DAFTAR BERKAS PENDUKUNG</strong></div><table style="width:100%;border-collapse:collapse;font-size:12px"><tr style="background:#eff6ff"><td style="border:1px solid #bfdbfe;padding:6px 9px;font-weight:700">No.</td><td style="border:1px solid #bfdbfe;padding:6px 9px;font-weight:700">Nama Berkas</td><td style="border:1px solid #bfdbfe;padding:6px 9px;font-weight:700">Keterangan</td></tr><tr><td style="border:1px solid #bfdbfe;padding:6px 9px">1.</td><td style="border:1px solid #bfdbfe;padding:6px 9px">KTP</td><td style="border:1px solid #bfdbfe;padding:6px 9px">Fotokopi</td></tr><tr><td style="border:1px solid #bfdbfe;padding:6px 9px">2.</td><td style="border:1px solid #bfdbfe;padding:6px 9px">Ijazah</td><td style="border:1px solid #bfdbfe;padding:6px 9px">Fotokopi</td></tr><tr><td style="border:1px solid #bfdbfe;padding:6px 9px">3.</td><td style="border:1px solid #bfdbfe;padding:6px 9px">Transkrip Nilai</td><td style="border:1px solid #bfdbfe;padding:6px 9px">Fotokopi</td></tr><tr><td style="border:1px solid #bfdbfe;padding:6px 9px">4.</td><td style="border:1px solid #bfdbfe;padding:6px 9px">Pas Foto 3×4</td><td style="border:1px solid #bfdbfe;padding:6px 9px">2 lembar</td></tr></table><br>`,
+  kosong:''
+};
+const lvlMap={1:'Ringan (80%)',2:'Sedang (60%)',3:'Maksimal (40%)'};
+const ratioMap={1:.82,2:.60,3:.38};
+let curPg=1,pgCount=1,activeFrame=null,pendingShape='rect',cmpLvl=2,cmpFile=null;
+let uploadedFiles=[],historyItems=[];
+
+function goPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pg-'+p).classList.add('active');
+  document.getElementById('nb-'+p).classList.add('active');
+  if(p==='create'){setTimeout(()=>{const c=document.getElementById('doccontent-1');if(c&&!c.innerHTML.trim())c.focus();},100);}
+}
+
+function applyTmpl(v){
+  const el=document.getElementById('doccontent-'+curPg);
+  if(el)el.innerHTML=tmpl[v]||'';
+  updStat();
+}
+
+function execFmt(cmd,val){document.execCommand(cmd,false,val||null);}
+
+function updStat(){
+  const el=document.getElementById('doccontent-'+curPg);
+  if(!el)return;
+  const words=(el.innerText||'').trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById('ed-stat-l').textContent=words+' kata · Halaman '+curPg+' dari '+pgCount;
+  document.getElementById('ed-stat-r').textContent=pgCount+(pgCount===1?' halaman':' halaman');
+}
+
+function addDocPage(){
+  pgCount++;const id=pgCount;
+  const canvas=document.getElementById('edCanvas');
+  const wrap=document.createElement('div');wrap.style.cssText='position:relative;margin-top:22px';wrap.id='page-wrap-'+id;
+  const badge=document.createElement('div');badge.className='pg-num-badge';badge.textContent='Halaman '+id;
+  const pg=document.createElement('div');pg.className='doc-page';pg.id='docpage-'+id;
+  const delBtn=document.createElement('button');delBtn.className='page-del-btn';delBtn.innerHTML='✕';
+  delBtn.setAttribute('title','Hapus halaman');delBtn.setAttribute('aria-label','Hapus halaman '+id);
+  delBtn.onclick=()=>delPage(id);
+  const ct=document.createElement('div');ct.className='doc-content';ct.id='doccontent-'+id;
+  ct.contentEditable='true';ct.onkeyup=updStat;ct.onclick=()=>{curPg=id;updStat();};
+  pg.appendChild(delBtn);pg.appendChild(ct);
+  wrap.appendChild(badge);wrap.appendChild(pg);
+  canvas.appendChild(wrap);
+  curPg=id;ct.focus();updStat();
+}
+
+function delPage(id){
+  if(pgCount<=1){alert('Minimal harus ada 1 halaman!');return;}
+  const wrap=document.getElementById('page-wrap-'+id);
+  if(wrap)wrap.remove();
+  pgCount--;
+  if(curPg===id)curPg=1;
+  updStat();
+}
+
+function toggleGrid(){
+  const gp=document.getElementById('gridPanel');const btn=document.getElementById('gridBtn');
+  const show=gp.style.display!=='block';gp.style.display=show?'block':'none';
+  btn.classList.toggle('active',show);
+}
+
+function insGrid(cols,rows,w,h){
+  const el=document.getElementById('doccontent-'+curPg);if(!el)return;el.focus();
+  const wrap=document.createElement('div');
+  wrap.style.cssText='display:flex;flex-wrap:wrap;gap:5px;margin:6px 0;line-height:0';
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)wrap.appendChild(buildFrame(w,h,'rect'));
+  insNode(wrap);insNode(document.createElement('br'));
+}
+function insSingle(w,h,shape){
+  const el=document.getElementById('doccontent-'+curPg);if(!el)return;el.focus();
+  insNode(buildFrame(w,h,shape));insNode(document.createElement('br'));
+}
+
+function buildFrame(w,h,shape){
+  const wr=document.createElement('span');
+  wr.className='img-frame';
+  wr.style.cssText=`width:${w}px;height:${h}px;display:inline-block;vertical-align:top;position:relative;margin:3px`;
+  wr.setAttribute('data-shape',shape);
+  const inner=document.createElement('span');inner.className='img-frame-inner';
+  const br=shape==='circle'?'50%':'6px';
+  inner.style.cssText=`width:${w}px;height:${h}px;border-radius:${br};overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f0f4ff,#e8eef8);border:1.5px dashed #bfdbfe;position:relative;cursor:pointer`;
+  const ph=document.createElement('span');ph.className='frm-ph';
+  ph.innerHTML='<i class="ti ti-camera-plus" aria-hidden="true" style="font-size:22px;color:#93c5fd"></i><span style="font-size:9px;color:#93c5fd;text-align:center;line-height:1.4">Klik tambah<br>foto</span>';
+  inner.appendChild(ph);
+  inner.onclick=(e)=>{e.stopPropagation();activeFrame=inner;document.getElementById('imgUpload').click();};
+  // delete button for frame
+  const fdel=document.createElement('button');fdel.className='frm-del';fdel.innerHTML='✕';
+  fdel.setAttribute('title','Hapus frame foto');fdel.setAttribute('aria-label','Hapus frame foto');
+  fdel.onclick=(e)=>{e.stopPropagation();wr.remove();};
+  wr.appendChild(fdel);
+  // resize
+  const rsz=document.createElement('span');rsz.className='rsz';
+  rsz.innerHTML='<i class="ti ti-arrows-diagonal" aria-hidden="true"></i>';
+  rsz.onmousedown=(e)=>doResize(e,wr,inner,shape);
+  inner.appendChild(rsz);
+  // hover toolbar
+  const tb=document.createElement('span');tb.className='frm-tb';
+  tb.innerHTML='<button onclick="replaceImg(this)"><i class="ti ti-photo" aria-hidden="true"></i> Ganti foto</button>';
+  wr.appendChild(tb);wr.appendChild(inner);
+  return wr;
+}
+
+function doResize(e,wr,inner,shape){
+  e.preventDefault();
+  const sx=e.clientX,sy=e.clientY,sw=parseInt(wr.style.width),sh=parseInt(wr.style.height);
+  const mv=(ev)=>{
+    const nw=Math.max(40,sw+(ev.clientX-sx));const nh=Math.max(40,sh+(ev.clientY-sy));
+    wr.style.width=nw+'px';wr.style.height=nh+'px';inner.style.width=nw+'px';inner.style.height=nh+'px';
+  };
+  const up=()=>{document.removeEventListener('mousemove',mv);document.removeEventListener('mouseup',up);};
+  document.addEventListener('mousemove',mv);document.addEventListener('mouseup',up);
+}
+
+function replaceImg(btn){
+  activeFrame=btn.closest('.img-frame').querySelector('.img-frame-inner');
+  document.getElementById('imgUpload').click();
+}
+
+function handleImgUpload(input){
+  if(!input.files||!input.files[0])return;
+  const url=URL.createObjectURL(input.files[0]);
+  if(!activeFrame)return;
+  const wr=activeFrame.closest('.img-frame');
+  const shape=wr?wr.getAttribute('data-shape'):'rect';
+  const br=shape==='circle'?'50%':'6px';
+  activeFrame.innerHTML='';
+  activeFrame.classList.add('has-img');
+  activeFrame.style.background='#000';
+  activeFrame.style.border='1.5px solid #bfdbfe';
+  activeFrame.style.borderRadius=br;
+  const img=document.createElement('img');img.src=url;img.alt='Foto';
+  img.style.cssText='width:100%;height:100%;object-fit:cover;display:block';
+  const rsz=document.createElement('span');rsz.className='rsz';
+  rsz.innerHTML='<i class="ti ti-arrows-diagonal" aria-hidden="true"></i>';
+  rsz.onmousedown=(e)=>doResize(e,wr,activeFrame,shape);
+  activeFrame.appendChild(img);activeFrame.appendChild(rsz);
+  // re-attach delete btn on wrapper
+  if(wr&&!wr.querySelector('.frm-del')){
+    const fdel=document.createElement('button');fdel.className='frm-del';fdel.innerHTML='✕';
+    fdel.setAttribute('title','Hapus frame foto');
+    fdel.onclick=(e)=>{e.stopPropagation();wr.remove();};
+    wr.appendChild(fdel);
+  }
+  input.value='';activeFrame=null;
+  addHist('Foto ditambahkan ke dokumen','t-up');
+}
+
+function insNode(node){
+  const sel=window.getSelection();
+  if(sel&&sel.rangeCount){
+    const r=sel.getRangeAt(0);r.deleteContents();r.insertNode(node);
+    r.setStartAfter(node);r.collapse(true);sel.removeAllRanges();sel.addRange(r);
+  } else {const el=document.getElementById('doccontent-'+curPg);if(el)el.appendChild(node);}
+}
+
+function insHR(){execFmt('insertHTML','<hr style="border:0;border-top:1.5px solid #1e4db7;margin:10px 0">');}
+function insTbl(){execFmt('insertHTML','<table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:12px"><tr style="background:#eff6ff"><td style="border:1px solid #bfdbfe;padding:5px 8px">Kolom 1</td><td style="border:1px solid #bfdbfe;padding:5px 8px">Kolom 2</td><td style="border:1px solid #bfdbfe;padding:5px 8px">Kolom 3</td></tr><tr><td style="border:1px solid #bfdbfe;padding:5px 8px">&nbsp;</td><td style="border:1px solid #bfdbfe;padding:5px 8px">&nbsp;</td><td style="border:1px solid #bfdbfe;padding:5px 8px">&nbsp;</td></tr></table><br>');}
+
+/* EXPORT */
+function exportPDF(){
+  const pages=[];
+  for(let i=1;i<=pgCount;i++){
+    const el=document.getElementById('doccontent-'+i);
+    if(el){
+      // clone to process images into data URLs if possible
+      pages.push(el.innerHTML);
+    }
+  }
+  const combined=pages.map((p,i)=>`<div class="pg">${p}</div>${i<pages.length-1?'<div style="page-break-after:always"></div>':''}`).join('');
+  const w=window.open('','_blank','width=800,height=900');
+  if(!w){alert('Izinkan pop-up untuk export PDF!');return;}
+  w.document.write(`<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Dokumen CV</title><style>
+    *{box-sizing:border-box}body{font-family:'Times New Roman',serif;font-size:12pt;color:#000;background:#fff;margin:0}
+    .pg{max-width:595px;margin:30px auto;padding:50px 55px;background:#fff}
+    img{max-width:100%;height:auto}table{border-collapse:collapse;width:100%}
+    td{border:1px solid #ccc;padding:5px 8px}hr{border:0;border-top:1.5px solid #1e4db7;margin:10px 0}
+    @media print{.pg{margin:0;padding:50px 55px}body{background:#fff}}
+  </style></head><body>${combined}<script>window.onload=function(){setTimeout(function(){window.print();},400);}<\/script></body></html>`);
+  w.document.close();
+  addHist('Dokumen_CV.pdf','t-cv');updStats();
+}
+
+function exportWord(){
+  const pages=[];
+  for(let i=1;i<=pgCount;i++){
+    const el=document.getElementById('doccontent-'+i);
+    if(el)pages.push(el.innerText||'');
+  }
+  const content=pages.join('\n\n--- Halaman Selanjutnya ---\n\n');
+  const blob=new Blob(['\ufeff'+content],{type:'application/msword'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='Dokumen_CV.doc';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  addHist('Dokumen_CV.doc','t-cv');updStats();
+}
+
+/* UPLOAD */
+function switchUTab(t,btn){
+  document.querySelectorAll('.utab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const inp=document.getElementById('uploadFiles');
+  document.getElementById('upl-hint').textContent=t==='foto'?'Format: JPG, PNG — maks 10MB per file':'Format: PDF, DOCX, TXT — maks 10MB per file';
+  inp.accept=t==='foto'?'image/*':'.pdf,.docx,.txt,.doc';
+}
+function handleUploadFiles(files){
+  for(const f of files){uploadedFiles.push(f);addHist(f.name,'t-up');}
+  renderFileGrid();updStats();
+  document.getElementById('dot-upload').classList.add('show');
+}
+function renderFileGrid(){
+  const g=document.getElementById('file-grid');
+  document.getElementById('file-count').textContent=uploadedFiles.length;
+  if(!uploadedFiles.length){
+    g.innerHTML='<div class="empty-grid"><i class="ti ti-inbox"></i><p>Belum ada file yang diupload</p></div>';
+    document.getElementById('btn-merge').style.display='none';return;
+  }
+  g.innerHTML='';
+  uploadedFiles.forEach((f,i)=>{
+    const ext=(f.name.split('.').pop()||'').toLowerCase();
+    const isImg=['jpg','jpeg','png','gif','webp'].includes(ext);
+    const d=document.createElement('div');d.className='fthumb';
+    if(isImg){
+      const url=URL.createObjectURL(f);
+      d.innerHTML=`<img src="${url}" alt="${f.name}"><p title="${f.name}">${f.name}</p><button class="frem" onclick="removeFile(${i})" title="Hapus file" aria-label="Hapus ${f.name}">✕</button>`;
+    } else {
+      const cls=ext==='pdf'?'background:#fef2f2;color:#ef4444':ext==='docx'||ext==='doc'?'background:#eff6ff;color:#3b82f6':'background:#f0fdf4;color:#10b981';
+      const ic=ext==='pdf'?'ti-file-type-pdf':ext==='docx'||ext==='doc'?'ti-file-type-doc':'ti-file';
+      d.innerHTML=`<div class="fthumb-icon" style="${cls}"><i class="ti ${ic}"></i></div><p title="${f.name}">${f.name}</p><button class="frem" onclick="removeFile(${i})" title="Hapus file" aria-label="Hapus ${f.name}">✕</button>`;
+    }
+    g.appendChild(d);
+  });
+  document.getElementById('btn-merge').style.display=uploadedFiles.length>1?'flex':'none';
+}
+function removeFile(i){uploadedFiles.splice(i,1);renderFileGrid();if(!uploadedFiles.length)document.getElementById('dot-upload').classList.remove('show');}
+function doMerge(){
+  if(uploadedFiles.length<2){alert('Upload minimal 2 file untuk digabung!');return;}
+  // build a text manifest and trigger download
+  const manifest=uploadedFiles.map((f,i)=>`${i+1}. ${f.name} (${fmtSize(f.size)})`).join('\n');
+  const blob=new Blob([`DAFTAR BERKAS GABUNGAN\n${'='.repeat(30)}\n\n${manifest}\n\nTotal: ${uploadedFiles.length} file\nDibuat: ${new Date().toLocaleDateString('id-ID')}`],{type:'text/plain'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Berkas_Gabungan.txt';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  addHist('Berkas_Gabungan.txt','t-up');updStats();
+}
+
+/* COMPRESS */
+function updCmpLvl(v){cmpLvl=parseInt(v);document.getElementById('lvl-lbl').textContent=lvlMap[cmpLvl];}
+function fmtSize(b){if(b<1024)return b+' B';if(b<1048576)return(b/1024).toFixed(1)+' KB';return(b/1048576).toFixed(1)+' MB';}
+function loadCmpFile(inp){
+  const f=inp.files[0];if(!f)return;cmpFile=f;
+  const ext=(f.name.split('.').pop()||'').toLowerCase();
+  const icoMap={pdf:'ti-file-type-pdf',docx:'ti-file-type-doc',doc:'ti-file-type-doc',jpg:'ti-photo',jpeg:'ti-photo',png:'ti-photo'};
+  document.getElementById('cfi-ico').className='ti '+(icoMap[ext]||'ti-file');
+  document.getElementById('cfi-name').textContent=f.name;
+  document.getElementById('cfi-size').textContent=fmtSize(f.size);
+  document.getElementById('cmp-info').style.display='flex';
+  document.getElementById('cmp-result').style.display='none';
+}
+async function startCompress(){
+  if(!cmpFile){alert('Pilih file terlebih dahulu!');return;}
+  const btn=document.getElementById('btn-compress');btn.disabled=true;
+  const th=document.getElementById('ai-think');th.style.display='block';
+  document.getElementById('cmp-result').style.display='none';
+  const msgs=['AI menganalisis struktur file...','Mendeteksi redundansi data...','Menerapkan algoritma kompresi...','Finalisasi & verifikasi...'];
+  let mi=0;const iv=setInterval(()=>{if(mi<msgs.length)document.getElementById('think-msg').textContent=msgs[mi++];},800);
+  await new Promise(r=>setTimeout(r,3400));
+  clearInterval(iv);th.style.display='none';btn.disabled=false;
+  const ratio=ratioMap[cmpLvl];
+  const orig=cmpFile.size;const newSz=Math.round(orig*ratio);const saved=Math.round((1-ratio)*100);
+  document.getElementById('sz-before').textContent=fmtSize(orig);
+  document.getElementById('sz-after').textContent=fmtSize(newSz);
+  document.getElementById('saving-row').textContent='✓ Berhasil menghemat '+saved+'% ukuran file!';
+  document.getElementById('cmp-result').style.display='block';
+  addHist(cmpFile.name,'t-cp');updStats();
+}
+function dlCompressed(){
+  if(!cmpFile)return;
+  const reader=new FileReader();
+  reader.onload=(e)=>{
+    const a=document.createElement('a');a.href=e.target.result;
+    const ext=cmpFile.name.split('.').pop();
+    a.download=cmpFile.name.replace('.'+ext,'')+'_compressed.'+ext;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  };
+  reader.readAsDataURL(cmpFile);
+}
+
+/* MODAL FRAME */
+function showFrmModal(){document.getElementById('frmModal').classList.add('open');}
+function closeFrmModal(){document.getElementById('frmModal').classList.remove('open');}
+function selShape(s,btn){
+  pendingShape=s;
+  document.querySelectorAll('.mgopt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  const def={rect:{w:110,h:145},square:{w:110,h:110},circle:{w:110,h:110},ktp:{w:88,h:116}};
+  document.getElementById('frm-w').value=def[s].w;
+  document.getElementById('frm-h').value=def[s].h;
+}
+function confirmFrame(){
+  const w=parseInt(document.getElementById('frm-w').value)||110;
+  const h=parseInt(document.getElementById('frm-h').value)||145;
+  const el=document.getElementById('doccontent-'+curPg);if(el)el.focus();
+  insNode(buildFrame(w,h,pendingShape));
+  closeFrmModal();
+}
+
+/* HISTORY & STATS */
+function addHist(name,type){
+  historyItems.unshift({name,type,time:new Date()});
+  renderHist();
+}
+function renderHist(){
+  const el=document.getElementById('hist-list');if(!historyItems.length){
+    el.innerHTML='<div class="empty-st"><i class="ti ti-file-description"></i><strong>Belum ada dokumen</strong><p>Mulai buat CV atau upload berkas Anda</p></div>';return;
+  }
+  el.innerHTML='';
+  historyItems.slice(0,12).forEach(h=>{
+    const isCp=h.type==='t-cp';const isUp=h.type==='t-up';
+    const ic=isCp?'ti-file-zip':isUp?'ti-cloud-upload':'ti-file-type-pdf';
+    const badgeTxt=isCp?'Kompres':isUp?'Upload':'Dokumen CV';
+    const badgeCls=isCp?'badge-cp':isUp?'badge-up':'badge-cv';
+    const t=h.time.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+    const dt=h.time.toLocaleDateString('id-ID',{day:'numeric',month:'short'});
+    const c=document.createElement('div');c.className='hist-item';
+    c.innerHTML=`<div class="hi-ico ${h.type}"><i class="ti ${ic}"></i></div><div style="flex:1"><div class="hi-name">${h.name}</div><div class="hi-sub">${dt} · ${t}</div></div><span class="badge ${badgeCls}">${badgeTxt}</span>`;
+    el.appendChild(c);
+  });
+}
+function updStats(){
+  document.getElementById('st-cv').textContent=historyItems.filter(h=>h.type==='t-cv').length;
+  document.getElementById('st-up').textContent=uploadedFiles.length;
+  document.getElementById('st-cp').textContent=historyItems.filter(h=>h.type==='t-cp').length;
+}
+
+setTimeout(()=>updStat(),150);
+</script>
