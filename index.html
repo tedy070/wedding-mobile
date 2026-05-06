@@ -3,122 +3,148 @@
 <html lang="id"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Profil Pengguna - Union &amp; Grace</title>
+<title>Keamanan Akun - Union &amp; Grace</title>
+<!-- Google Fonts: Inter & Noto Serif -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed": "#e2e2e2",
-                        "surface-tint": "#795465",
-                        "inverse-primary": "#e9bacd",
-                        "primary-container": "#f8c8dc",
-                        "on-surface": "#1b1c1c",
-                        "tertiary": "#5d5f5f",
-                        "surface-container-low": "#f5f3f3",
-                        "surface": "#fbf9f8",
-                        "on-tertiary-fixed": "#1a1c1c",
-                        "error": "#ba1a1a",
-                        "surface-container-highest": "#e4e2e2",
-                        "on-primary": "#ffffff",
-                        "primary": "#795465",
-                        "primary-fixed": "#ffd8e7",
-                        "tertiary-container": "#d4d5d5",
-                        "on-secondary-container": "#3b6a6f",
-                        "error-container": "#ffdad6",
-                        "secondary-container": "#b8e8ee",
-                        "background": "#fbf9f8",
-                        "surface-dim": "#dbd9d9",
-                        "outline-variant": "#d2c3c7",
-                        "on-secondary-fixed-variant": "#1d4d53",
-                        "on-secondary-fixed": "#001f23",
-                        "inverse-on-surface": "#f2f0f0",
-                        "on-tertiary": "#ffffff",
-                        "secondary-fixed": "#bbebf1",
-                        "secondary-fixed-dim": "#9fcfd5",
-                        "on-secondary": "#ffffff",
-                        "on-tertiary-container": "#5a5c5c",
-                        "surface-variant": "#e4e2e2",
-                        "on-surface-variant": "#4f4448",
-                        "surface-bright": "#fbf9f8",
-                        "on-primary-fixed-variant": "#5f3c4d",
-                        "on-background": "#1b1c1c",
-                        "on-primary-fixed": "#2e1221",
-                        "on-error": "#ffffff",
-                        "on-error-container": "#93000a",
-                        "surface-container-high": "#eae8e7",
-                        "outline": "#817478",
-                        "on-tertiary-fixed-variant": "#454747",
-                        "inverse-surface": "#303030",
-                        "primary-fixed-dim": "#e9bacd",
-                        "on-primary-container": "#765162",
-                        "surface-container": "#efeded",
-                        "tertiary-fixed-dim": "#c6c6c7",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary": "#37656b"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px",
-                        "2xl": "1rem",
-                        "3xl": "1.5rem"
-                    },
-                    "spacing": {
-                        "margin-desktop": "40px",
-                        "gutter": "24px",
-                        "unit": "8px",
-                        "margin-mobile": "16px",
-                        "section-gap": "80px",
-                        "container-max": "1200px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Noto Serif"],
-                        "headline-lg": ["Noto Serif"],
-                        "body-md": ["Inter"],
-                        "headline-display": ["Noto Serif"],
-                        "body-lg": ["Inter"],
-                        "label-sm": ["Inter"]
-                    },
-                    "fontSize": {
-                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
-                    }
-                }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#5d5f5f",
+                    "surface-bright": "#fbf9f8",
+                    "surface-container-low": "#f5f3f3",
+                    "surface-container-highest": "#e4e2e2",
+                    "tertiary-container": "#d4d5d5",
+                    "secondary-fixed": "#bbebf1",
+                    "surface-dim": "#dbd9d9",
+                    "on-tertiary-container": "#5a5c5c",
+                    "on-surface": "#1b1c1c",
+                    "surface": "#fbf9f8",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#ffd8e7",
+                    "on-primary-container": "#765162",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#4f4448",
+                    "on-secondary-fixed": "#001f23",
+                    "tertiary-fixed": "#e2e2e2",
+                    "secondary-fixed-dim": "#9fcfd5",
+                    "surface-tint": "#795465",
+                    "on-secondary-fixed-variant": "#1d4d53",
+                    "background": "#fbf9f8",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#b8e8ee",
+                    "secondary": "#37656b",
+                    "inverse-primary": "#e9bacd",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-primary-fixed": "#2e1221",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-background": "#1b1c1c",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "on-primary-fixed-variant": "#5f3c4d",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#f8c8dc",
+                    "primary": "#795465",
+                    "error": "#ba1a1a",
+                    "outline": "#817478",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#303030",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e4e2e2",
+                    "on-secondary-container": "#3b6a6f",
+                    "surface-container-high": "#eae8e7",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "primary-fixed-dim": "#e9bacd",
+                    "surface-container": "#efeded",
+                    "outline-variant": "#d2c3c7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "section-gap": "80px",
+                    "container-max": "1200px",
+                    "unit": "8px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-display": ["Noto Serif"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Noto Serif"],
+                    "headline-md": ["Noto Serif"],
+                    "title-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                    "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
+                    "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                    "title-sm": ["14px", { "lineHeight": "1.4", "fontWeight": "500" }]
             }
+          }
         }
+      }
     </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        /* Ambient Background specific to Ethereal theme */
+        .ambient-bg {
+            background: radial-gradient(circle at 50% 0%, rgba(248, 200, 220, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(184, 232, 238, 0.15) 0%, transparent 50%);
+            background-color: theme('colors.surface');
+            background-attachment: fixed;
         }
-        .bg-glass {
-            background: rgba(251, 249, 248, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        
+        /* Glassmorphism Panel */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(210, 195, 199, 0.3);
+            box-shadow: 0 8px 32px rgba(176, 224, 230, 0.15);
         }
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, #ffd8e7 0%, #bbebf1 100%);
+
+        /* Minimal Input Styles */
+        .input-minimal {
+            border: none;
+            border-bottom: 1px solid theme('colors.outline-variant');
+            background: transparent;
+            border-radius: 0;
+            padding: 12px 0;
+            width: 100%;
+            transition: all 0.3s ease;
         }
-        .shadow-ambient {
-            box-shadow: 0 8px 32px rgba(176, 224, 230, 0.3);
+        .input-minimal:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom-color: theme('colors.primary');
         }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+
+        /* Thumb-friendly utilities */
+        .tap-target {
+            min-height: 48px;
+            min-width: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 <style>
@@ -126,178 +152,145 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-</head>
-<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
-<!-- TopAppBar -->
-<header class="bg-surface dark:bg-surface-dim w-full sticky top-0 z-50 flat no shadows flex justify-between items-center px-margin-mobile py-4 w-full md:px-margin-desktop">
-<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">
-            Union &amp; Grace
-        </div>
+  </head>
+<body class="ambient-bg text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased pb-[80px] md:pb-0">
+<!-- Mobile Header (Task Focused) -->
+<header class="md:hidden sticky top-0 z-40 bg-surface/80 backdrop-blur-md px-margin-mobile py-4 flex items-center justify-between border-b border-outline-variant/20">
+<button class="tap-target -ml-3 text-on-surface-variant hover:text-primary transition-colors rounded-full active:bg-surface-variant/50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight">Keamanan Akun</h1>
+<div class="w-12"></div> <!-- Spacer for centering -->
+</header>
+<!-- Desktop Header (Fallback based on JSON TopAppBar) -->
+<header class="hidden md:flex w-full sticky top-0 z-50 bg-surface border-b border-outline-variant justify-between items-center px-gutter py-4">
+<div class="font-headline-md text-headline-md text-primary tracking-tight">Union &amp; Grace</div>
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined cursor-pointer transition-opacity active:opacity-80 hover:text-primary transition-colors duration-200 text-on-surface-variant font-medium">notifications</span>
-<span class="material-symbols-outlined cursor-pointer transition-opacity active:opacity-80 text-primary font-bold border-b-2 border-primary pb-1" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="account_circle">account_circle</span>
 </div>
 </header>
-<!-- Main Content -->
-<main class="flex-grow flex flex-col px-margin-mobile pb-24 max-w-container-max mx-auto w-full md:px-margin-desktop">
-<!-- Profile Header Card (Glassmorphism + Gradient) -->
-<section class="mt-6 mb-8">
-<div class="relative rounded-3xl overflow-hidden shadow-ambient p-6 flex flex-col items-center text-center">
-<div class="absolute inset-0 bg-gradient-primary opacity-30 z-0"></div>
-<div class="absolute inset-0 bg-glass z-0"></div>
-<div class="relative z-10 flex flex-col items-center">
-<div class="relative w-24 h-24">
-<div class="w-24 h-24 rounded-full overflow-hidden border-4 border-surface shadow-sm">
-<img alt="Pasangan" class="w-full h-full object-cover" data-alt="A beautifully composed, high-end portrait of a young couple smiling warmly, set against a soft, airy background. The lighting is bright and luminous, evoking a modern romantic aesthetic. The color palette features delicate pastels, soft whites, and subtle pinks, perfectly aligning with a sophisticated wedding application design. The mood is joyful, intimate, and elegant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQt-tffX6n0-0PG-rv_IMGWcGVpVAspFpkDzuugZetH6PF6UwqrET_dUUhjpbtZd1VYDV-vU6fBzse847grquiZHJF123sLotl58K-vcgdE3o0PM5cvCcnN1tctYvnWpdIEnO2rDVf2P5u_NKND_LMIbEbPN62rwrcItFyG_OVEDLkR-f87Pugyjqagi5ELTDBfYTTCbyVBuhnLEBMpzAuOEWCAUzRBwZm6VHwo9aNhY8u6P6C3m1dRQj9o0U3DAW_Ug0qqAXbKLwT"/>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[600px] mx-auto px-margin-mobile py-8 flex flex-col gap-8">
+<!-- Context Intro -->
+<div class="text-center md:text-left mb-2">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Kelola kata sandi Anda dan amankan akses ke perencanaan pernikahan Anda.
+            </p>
 </div>
-<button class="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center shadow-md border-2 border-surface active:scale-95 transition-transform">
-<span class="material-symbols-outlined text-[18px] text-primary">photo_camera</span>
-</button>
+<!-- Password Change Section -->
+<section class="glass-panel rounded-xl p-6 flex flex-col gap-6 relative overflow-hidden">
+<!-- Decorative blur orb -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary-container rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lock</span>
+<h2 class="font-headline-lg text-[24px] text-on-surface">Ubah Kata Sandi</h2>
 </div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Sarah &amp; James</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6">Oct 12, 2024</p>
-<div class="bg-surface rounded-2xl py-3 px-6 shadow-sm border border-outline-variant/30 w-full max-w-xs">
-<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-1">Menuju Hari Bahagia</p>
-<p class="font-headline-md text-headline-md text-on-surface">142 <span class="font-body-md text-body-md text-on-surface-variant">Hari</span></p>
+<form class="flex flex-col gap-5 mt-2">
+<div class="relative">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase absolute -top-2 left-0 text-[10px]">Kata Sandi Saat Ini</label>
+<input class="input-minimal font-body-lg text-body-lg text-on-surface mt-2" placeholder="••••••••" type="password"/>
 </div>
+<div class="relative mt-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase absolute -top-2 left-0 text-[10px]">Kata Sandi Baru</label>
+<input class="input-minimal font-body-lg text-body-lg text-on-surface mt-2" placeholder="••••••••" type="password"/>
 </div>
+<div class="relative mt-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase absolute -top-2 left-0 text-[10px]">Konfirmasi Kata Sandi</label>
+<input class="input-minimal font-body-lg text-body-lg text-on-surface mt-2" placeholder="••••••••" type="password"/>
+</div>
+<!-- Primary Button (Pink-to-Blue Gradient per Brand Guidance) -->
+<button class="mt-4 w-full py-4 rounded-full bg-gradient-to-r from-primary-fixed to-secondary-fixed text-on-surface font-label-sm text-label-sm tracking-wider uppercase shadow-[0_4px_20px_rgba(184,232,238,0.4)] active:scale-95 transition-transform flex justify-center items-center gap-2" type="button">
+                    Simpan Perubahan
+                </button>
+</form>
+</section>
+<!-- Two-Factor Authentication -->
+<section class="glass-panel rounded-xl p-6 flex flex-col gap-4">
+<div class="flex justify-between items-center w-full">
+<div class="flex flex-col gap-1 pr-4">
+<h2 class="font-title-sm text-[18px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">security</span>
+                        Autentikasi 2 Langkah
+                    </h2>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-snug">
+                        Tambahkan lapisan keamanan ekstra dengan meminta kode login dari perangkat Anda.
+                    </p>
+</div>
+<!-- Thumb-friendly Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer tap-target shrink-0">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
 </div>
 </section>
-<!-- Settings Menu (Clean List) -->
-<section class="flex-grow space-y-2 mb-8">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-4 px-2">Pengaturan</h2>
-<div class="flex items-center justify-between p-4 rounded-2xl bg-surface hover:bg-surface-container-low transition-colors duration-200 group cursor-pointer">
+<!-- Connected Devices -->
+<section class="glass-panel rounded-xl p-6 flex flex-col gap-6">
+<h2 class="font-title-sm text-[18px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">devices</span>
+                Perangkat Terhubung
+            </h2>
+<div class="flex flex-col gap-4">
+<!-- Device Item -->
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/20">
 <div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">dark_mode</span>
-</div>
-<span class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">Mode Gelap</span>
-</div>
-<span class="material-symbols-outlined text-primary">toggle_off</span>
-</div><a class="flex items-center justify-between p-4 rounded-2xl bg-surface hover:bg-surface-container-low transition-colors duration-200 group" href="#">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
-<span class="material-symbols-outlined">favorite</span>
-</div>
-<span class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">Detail Pernikahan</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-</a>
-<a class="flex items-center justify-between p-4 rounded-2xl bg-surface hover:bg-surface-container-low transition-colors duration-200 group" href="#">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
-<span class="material-symbols-outlined">security</span>
-</div>
-<span class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">Keamanan Akun</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-</a><a class="flex items-center justify-between p-4 rounded-2xl bg-surface hover:bg-surface-container-low transition-colors duration-200 group" href="#">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">language</span>
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">smartphone</span>
 </div>
 <div class="flex flex-col">
-<span class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">Bahasa</span>
-<span class="text-xs text-on-surface-variant">Bahasa Indonesia</span>
+<span class="font-title-sm text-[15px] text-on-surface">iPhone 14 Pro</span>
+<span class="font-body-md text-[13px] text-primary">Aktif sekarang · Jakarta</span>
 </div>
 </div>
-<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-</a>
-<a class="flex items-center justify-between p-4 rounded-2xl bg-surface hover:bg-surface-container-low transition-colors duration-200 group" href="#">
+</div>
+<!-- Device Item -->
+<div class="flex items-center justify-between">
 <div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">notifications_active</span>
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">laptop_mac</span>
 </div>
-<span class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">Notifikasi</span>
+<div class="flex flex-col">
+<span class="font-title-sm text-[15px] text-on-surface">MacBook Air</span>
+<span class="font-body-md text-[13px] text-on-surface-variant">Kemarin 14:20 · Bandung</span>
 </div>
-<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-</a>
-<a class="flex items-center justify-between p-4 rounded-2xl bg-surface hover:bg-surface-container-low transition-colors duration-200 group" href="#">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
-<span class="material-symbols-outlined">help_outline</span>
 </div>
-<span class="font-body-lg text-body-lg text-on-surface group-hover:text-primary transition-colors">Bantuan</span>
+<button class="tap-target text-error font-label-sm text-label-sm uppercase hover:bg-error-container/20 rounded-lg px-2 transition-colors">
+                        Logout
+                    </button>
 </div>
-<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-</a>
-</section>
-<!-- Logout Button -->
-<section class="mt-auto pt-4">
-<button class="w-full py-4 rounded-2xl border border-error text-error font-body-lg text-body-lg hover:bg-error-container hover:border-error-container transition-colors duration-300 flex items-center justify-center gap-2 bg-surface">
-<span class="material-symbols-outlined">logout</span>
-                Keluar
-            </button>
+</div>
 </section>
 </main>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-glass border-t border-surface-variant z-50 pb-safe">
-<div class="flex justify-around items-center px-2 py-3">
-<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors w-16" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-sm text-label-sm text-[10px]">Overview</span>
+<!-- Mobile Bottom Navigation (Adapted from SideNavBar JSON) -->
+<!-- Displayed on md:hidden. Inactive states used as this is a sub-page -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface/90 backdrop-blur-xl border-t border-outline-variant/10 flex justify-between items-center px-2 py-2 pb-safe z-50 shadow-[0_-4px_24px_rgba(0,0,0,0.02)]">
+<a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-[10px] uppercase">Overview</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors w-16" href="#">
-<span class="material-symbols-outlined">payments</span>
-<span class="font-label-sm text-label-sm text-[10px]">Budget</span>
+<a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="payments">payments</span>
+<span class="font-label-sm text-[10px] uppercase">Budget</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors w-16" href="#">
-<span class="material-symbols-outlined">group</span>
-<span class="font-label-sm text-label-sm text-[10px]">Guest List</span>
+<a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="group">group</span>
+<span class="font-label-sm text-[10px] uppercase">Guest List</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors w-16" href="#">
-<span class="material-symbols-outlined">description</span>
-<span class="font-label-sm text-label-sm text-[10px]">Documents</span>
+<a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="description">description</span>
+<span class="font-label-sm text-[10px] uppercase">Documents</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors w-16" href="#">
-<span class="material-symbols-outlined">storefront</span>
-<span class="font-label-sm text-label-sm text-[10px]">Vendors</span>
+<a class="flex flex-col items-center justify-center w-full py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1 text-[24px]" data-icon="storefront">storefront</span>
+<span class="font-label-sm text-[10px] uppercase">Vendors</span>
 </a>
-</div>
 </nav>
-<!-- SideNavBar (Web Only - Hidden on Mobile) -->
-<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-dim py-8 px-6 border-r border-outline-variant/20">
-<div class="mb-10 flex flex-col items-center">
-<div class="w-20 h-20 rounded-full overflow-hidden mb-4 border-2 border-primary-container shadow-sm">
-<img alt="Wedding Portrait" class="w-full h-full object-cover" data-alt="A high-end, softly lit portrait of a couple, matching the modern romance style. The image features airy, luminous lighting with soft pastel tones of pink and blue. The mood is elegant and sophisticated, fitting perfectly within a premium wedding application UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA02FtPHpMt2aNIaH8VaCqDowO85_2Sl2izEk5OEyZls7oH0NMc6ZnlKgfd-xhKEqRTdfxLbaetMTvqntS3uF7LmIDMIfORK1zGuLiMIYttUNM5CdPLceUiZHRryHIQJXb6p_WRovMXYNeCTX6VjGIEgnXJKYht-Es336FZcgy-zmqmCr6yJv8Iq6a6i2nHRdWDuuAAdVZ9SSfOr5t5nFL7ckeKg-AL68pXy8nUpVhF_KarEGvUP0YHu9OmdBBWhoSaUzEy3m6wx8MT"/>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface text-center">Sarah &amp; James</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Oct 12, 2024</p>
-</div>
-<button class="w-full py-3 px-4 rounded-xl bg-gradient-primary text-on-primary font-body-md text-body-md mb-8 shadow-ambient hover:opacity-90 transition-opacity">
-            Add Expense
-        </button>
-<div class="flex flex-col gap-2 flex-grow">
-<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-body-md text-body-md">Overview</span>
-</a>
-<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
-<span class="material-symbols-outlined">payments</span>
-<span class="font-body-md text-body-md">Budget</span>
-</a>
-<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
-<span class="material-symbols-outlined">group</span>
-<span class="font-body-md text-body-md">Guest List</span>
-</a>
-<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
-<span class="material-symbols-outlined">description</span>
-<span class="font-body-md text-body-md">Documents</span>
-</a>
-<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
-<span class="material-symbols-outlined">storefront</span>
-<span class="font-body-md text-body-md">Vendors</span>
-</a>
-</div>
-<div class="flex flex-col gap-2 mt-auto pt-6 border-t border-outline-variant/30">
-<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-xl px-4 py-3" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-body-md text-body-md">Settings</span>
-</a>
-<a class="flex items-center gap-4 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
-<span class="material-symbols-outlined">help_outline</span>
-<span class="font-body-md text-body-md">Support</span>
-</a>
-</div>
-</nav>
+<!-- Support padding for mobile safe area at bottom -->
+<style>
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
 </body></html>
