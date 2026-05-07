@@ -1,216 +1,1025 @@
 <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Union & Grace — Wedding Planner</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#7D3C52;--rose-light:#F5D6E3;--rose-dark:#5C2A3C;--rose-mid:#C0637D;
+  --teal:#3D7A6E;--teal-light:#E2F5F0;--teal-dark:#2A5C52;
+  --cream:#FAF8F5;--white:#FFFFFF;--border:#E5DDD6;--border-light:#EEE8E2;
+  --gray:#6B6460;--gray-light:#F0EBE6;--dark:#2C1A14;
+  --pink-bg:#FDE8F2;--pink-card:#F9EEF4;
+  --amber-bg:#FEF3E2;--amber:#8B5E1A;
+  --success-bg:#E2F5F0;--success:#1A6B55;
+  --danger-bg:#FFECEC;--danger:#8B2020;
+}
+html,body{height:100%;background:var(--cream)}
+body{font-family:'DM Sans',sans-serif;color:var(--dark);overflow-x:hidden}
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Add Seserahan/Mahar</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-container-high": "#eae8e7",
-                        "on-secondary-container": "#3b6a6f",
-                        "on-secondary": "#ffffff",
-                        "tertiary-fixed-dim": "#c6c6c7",
-                        "primary-fixed-dim": "#e9bacd",
-                        "surface-container": "#efeded",
-                        "outline-variant": "#d2c3c7",
-                        "inverse-primary": "#e9bacd",
-                        "inverse-on-surface": "#f2f0f0",
-                        "secondary": "#37656b",
-                        "on-primary-fixed": "#2e1221",
-                        "on-tertiary-fixed-variant": "#454747",
-                        "on-primary-fixed-variant": "#5f3c4d",
-                        "on-tertiary-fixed": "#1a1c1c",
-                        "on-background": "#1b1c1c",
-                        "surface-container-lowest": "#ffffff",
-                        "primary-container": "#f8c8dc",
-                        "primary": "#795465",
-                        "error": "#ba1a1a",
-                        "on-error-container": "#93000a",
-                        "outline": "#817478",
-                        "on-error": "#ffffff",
-                        "inverse-surface": "#303030",
-                        "surface-variant": "#e4e2e2",
-                        "primary-fixed": "#ffd8e7",
-                        "surface": "#fbf9f8",
-                        "on-tertiary": "#ffffff",
-                        "on-primary-container": "#765162",
-                        "error-container": "#ffdad6",
-                        "on-secondary-fixed": "#001f23",
-                        "on-surface-variant": "#4f4448",
-                        "secondary-fixed-dim": "#9fcfd5",
-                        "tertiary-fixed": "#e2e2e2",
-                        "on-secondary-fixed-variant": "#1d4d53",
-                        "background": "#fbf9f8",
-                        "surface-tint": "#795465",
-                        "secondary-container": "#b8e8ee",
-                        "on-primary": "#ffffff",
-                        "surface-bright": "#fbf9f8",
-                        "tertiary": "#5d5f5f",
-                        "tertiary-container": "#d4d5d5",
-                        "surface-container-low": "#f5f3f3",
-                        "surface-container-highest": "#e4e2e2",
-                        "secondary-fixed": "#bbebf1",
-                        "on-surface": "#1b1c1c",
-                        "surface-dim": "#dbd9d9",
-                        "on-tertiary-container": "#5a5c5c"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "unit": "8px",
-                        "gutter": "24px",
-                        "margin-mobile": "16px",
-                        "margin-desktop": "40px",
-                        "container-max": "1200px",
-                        "section-gap": "80px"
-                    },
-                    "fontFamily": {
-                        "body-md": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "headline-display": ["Noto Serif"],
-                        "headline-lg": ["Noto Serif"],
-                        "body-lg": ["Inter"],
-                        "headline-md": ["Noto Serif"]
-                    },
-                    "fontSize": {
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "400" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "400" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(184, 232, 238, 0.5);
-            box-shadow: 0 4px 30px rgba(176, 224, 230, 0.3);
-        }
-        .ethereal-gradient {
-            background: linear-gradient(135deg, #f8c8dc 0%, #b8e8ee 100%);
-        }
-        .ethereal-gradient-text {
-            background: linear-gradient(135deg, #795465 0%, #37656b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .input-border-transition {
-            transition: border-color 0.3s ease;
-        }
-        .input-border-transition:focus-within {
-            border-bottom: 2px solid #795465; /* Primary color */
-        }
-    </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
+.app{display:flex;flex-direction:column;height:100vh;max-width:480px;margin:0 auto;background:var(--cream);position:relative}
+.header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 12px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:60;flex-shrink:0}
+.brand{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--teal);font-style:italic;letter-spacing:.5px;font-weight:600}
+.hicons{display:flex;gap:6px}
+.hicon{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray);font-size:16px;transition:all .2s}
+.hicon:hover{background:var(--gray-light);color:var(--dark)}
+.screen{flex:1;overflow-y:auto;overflow-x:hidden;-ms-overflow-style:none;scrollbar-width:none;padding-bottom:10px}
+.screen::-webkit-scrollbar{display:none}
+.tabbar{display:flex;background:var(--white);border-top:1px solid var(--border);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 0 11px;cursor:pointer;font-size:9px;color:var(--gray);gap:3px;border-top:2px solid transparent;transition:all .2s;letter-spacing:.3px;text-transform:uppercase;font-weight:500}
+.tab.active{color:var(--teal);border-top-color:var(--teal)}
+.tab i{font-size:20px;line-height:1}
+
+.card{background:var(--white);border-radius:16px;padding:16px;margin:0 14px 12px;border:1px solid var(--border)}
+.card-sm{background:var(--white);border-radius:12px;padding:12px 14px;border:1px solid var(--border)}
+.grad-card{background:linear-gradient(135deg,#F9E4EE 0%,#DFF0EB 100%);border-radius:16px;padding:16px;margin:0 14px 12px}
+
+.hero-banner{padding:22px 20px 18px}
+.hero-banner h1{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:700;color:var(--dark);line-height:1;letter-spacing:-1px}
+.hero-banner p{font-size:13px;color:var(--rose-dark);margin-top:6px;font-weight:400}
+
+.section-head{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--dark);padding:18px 20px 2px;line-height:1.05;letter-spacing:-0.5px}
+.section-sub{font-size:13px;color:var(--gray);padding:3px 20px 14px;font-weight:400}
+
+.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:3px;letter-spacing:.1px}
+.badge-green{background:var(--success-bg);color:var(--success)}
+.badge-amber{background:var(--amber-bg);color:var(--amber)}
+.badge-gray{background:var(--gray-light);color:var(--gray)}
+.badge-red{background:var(--danger-bg);color:var(--danger)}
+
+.pill-row{display:flex;gap:7px;padding:0 14px 14px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.pill-row::-webkit-scrollbar{display:none}
+.pill{padding:7px 16px;border-radius:50px;border:1px solid var(--border);background:var(--white);color:var(--gray);font-size:12.5px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all .15s;font-weight:400}
+.pill:hover{border-color:var(--teal);color:var(--teal)}
+.pill.active{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600}
+
+.progress-bar{height:5px;background:var(--gray-light);border-radius:5px;overflow:hidden}
+.progress-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--rose),var(--teal))}
+
+.fab{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--teal));border:none;color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:sticky;bottom:18px;left:calc(100% - 66px);margin-right:14px;margin-top:-26px;box-shadow:0 4px 18px rgba(93,44,60,.35);transition:transform .15s}
+.fab:hover{transform:scale(1.07)}
+.fab:active{transform:scale(.96)}
+
+.field-label{font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.7px;margin-bottom:4px;margin-top:15px;display:block;text-transform:uppercase}
+.input-field{width:100%;border:none;border-bottom:1.5px solid var(--border);background:transparent;padding:8px 0;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;color:var(--dark);transition:border-color .2s}
+.input-field:focus{border-bottom-color:var(--teal)}
+select.input-field{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6460' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;padding-right:22px}
+textarea.input-field{border:1.5px solid var(--border);border-radius:10px;padding:10px 12px;min-height:80px;resize:none;border-bottom:1.5px solid var(--border)}
+textarea.input-field:focus{border-color:var(--teal)}
+
+.btn-primary{width:100%;background:linear-gradient(135deg,var(--rose-dark),var(--teal-dark));color:#fff;border:none;border-radius:50px;padding:14px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;font-weight:600;margin-top:18px;letter-spacing:.2px;transition:opacity .2s}
+.btn-primary:hover{opacity:.9}
+.btn-outline-danger{width:100%;border:1.5px solid #E0A0A0;background:transparent;color:var(--danger);border-radius:12px;padding:13px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:500;transition:all .2s}
+.btn-outline-danger:hover{background:var(--danger-bg)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(30,15,10,.55);z-index:200;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+.modal-overlay.open{display:flex}
+.modal-sheet{background:var(--white);border-radius:24px 24px 0 0;padding:24px 20px 36px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none}
+.modal-sheet::-webkit-scrollbar{display:none}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:4px;margin:0 auto 20px}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--dark);margin-bottom:2px}
+
+.subpage{position:fixed;inset:0;background:var(--cream);z-index:100;overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none;display:none}
+.subpage.open{display:block}
+.subpage::-webkit-scrollbar{display:none}
+.back-header{display:flex;align-items:center;gap:12px;padding:14px 18px 13px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.back-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray);font-size:16px;transition:all .2s}
+.back-btn:hover{background:var(--gray-light);color:var(--dark)}
+
+.doc-row{display:flex;gap:13px;align-items:flex-start;padding:14px 16px;background:var(--white);border-radius:14px;margin:0 14px 10px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.doc-row:hover{border-color:var(--rose-light)}
+.circle-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .2s}
+
+.vendor-img{height:110px;background:var(--gray-light);border-radius:14px;display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:12px;overflow:hidden}
+.cat-tag{position:absolute;top:9px;right:9px;background:var(--rose-dark);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+
+.rsvp-seg{padding:12px 10px;border-radius:12px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;text-align:center;font-family:'DM Sans',sans-serif;font-size:13px;transition:all .18s}
+.rsvp-seg:hover{border-color:var(--rose-mid)}
+.rsvp-seg.active{border-color:var(--rose);color:var(--rose);background:var(--pink-bg)}
+
+.toggle-sw{width:44px;height:24px;border-radius:12px;position:relative;cursor:pointer;transition:background .22s;flex-shrink:0;border:none;padding:0}
+.toggle-sw .knob{width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;transition:left .22s;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+
+.notif-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border-light)}
+.notif-row:last-child{border-bottom:none}
+
+.tx-row{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--border-light)}
+.tx-row:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none}
+.tx-icon{width:40px;height:40px;border-radius:12px;background:var(--gray-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:var(--gray)}
+.tx-icon i{font-size:18px}
+
+.stat-card{border-radius:14px;padding:12px 14px;text-align:center}
+.stat-num{font-size:24px;font-weight:700;line-height:1;margin-bottom:3px}
+.stat-lbl{font-size:9.5px;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+
+.toast{position:fixed;top:72px;left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;padding:9px 20px;border-radius:50px;font-size:13px;z-index:400;pointer-events:none;opacity:0;transition:opacity .25s;font-weight:500;letter-spacing:.1px;white-space:nowrap}
+.toast.show{opacity:1}
+
+.setting-row{display:flex;align-items:center;gap:14px;padding:15px 0;border-bottom:1px solid var(--border-light);cursor:pointer}
+.setting-row:last-of-type{border-bottom:none}
+.setting-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.setting-icon i{font-size:18px}
+
+.couple-card{background:linear-gradient(160deg,#F9D8E8 0%,#DFF0EB 100%);margin:14px;border-radius:20px;padding:24px 18px;text-align:center}
+.avatar{width:78px;height:78px;border-radius:50%;background:var(--white);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,.8)}
+.avatar i{font-size:34px;color:var(--rose)}
+.couple-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-.3px}
+.couple-date{font-size:13px;color:var(--gray);margin-top:3px}
+.days-pill{background:rgba(255,255,255,.85);border-radius:12px;padding:10px 20px;display:inline-block;margin-top:12px;backdrop-filter:blur(4px)}
+
+.help-topic-card{background:var(--white);border-radius:14px;border:1px solid var(--border);margin-bottom:12px;overflow:hidden}
+.help-topic-head{padding:13px 16px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border-light)}
+.help-topic-item{padding:12px 16px;font-size:13.5px;color:var(--dark);border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.help-topic-item:last-child{border-bottom:none}
+.help-topic-item:hover{background:var(--cream)}
+</style>
 </head>
-<body class="bg-background min-h-screen flex flex-col font-body-md text-on-background antialiased relative overflow-x-hidden">
-<!-- Ambient Background Element -->
-<div class="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-primary-fixed to-transparent opacity-40 pointer-events-none z-0"></div>
-<div class="absolute top-[-50px] right-[-50px] w-64 h-64 rounded-full bg-secondary-fixed blur-3xl opacity-30 pointer-events-none z-0"></div>
-<!-- Top Navigation (Transactional - minimal) -->
-<header class="w-full sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center px-4 py-4 md:px-margin-desktop md:max-w-container-max md:mx-auto">
-<a class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors cursor-pointer group" href="{{DATA:SCREEN:SCREEN_54}}">
-<span class="material-symbols-outlined group-active:opacity-80">arrow_back</span>
-</a>
-<div class="font-headline-md text-headline-md text-on-surface tracking-tight text-center flex-grow">
-            Add Item
+<body>
+<div class="app" id="app">
+
+  <div class="header">
+    <span class="brand">Union & Grace</span>
+    <div class="hicons">
+      <button class="hicon" onclick="showToast('Tidak ada notifikasi baru')" title="Notifikasi"><i class="ti ti-bell"></i></button>
+      <button class="hicon" onclick="goProfile()" title="Profil"><i class="ti ti-user-circle"></i></button>
+    </div>
+  </div>
+
+  <div class="screen" id="main-screen">
+    <div id="page-ringkasan"></div>
+    <div id="page-anggaran" style="display:none"></div>
+    <div id="page-seserahan" style="display:none"></div>
+    <div id="page-tamu" style="display:none"></div>
+    <div id="page-dokumen" style="display:none"></div>
+    <div id="page-vendor" style="display:none"></div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tab active" onclick="switchTab('ringkasan',this)" id="tab-ringkasan"><i class="ti ti-layout-dashboard"></i>Ringkasan</div>
+    <div class="tab" onclick="switchTab('anggaran',this)" id="tab-anggaran"><i class="ti ti-report-money"></i>Anggaran</div>
+    <div class="tab" onclick="switchTab('seserahan',this)" id="tab-seserahan"><i class="ti ti-gift"></i>Seserahan</div>
+    <div class="tab" onclick="switchTab('tamu',this)" id="tab-tamu"><i class="ti ti-users"></i>Tamu</div>
+    <div class="tab" onclick="switchTab('dokumen',this)" id="tab-dokumen"><i class="ti ti-file-check"></i>Dokumen</div>
+    <div class="tab" onclick="switchTab('vendor',this)" id="tab-vendor"><i class="ti ti-building-store"></i>Vendor</div>
+  </div>
+
+</div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+  <div class="modal-sheet" id="modal-content">
+    <div class="modal-handle"></div>
+  </div>
+</div>
+
+<div class="subpage" id="subpage-container"></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const state={
+  couple:{p1:'Sarah',p2:'James',date:'2024-10-12',venue:'The Glasshouse, New York',theme:'Ethereal Minimal'},
+  income:250000000,
+  transactions:[
+    {id:1,name:'DP Katering Utama',cat:'Katering',type:'out',amount:20000000,status:'Lunas',date:'2024-10-05'},
+    {id:2,name:'Tabungan Bersama',cat:'Pemasukan',type:'in',amount:50000000,status:'Selesai',date:'2024-10-03'},
+    {id:3,name:'Gaun Pengantin',cat:'Busana',type:'out',amount:15000000,status:'Termin 1',date:'2024-10-01'},
+    {id:4,name:'Sumbangan Orang Tua',cat:'Pemasukan',type:'in',amount:150000000,status:'',date:'2024-09-15'},
+    {id:5,name:'Deposit Venue',cat:'Lokasi',type:'out',amount:40000000,status:'Lunas',date:'2024-09-10'},
+  ],
+  seserahan:[
+    {id:1,name:'Cincin Kawin & Kalung',cat:'Perhiasan',party:'Mahar',price:15000000,status:'Siap'},
+    {id:2,name:'Seperangkat Alat Sholat',cat:'Perlengkapan Ibadah',party:'Pria',price:1500000,status:'Sedang Dikemas'},
+    {id:3,name:'Tas & Sepatu',cat:'Fashion',party:'Pria',price:4000000,status:'Sudah Dibeli'},
+    {id:4,name:'Skincare Set',cat:'Perawatan',party:'Pria',price:2500000,status:'Belum Dibeli'},
+    {id:5,name:'Mukena Premium',cat:'Perlengkapan Ibadah',party:'Wanita',price:2500000,status:'Sudah Dibeli'},
+  ],
+  guests:[
+    {id:1,name:'Keluarga Bpk. Budi Santoso',group:'Keluarga Pihak Pria',count:4,vip:true,rsvp:'Hadir'},
+    {id:2,name:'Sarah Wijaya & Pasangan',group:'Teman Kuliah',count:2,vip:false,rsvp:'Menunggu'},
+    {id:3,name:'Andi Pratama',group:'Rekan Kerja',count:1,vip:false,rsvp:'Tidak Hadir'},
+    {id:4,name:'Keluarga Ibu Kartini',group:'Keluarga Pihak Wanita',count:3,vip:true,rsvp:'Hadir'},
+  ],
+  documents:[
+    {id:1,name:'Formulir N1',desc:'Surat Pengantar Nikah dari Kelurahan.',status:'Selesai'},
+    {id:2,name:'Fotokopi KTP & KK',desc:'Identitas diri kedua calon mempelai.',status:'Selesai'},
+    {id:3,name:'Formulir N2 & N3',desc:'Permohonan & Persetujuan Mempelai.',status:'Sedang Diproses'},
+    {id:4,name:'Formulir N4',desc:'Surat Keterangan Tentang Orang Tua.',status:'Belum Diurus'},
+    {id:5,name:'Pasfoto 2×3 & 3×4',desc:'Latar belakang biru, masing-masing 4 lembar.',status:'Belum Diurus'},
+    {id:6,name:'Akta Kelahiran',desc:'Akta kelahiran kedua calon mempelai.',status:'Belum Diurus'},
+  ],
+  vendors:[
+    {id:1,name:'Rasa Nusantara Catering',cat:'Katering',desc:'Paket Prasmanan Mewah',phone:'0812-3456-7890',email:'hello@rasanusantara.com',cost:45000000,ok:true},
+    {id:2,name:'Bloom & Co.',cat:'Dekorasi',desc:'Dekorasi Pelaminan & Bunga',phone:'0898-7654-3210',email:'info@bloomco.id',cost:30000000,ok:false},
+    {id:3,name:'Evergreen Florals',cat:'Dekorasi',desc:'Rangkaian Bunga Segar',phone:'0811-1234-5678',email:'hello@evergreen.id',cost:15000000,ok:true},
+    {id:4,name:'Aura Jewelry',cat:'Cincin',desc:'Cincin Pernikahan Custom',phone:'0877-8888-9999',email:'aura@jewelry.id',cost:35000000,ok:true},
+  ],
+  notif:{budgEmail:true,budgPush:true,rsvpEmail:true,rsvpPush:true,docEmail:true,docPush:false,vendEmail:false,vendPush:false},
+  darkMode:false,
+  budFilter:'semua',
+  sesFilter:'Semua',
+  guestSearch:'',
+  vendSearch:'',
+};
+
+const fmt=n=>'Rp '+Math.round(n).toLocaleString('id-ID');
+const catIconCls=c=>({
+  'Katering':'ti-tools-kitchen-2','Busana':'ti-hanger','Lokasi':'ti-building','Dekorasi':'ti-flower',
+  'Perhiasan':'ti-diamond','Fotografer':'ti-camera','Cincin':'ti-ring','Pemasukan':'ti-wallet',
+  'Mahar':'ti-diamond','Fashion':'ti-shopping-bag','Perlengkapan Ibadah':'ti-star','Perawatan':'ti-leaf',
+  'Lainnya':'ti-box'
+}[c]||'ti-box');
+const statusCls=s=>({'Siap':'badge-green','Sudah Dibeli':'badge-green','Selesai':'badge-green','Hadir':'badge-green','Lunas':'badge-green','Termin 1':'badge-amber','Sedang Dikemas':'badge-amber','Sedang Diproses':'badge-amber','Menunggu':'badge-amber','DP':'badge-amber','Belum Dibeli':'badge-gray','Belum Diurus':'badge-gray','Tidak Hadir':'badge-red','Belum Dibayar':'badge-gray'}[s]||'badge-gray');
+const statusIcon=s=>({'Siap':'ti-circle-check','Sudah Dibeli':'ti-circle-check','Selesai':'ti-circle-check','Hadir':'ti-circle-check','Lunas':'ti-circle-check','Termin 1':'ti-clock','Sedang Dikemas':'ti-package','Sedang Diproses':'ti-loader','Menunggu':'ti-clock','DP':'ti-clock','Belum Dibeli':'ti-circle-x','Belum Diurus':'ti-circle-x','Tidak Hadir':'ti-circle-x','Belum Dibayar':'ti-circle-x'}[s]||'ti-circle');
+const rsvpIcon=r=>r==='Hadir'?'ti-circle-check':r==='Menunggu'?'ti-clock':'ti-circle-x';
+
+const getTotals=()=>{
+  const out=state.transactions.filter(t=>t.type==='out').reduce((a,t)=>a+t.amount,0);
+  const extraIn=state.transactions.filter(t=>t.type==='in').reduce((a,t)=>a+t.amount,0);
+  const saldo=state.income+extraIn-out;
+  const docDone=state.documents.filter(d=>d.status==='Selesai').length;
+  const docPct=Math.round(docDone/state.documents.length*100);
+  const totalG=state.guests.reduce((a,g)=>a+g.count,0);
+  const hadir=state.guests.filter(g=>g.rsvp==='Hadir').reduce((a,g)=>a+g.count,0);
+  const tunggu=state.guests.filter(g=>g.rsvp==='Menunggu').reduce((a,g)=>a+g.count,0);
+  const tidakH=state.guests.filter(g=>g.rsvp==='Tidak Hadir').reduce((a,g)=>a+g.count,0);
+  const sesDone=state.seserahan.filter(i=>i.status==='Siap'||i.status==='Sudah Dibeli').length;
+  const sesCost=state.seserahan.reduce((a,i)=>a+i.price,0);
+  const vcost=state.vendors.reduce((a,v)=>a+v.cost,0);
+  return{out,extraIn,saldo,docDone,docPct,totalG,hadir,tunggu,tidakH,sesDone,sesCost,vcost};
+};
+
+let currentTab='ringkasan';
+let toastTimer=null;
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  if(toastTimer)clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2400);
+}
+
+function switchTab(name,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  ['ringkasan','anggaran','seserahan','tamu','dokumen','vendor'].forEach(p=>{
+    document.getElementById('page-'+p).style.display=p===name?'block':'none';
+  });
+  currentTab=name;
+  renderPage(name);
+}
+
+function renderPage(name){
+  const el=document.getElementById('page-'+name);
+  const T=getTotals();
+  const map={ringkasan:renderRingkasan,anggaran:renderAnggaran,seserahan:renderSeserahan,tamu:renderTamu,dokumen:renderDokumen,vendor:renderVendor};
+  if(map[name]) el.innerHTML=map[name](T);
+}
+
+/* ── RINGKASAN ── */
+function renderRingkasan(T){
+  const progW=Math.min(100,Math.round(T.out/state.income*100));
+  const circ=2*Math.PI*28;const dash=(T.hadir/Math.max(T.totalG,1)*circ).toFixed(1);
+  return `
+  <div class="hero-banner" style="background:linear-gradient(160deg,#F9D8E8,#DFF0EB)">
+    <h1>Ringkasan</h1>
+    <p>Halo ${state.couple.p1} &amp; ${state.couple.p2}, berikut status perencanaan pernikahan Anda.</p>
+  </div>
+  <div style="height:14px"></div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span style="font-weight:600;font-size:15px">Anggaran</span>
+      <i class="ti ti-report-money" style="font-size:20px;color:var(--gray)"></i>
+    </div>
+    <div style="display:flex;gap:24px;margin-bottom:11px">
+      <div><div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px">Pendapatan</div><div style="font-size:15px;font-weight:700;color:var(--teal)">${fmt(state.income)}</div></div>
+      <div><div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px">Pengeluaran</div><div style="font-size:15px;font-weight:700">${fmt(T.out)}</div></div>
+    </div>
+    <div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${progW}%;background:var(--teal)"></div></div>
+    <div style="background:var(--teal-light);padding:6px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:5px">
+      <i class="ti ti-wallet" style="font-size:13px;color:var(--teal)"></i>
+      <span style="font-size:12px;font-weight:700;color:var(--teal)">Sisa: ${fmt(state.income-T.out)}</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+      <span style="font-weight:600;font-size:15px">Dokumen</span>
+      <i class="ti ti-file-check" style="font-size:20px;color:var(--gray)"></i>
+    </div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:var(--rose);line-height:1">${T.docPct}<span style="font-size:24px">%</span></div>
+    <div style="font-size:12.5px;color:var(--gray);margin:5px 0 10px">Selesai dikumpulkan</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${T.docPct}%"></div></div>
+  </div>
+
+  <div class="card" style="background:var(--pink-card);border-color:#F0C8DC">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+      <span style="font-weight:600;font-size:15px;color:var(--rose-dark)">RSVP Tamu</span>
+      <i class="ti ti-users" style="font-size:20px;color:var(--rose-mid)"></i>
+    </div>
+    <div style="display:flex;align-items:center;gap:20px">
+      <svg width="68" height="68" style="flex-shrink:0">
+        <circle cx="34" cy="34" r="28" fill="none" stroke="#EAC0D4" stroke-width="6"/>
+        <circle cx="34" cy="34" r="28" fill="none" stroke="var(--teal)" stroke-width="6" stroke-dasharray="${dash} ${circ.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 34 34)"/>
+        <text x="34" y="39" text-anchor="middle" font-size="13" font-weight="700" fill="#5C2A3C" font-family="'DM Sans',sans-serif">${T.totalG}</text>
+      </svg>
+      <div style="font-size:13px;color:var(--rose-dark);line-height:2">
+        <div style="display:flex;align-items:center;gap:6px"><i class="ti ti-circle-filled" style="font-size:8px;color:var(--teal)"></i>Hadir (${T.hadir})</div>
+        <div style="display:flex;align-items:center;gap:6px;opacity:.65"><i class="ti ti-circle-filled" style="font-size:8px"></i>Menunggu (${T.tunggu})</div>
+        <div style="display:flex;align-items:center;gap:6px;opacity:.4"><i class="ti ti-circle-filled" style="font-size:8px"></i>Tidak Hadir (${T.tidakH})</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span style="font-weight:600;font-size:15px">Vendor Terbaru</span>
+      <button onclick="document.getElementById('tab-vendor').click()" style="font-size:11px;font-weight:700;color:var(--teal);background:none;border:none;cursor:pointer;letter-spacing:.4px;text-transform:uppercase;font-family:'DM Sans',sans-serif">Lihat Semua</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px">
+      ${state.vendors.slice(0,2).map(v=>`
+      <div>
+        <div style="height:80px;background:var(--gray-light);border-radius:12px;margin-bottom:7px;display:flex;align-items:center;justify-content:center;color:var(--gray)">
+          <i class="ti ${catIconCls(v.cat)}" style="font-size:30px"></i>
         </div>
-<div class="w-6"></div> <!-- Spacer for centering -->
-</header>
-<!-- Main Content Area -->
-<main class="flex-grow w-full max-w-[600px] mx-auto px-4 py-8 z-10 flex flex-col gap-6">
-<div class="text-center mb-4">
-<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">New Seserahan</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Add details for your upcoming gift or dowry item.</p>
-</div>
-<form class="glass-panel rounded-xl p-6 flex flex-col gap-6">
-<!-- Nama Barang -->
-<div class="flex flex-col gap-2 relative">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="nama_barang">Nama Barang</label>
-<div class="input-border-transition border-b border-outline-variant relative">
-<input class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-lg text-body-lg text-on-surface placeholder-outline" id="nama_barang" placeholder="e.g., Mukena, Perhiasan" required="" type="text"/>
-</div>
-</div>
-<!-- Kategori -->
-<div class="flex flex-col gap-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="kategori">Kategori</label>
-<div class="input-border-transition border-b border-outline-variant relative">
-<select class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-lg text-body-lg text-on-surface appearance-none pr-8 cursor-pointer" id="kategori">
-<option class="text-on-surface bg-surface" value="seserahan">Seserahan</option>
-<option class="text-on-surface bg-surface" value="mahar">Mahar</option>
-</select>
-<span class="material-symbols-outlined absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-</div>
-</div>
-<!-- Harga/Estimasi -->
-<div class="flex flex-col gap-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="harga">Harga/Estimasi</label>
-<div class="input-border-transition border-b border-outline-variant relative flex items-center">
-<span class="font-body-lg text-body-lg text-on-surface-variant pr-2">Rp</span>
-<input class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-lg text-body-lg text-on-surface placeholder-outline" id="harga" placeholder="0" required="" type="number"/>
-</div>
-</div>
-<!-- Status -->
-<div class="flex flex-col gap-3">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</label>
-<div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-<label class="cursor-pointer relative">
-<input checked="" class="peer sr-only" name="status" type="radio" value="belum_dibeli"/>
-<div class="rounded-full px-4 py-2 border border-outline-variant text-center font-body-md text-body-md text-on-surface peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all">
-                            Belum Dibeli
-                        </div>
-</label>
-<label class="cursor-pointer relative">
-<input class="peer sr-only" name="status" type="radio" value="sudah_dibeli"/>
-<div class="rounded-full px-4 py-2 border border-outline-variant text-center font-body-md text-body-md text-on-surface peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all">
-                            Sudah Dibeli
-                        </div>
-</label>
-<label class="cursor-pointer relative">
-<input class="peer sr-only" name="status" type="radio" value="sudah_dihias"/>
-<div class="rounded-full px-4 py-2 border border-outline-variant text-center font-body-md text-body-md text-on-surface peer-checked:bg-secondary-container peer-checked:border-secondary-container peer-checked:text-on-secondary-container transition-all">
-                            Sudah Dihias
-                        </div>
-</label>
-</div>
-</div>
-<!-- Notes -->
-<div class="flex flex-col gap-2">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="notes">Notes (Optional)</label>
-<div class="input-border-transition border-b border-outline-variant relative">
-<textarea class="w-full bg-transparent border-none focus:ring-0 px-0 py-2 font-body-md text-body-md text-on-surface placeholder-outline resize-none" id="notes" placeholder="Add any special instructions or details..." rows="3"></textarea>
-</div>
-</div>
-</form>
-</main>
-<!-- Bottom Sticky CTA -->
-<div class="w-full sticky bottom-0 z-50 bg-surface/90 backdrop-blur-md border-t border-outline-variant px-4 py-4 md:px-margin-desktop shadow-[0_-4px_20px_rgba(176,224,230,0.2)]">
-<div class="max-w-[600px] mx-auto">
-<a class="w-full ethereal-gradient rounded-full py-4 px-8 flex justify-center items-center gap-2 shadow-[0_4px_15px_rgba(248,200,220,0.4)] hover:shadow-[0_6px_20px_rgba(248,200,220,0.6)] transition-all active:scale-95 cursor-pointer" href="{{DATA:SCREEN:SCREEN_54}}">
-<span class="font-label-sm text-label-sm text-on-primary uppercase tracking-wider">Simpan Seserahan</span>
-<span class="material-symbols-outlined text-on-primary text-xl">check_circle</span>
-</a>
-</div>
-</div>
-</body></html>
+        <div style="font-weight:600;font-size:13px">${v.name}</div>
+        <div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;margin-top:2px">${v.cat}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ── ANGGARAN ── */
+function renderAnggaran(T){
+  const allIn=state.income+T.extraIn;
+  const txs=state.transactions.filter(t=>state.budFilter==='semua'||(state.budFilter==='pemasukan'&&t.type==='in')||(state.budFilter==='pengeluaran'&&t.type==='out'));
+  const groups={};
+  txs.forEach(t=>{
+    const k=t.date.substring(0,7);
+    if(!groups[k]){const d=new Date(t.date+'T00:00:00');groups[k]={label:d.toLocaleDateString('id-ID',{month:'long',year:'numeric'}).toUpperCase(),items:[]}}
+    groups[k].items.push(t);
+  });
+  const sorted=Object.keys(groups).sort((a,b)=>b.localeCompare(a)).map(k=>groups[k]);
+  return `
+  <div style="padding:18px 20px 0">
+    <div class="section-head" style="padding:0 0 2px">Buku Besar</div>
+    <div class="section-sub" style="padding:2px 0 14px">Pantau pemasukan dan pengeluaran Anda.</div>
+  </div>
+  <div class="grad-card">
+    <div style="font-size:10px;font-weight:600;color:var(--rose-dark);letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">Total Saldo</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--rose-dark)">${fmt(allIn-T.out)}</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px 14px">
+    <div class="card-sm" style="margin:0">
+      <div style="display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px"><i class="ti ti-arrow-down" style="font-size:13px"></i>Pemasukan</div>
+      <div style="font-size:14px;font-weight:700">${fmt(allIn)}</div>
+    </div>
+    <div class="card-sm" style="margin:0">
+      <div style="display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--rose);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px"><i class="ti ti-arrow-up" style="font-size:13px"></i>Pengeluaran</div>
+      <div style="font-size:14px;font-weight:700">${fmt(T.out)}</div>
+    </div>
+  </div>
+  <div class="pill-row">
+    ${['semua','pemasukan','pengeluaran'].map(f=>`<span class="pill${state.budFilter===f?' active':''}" onclick="setBudFilter('${f}')">${f.charAt(0).toUpperCase()+f.slice(1)}</span>`).join('')}
+  </div>
+  ${sorted.map(g=>`
+  <div style="font-size:10.5px;font-weight:600;color:var(--gray);letter-spacing:.8px;padding:0 18px 8px;text-transform:uppercase">${g.label}</div>
+  <div class="card">${g.items.map((t,i)=>`
+    <div class="tx-row" style="${i===g.items.length-1?'border-bottom:none;padding-bottom:0;margin-bottom:0':''}">
+      <div class="tx-icon"><i class="ti ${catIconCls(t.cat)}"></i></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.name}</div>
+        <div style="font-size:11.5px;color:var(--gray);margin-top:2px;display:flex;align-items:center;gap:5px">${t.cat}${t.status?`<span class="badge ${statusCls(t.status)}"><i class="ti ${statusIcon(t.status)}" style="font-size:10px"></i>${t.status}</span>`:''}</div>
+      </div>
+      <div style="font-weight:700;font-size:13.5px;color:${t.type==='in'?'var(--teal)':'var(--dark)'};white-space:nowrap;flex-shrink:0">${t.type==='in'?'+':'-'}${fmt(t.amount)}</div>
+    </div>`).join('')}</div>`).join('')}
+  <button class="fab" onclick="openModal('tx')"><i class="ti ti-plus" style="font-size:22px"></i></button>`;
+}
+
+/* ── SESERAHAN ── */
+function renderSeserahan(T){
+  const items=state.seserahan.filter(i=>state.sesFilter==='Semua'||(state.sesFilter==='Pihak Pria'&&i.party==='Pria')||(state.sesFilter==='Pihak Wanita'&&i.party==='Wanita')||(state.sesFilter==='Mahar'&&i.party==='Mahar'));
+  const sesPct=Math.round(T.sesDone/Math.max(state.seserahan.length,1)*100);
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 18px 0">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700">Seserahan &amp; Mahar</div>
+    <button class="hicon" onclick="goProfile()"><i class="ti ti-user-circle"></i></button>
+  </div>
+  <div class="card" style="margin-top:12px">
+    <div style="font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px">Progress Keseluruhan</div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-weight:600;font-size:14px">${T.sesDone} / ${state.seserahan.length} Item Siap</span><span style="font-size:13px;color:var(--gray)">${sesPct}%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${sesPct}%"></div></div>
+  </div>
+  <div class="grad-card">
+    <div style="font-size:10px;font-weight:600;color:var(--rose-dark);letter-spacing:.6px;text-transform:uppercase;margin-bottom:4px">Estimasi Biaya</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--rose-dark);margin-top:2px">${fmt(T.sesCost)}</div>
+    <div style="font-size:12.5px;color:var(--teal);margin-top:5px;display:flex;align-items:center;gap:4px"><i class="ti ti-circle-check" style="font-size:14px"></i>Sesuai Anggaran</div>
+  </div>
+  <div class="pill-row">${['Semua','Pihak Pria','Pihak Wanita','Mahar'].map(f=>`<span class="pill${state.sesFilter===f?' active':''}" onclick="setSesFilter('${f}')">${f}</span>`).join('')}</div>
+  ${items.map(item=>`
+  <div class="card">
+    <div style="display:flex;gap:12px">
+      <div style="width:48px;height:48px;border-radius:13px;background:var(--gray-light);display:flex;align-items:center;justify-content:center;color:var(--gray);flex-shrink:0">
+        <i class="ti ${catIconCls(item.cat)}" style="font-size:22px"></i>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
+          <div style="font-weight:600;font-size:14px">${item.name}</div>
+          <span class="badge ${statusCls(item.status)}" style="flex-shrink:0"><i class="ti ${statusIcon(item.status)}" style="font-size:10px"></i>${item.status}</span>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:2px">${item.cat} &middot; ${item.party}</div>
+        <div style="font-size:13px;font-weight:700;color:var(--rose);margin-top:4px">${fmt(item.price)}</div>
+      </div>
+    </div>
+  </div>`).join('')}
+  <button class="fab" onclick="openModal('ses')"><i class="ti ti-plus" style="font-size:22px"></i></button>`;
+}
+
+/* ── TAMU ── */
+function renderTamu(T){
+  const filtered=state.guests.filter(g=>!state.guestSearch||g.name.toLowerCase().includes(state.guestSearch.toLowerCase())||g.group.toLowerCase().includes(state.guestSearch.toLowerCase()));
+  return `
+  <div style="padding:18px 18px 0">
+    <div class="section-head" style="padding:0 0 14px">Manajemen<br>Tamu</div>
+  </div>
+  <div style="margin:0 14px 12px">
+    <button class="btn-primary" style="margin:0;display:flex;align-items:center;justify-content:center;gap:7px" onclick="openModal('guest')">
+      <i class="ti ti-user-plus" style="font-size:16px"></i>Tambah Tamu Baru
+    </button>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:0 14px 13px">
+    <div class="stat-card" style="background:var(--white);border:1px solid var(--border)">
+      <div class="stat-num">${T.totalG}</div>
+      <div class="stat-lbl" style="color:var(--gray)">Undangan</div>
+    </div>
+    <div class="stat-card" style="background:var(--teal-light)">
+      <div class="stat-num" style="color:var(--teal)">${T.hadir}</div>
+      <div class="stat-lbl" style="color:var(--teal)">Hadir</div>
+    </div>
+    <div class="stat-card" style="background:var(--pink-bg)">
+      <div class="stat-num" style="color:var(--rose)">${T.tunggu}</div>
+      <div class="stat-lbl" style="color:var(--rose)">Menunggu</div>
+    </div>
+  </div>
+  <div style="margin:0 14px 12px">
+    <div class="card-sm" style="display:flex;align-items:center;gap:9px">
+      <i class="ti ti-search" style="font-size:17px;color:var(--gray);flex-shrink:0"></i>
+      <input style="border:none;outline:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13.5px;width:100%;color:var(--dark)" placeholder="Ketik nama tamu..." value="${state.guestSearch}" oninput="setGuestSearch(this.value)">
+    </div>
+  </div>
+  ${filtered.map(g=>`
+  <div class="card">
+    <div style="font-weight:600;font-size:14.5px;margin-bottom:4px">${g.name}</div>
+    <div style="font-size:12.5px;color:var(--gray);margin-bottom:9px;display:flex;align-items:center;gap:5px">
+      <i class="ti ${g.count>1?'ti-users':'ti-user'}" style="font-size:14px"></i>${g.count} Orang
+    </div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap;align-items:center">
+      <span style="font-size:10.5px;font-weight:600;background:var(--gray-light);color:var(--gray);padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.3px">${g.group}</span>
+      ${g.vip?'<span style="font-size:10.5px;font-weight:700;background:var(--amber-bg);color:var(--amber);padding:3px 10px;border-radius:20px">VIP</span>':''}
+      <span class="badge ${statusCls(g.rsvp)}"><i class="ti ${rsvpIcon(g.rsvp)}" style="font-size:10px"></i>${g.rsvp}</span>
+    </div>
+  </div>`).join('')}`;
+}
+
+/* ── DOKUMEN ── */
+function renderDokumen(T){
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px 0">
+    <button class="hicon"><i class="ti ti-search"></i></button>
+    <button class="hicon" onclick="goProfile()"><i class="ti ti-user-circle"></i></button>
+  </div>
+  <div style="padding:8px 18px 0">
+    <div class="section-head" style="padding:0 0 2px">Persyaratan<br>Legal</div>
+    <div class="section-sub" style="padding:4px 0 12px">Lengkapi dokumen penting untuk pendaftaran administrasi pernikahan KUA.</div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span style="font-size:10.5px;font-weight:600;color:var(--gray);letter-spacing:.5px;text-transform:uppercase">Progress Kelengkapan</span>
+      <span style="font-size:12px;color:var(--gray)">${T.docDone} / ${state.documents.length} Selesai</span>
+    </div>
+    <div class="progress-bar" style="margin-bottom:16px;height:6px"><div class="progress-fill" style="width:${T.docPct}%"></div></div>
+  </div>
+  ${state.documents.map(d=>`
+  <div class="doc-row" style="${d.status==='Sedang Diproses'?'background:#FFF0F5;border-color:#E8A0C0':''}" onclick="toggleDoc(${d.id})">
+    <div class="circle-check" style="${d.status==='Selesai'?'border-color:var(--teal);background:var(--teal);color:#fff':d.status==='Sedang Diproses'?'border-color:var(--rose-mid);color:var(--rose-mid)':''}">
+      ${d.status==='Selesai'?'<i class="ti ti-check" style="font-size:13px"></i>':d.status==='Sedang Diproses'?'<i class="ti ti-dots" style="font-size:13px"></i>':''}
+    </div>
+    <div style="flex:1">
+      <div style="font-weight:600;font-size:14px">${d.name}</div>
+      <div style="font-size:12px;color:var(--gray);margin-top:2px">${d.desc}</div>
+      ${d.status==='Sedang Diproses'?'<div style="font-size:11px;font-weight:700;color:var(--rose);margin-top:6px;letter-spacing:.4px;text-transform:uppercase;display:flex;align-items:center;gap:4px"><i class="ti ti-upload" style="font-size:12px"></i>Unggah Dokumen</div>':''}
+    </div>
+  </div>`).join('')}
+  <button class="fab" onclick="openModal('doc')"><i class="ti ti-plus" style="font-size:22px"></i></button>`;
+}
+
+/* ── VENDOR ── */
+function renderVendor(T){
+  const filtered=state.vendors.filter(v=>!state.vendSearch||v.name.toLowerCase().includes(state.vendSearch.toLowerCase())||v.cat.toLowerCase().includes(state.vendSearch.toLowerCase()));
+  return `
+  <div style="padding:18px 18px 0">
+    <div class="section-head" style="padding:0 0 2px">Direktori<br>Vendor</div>
+    <div class="section-sub" style="padding:4px 0 13px">Kelola daftar rekanan dan biaya untuk hari istimewa Anda.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 14px 13px">
+    <div class="card-sm" style="margin:0"><div style="font-size:10px;color:var(--gray);letter-spacing:.4px;text-transform:uppercase;font-weight:600">Total Vendor</div><div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;margin-top:2px">${state.vendors.length}</div></div>
+    <div class="card-sm" style="margin:0;background:var(--pink-card)"><div style="font-size:10px;color:var(--rose-dark);letter-spacing:.4px;text-transform:uppercase;font-weight:600">Total Biaya</div><div style="font-size:16px;font-weight:700;color:var(--rose-dark);margin-top:4px">${fmt(T.vcost)}</div></div>
+  </div>
+  <div style="margin:0 14px 13px;display:flex;gap:8px">
+    <div class="card-sm" style="flex:1;display:flex;gap:9px;align-items:center">
+      <i class="ti ti-search" style="font-size:17px;color:var(--gray);flex-shrink:0"></i>
+      <input style="border:none;outline:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;width:100%;color:var(--dark)" placeholder="Cari vendor..." value="${state.vendSearch}" oninput="setVendSearch(this.value)">
+    </div>
+    <div class="card-sm" style="display:flex;align-items:center;cursor:pointer" onclick="showToast('Filter aktif')"><i class="ti ti-adjustments-horizontal" style="font-size:18px;color:var(--gray)"></i></div>
+  </div>
+  ${filtered.map(v=>`
+  <div class="card">
+    <div class="vendor-img">
+      <i class="ti ${catIconCls(v.cat)}" style="font-size:38px;color:var(--gray)"></i>
+      <span class="cat-tag">${v.cat}</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+      <div style="flex:1">
+        <div style="font-weight:700;font-size:15px">${v.name}</div>
+        <div style="font-size:12.5px;color:var(--gray);margin-top:2px">${v.desc}</div>
+      </div>
+      <button onclick="toggleVendor(${v.id})" style="width:32px;height:32px;border-radius:50%;background:${v.ok?'var(--teal-light)':'var(--gray-light)'};border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:${v.ok?'var(--teal)':'var(--gray)'};flex-shrink:0">
+        <i class="ti ${v.ok?'ti-circle-check':'ti-circle'}" style="font-size:17px"></i>
+      </button>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)">
+      <div style="font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:6px;margin-bottom:4px"><i class="ti ti-phone" style="font-size:14px"></i>${v.phone}</div>
+      <div style="font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:6px;margin-bottom:8px"><i class="ti ti-mail" style="font-size:14px"></i>${v.email}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:10.5px;color:var(--gray);font-weight:600;letter-spacing:.3px;text-transform:uppercase">Estimasi Biaya</span>
+        <span style="font-size:14px;font-weight:700">${fmt(v.cost)}</span>
+      </div>
+    </div>
+  </div>`).join('')}
+  <button class="fab" onclick="openModal('vendor')"><i class="ti ti-plus" style="font-size:22px"></i></button>`;
+}
+
+/* ── STATE SETTERS ── */
+function setBudFilter(f){state.budFilter=f;renderPage('anggaran')}
+function setSesFilter(f){state.sesFilter=f;renderPage('seserahan')}
+function setGuestSearch(v){state.guestSearch=v;renderPage('tamu')}
+function setVendSearch(v){state.vendSearch=v;renderPage('vendor')}
+function toggleDoc(id){
+  const d=state.documents.find(x=>x.id===id);if(!d)return;
+  d.status=d.status==='Selesai'?'Belum Diurus':d.status==='Belum Diurus'?'Sedang Diproses':'Selesai';
+  renderPage('dokumen');
+}
+function toggleVendor(id){const v=state.vendors.find(x=>x.id===id);if(v){v.ok=!v.ok;renderPage('vendor');}}
+
+/* ── MODAL ── */
+function openModal(type){
+  const ov=document.getElementById('modal-overlay');
+  const mc=document.getElementById('modal-content');
+  ov.classList.add('open');
+  const forms={tx:buildTxForm,ses:buildSesForm,guest:buildGuestForm,doc:buildDocForm,vendor:buildVendorForm};
+  mc.innerHTML='<div class="modal-handle"></div>'+(forms[type]?(forms[type]()):' ');
+}
+function closeModalOnBg(e){if(e.target===e.currentTarget)document.getElementById('modal-overlay').classList.remove('open');}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
+
+/* ── TX FORM ── */
+let txType='out',txStatus='Belum Dibayar';
+function buildTxForm(){
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div class="modal-title">Tambah Anggaran</div>
+    <button class="hicon" onclick="closeModal()"><i class="ti ti-x"></i></button>
+  </div>
+  <span class="field-label">Tipe Transaksi</span>
+  <div style="display:flex;gap:8px;margin-bottom:4px">
+    <span class="pill active" id="tx-out" onclick="setTxTypeUI('out')"><i class="ti ti-arrow-up" style="font-size:12px"></i> Pengeluaran</span>
+    <span class="pill" id="tx-in" onclick="setTxTypeUI('in')"><i class="ti ti-arrow-down" style="font-size:12px"></i> Pemasukan</span>
+  </div>
+  <span class="field-label">Nominal</span>
+  <div style="display:flex;align-items:baseline;gap:7px">
+    <span style="font-size:20px;font-weight:500;color:var(--gray)">Rp</span>
+    <input id="tx-amt" type="number" class="input-field" style="font-size:28px;font-weight:700" placeholder="0">
+  </div>
+  <span class="field-label">Nama Pengeluaran</span>
+  <input id="tx-name" class="input-field" placeholder="Contoh: DP Gedung">
+  <span class="field-label">Kategori</span>
+  <select id="tx-cat" class="input-field">
+    <option value="">Pilih Kategori</option>
+    ${['Katering','Busana','Lokasi','Dekorasi','Perhiasan','Fotografer','Pemasukan','Lainnya'].map(c=>`<option>${c}</option>`).join('')}
+  </select>
+  <span class="field-label">Status Pembayaran</span>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    ${['Belum Dibayar','DP','Lunas'].map(s=>`<span class="pill${s==='Belum Dibayar'?' active':''}" id="txst-${s.replace(/ /g,'_')}" onclick="setTxStatusUI('${s}')">${s}</span>`).join('')}
+  </div>
+  <span class="field-label">Catatan</span>
+  <input id="tx-note" class="input-field" placeholder="Tambahkan detail atau vendor terkait...">
+  <button class="btn-primary" onclick="saveTx()"><i class="ti ti-device-floppy" style="font-size:15px"></i> Simpan Anggaran</button>`;
+}
+function setTxTypeUI(t){txType=t;['out','in'].forEach(x=>{const el=document.getElementById('tx-'+x);if(el)el.className='pill'+(x===t?' active':'');});}
+function setTxStatusUI(s){txStatus=s;['Belum Dibayar','DP','Lunas'].forEach(x=>{const el=document.getElementById('txst-'+x.replace(/ /g,'_'));if(el)el.className='pill'+(x===s?' active':'');});}
+function saveTx(){
+  const name=document.getElementById('tx-name').value.trim();
+  const amt=parseFloat(document.getElementById('tx-amt').value)||0;
+  const cat=document.getElementById('tx-cat').value||'Lainnya';
+  if(!name||!amt){showToast('Isi nama dan nominal terlebih dahulu');return;}
+  state.transactions.unshift({id:Date.now(),name,cat,type:txType,amount:amt,status:txStatus,date:new Date().toISOString().split('T')[0]});
+  closeModal();renderPage('anggaran');showToast('Anggaran berhasil ditambahkan');txType='out';txStatus='Belum Dibayar';
+}
+
+/* ── SES FORM ── */
+let sesParty='Pria',sesStatus='Belum Dibeli';
+function buildSesForm(){
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div class="modal-title">Tambah Seserahan</div>
+    <button class="hicon" onclick="closeModal()"><i class="ti ti-x"></i></button>
+  </div>
+  <p style="font-size:12.5px;color:var(--gray);margin-bottom:4px">Tambahkan detail untuk item seserahan atau mahar.</p>
+  <span class="field-label">Nama Barang</span>
+  <input id="ses-name" class="input-field" placeholder="e.g., Mukena, Perhiasan">
+  <span class="field-label">Kategori</span>
+  <select id="ses-cat" class="input-field">
+    ${['Perhiasan','Perlengkapan Ibadah','Fashion','Perawatan','Mahar','Lainnya'].map(c=>`<option>${c}</option>`).join('')}
+  </select>
+  <span class="field-label">Dari Pihak</span>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    ${['Pria','Wanita','Mahar'].map(p=>`<span class="pill${p==='Pria'?' active':''}" id="sesp-${p}" onclick="setSesPartyUI('${p}')">${p}</span>`).join('')}
+  </div>
+  <span class="field-label">Harga / Estimasi</span>
+  <div style="display:flex;gap:7px;align-items:baseline"><span style="color:var(--gray)">Rp</span><input id="ses-price" type="number" class="input-field" placeholder="0"></div>
+  <span class="field-label">Status</span>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+    ${['Belum Dibeli','Sudah Dibeli','Sudah Dihias'].map(s=>`<div class="rsvp-seg${s==='Belum Dibeli'?' active':''}" id="sess-${s.replace(/ /g,'_')}" onclick="setSesStatusUI('${s}')">${s}</div>`).join('')}
+  </div>
+  <button class="btn-primary" onclick="saveSes()"><i class="ti ti-device-floppy" style="font-size:15px"></i> Simpan Seserahan</button>`;
+}
+function setSesPartyUI(p){sesParty=p;['Pria','Wanita','Mahar'].forEach(x=>{const el=document.getElementById('sesp-'+x);if(el)el.className='pill'+(x===p?' active':'');});}
+function setSesStatusUI(s){sesStatus=s;['Belum Dibeli','Sudah Dibeli','Sudah Dihias'].forEach(x=>{const el=document.getElementById('sess-'+x.replace(/ /g,'_'));if(el)el.className='rsvp-seg'+(x===s?' active':'');});}
+function saveSes(){
+  const name=document.getElementById('ses-name').value.trim();
+  if(!name){showToast('Isi nama barang terlebih dahulu');return;}
+  const cat=document.getElementById('ses-cat').value;
+  const price=parseFloat(document.getElementById('ses-price').value)||0;
+  state.seserahan.push({id:Date.now(),name,cat,party:sesParty,price,status:sesStatus});
+  closeModal();renderPage('seserahan');showToast('Seserahan berhasil ditambahkan');
+  sesParty='Pria';sesStatus='Belum Dibeli';
+}
+
+/* ── GUEST FORM ── */
+let gGroup='Keluarga',gRsvp='Menunggu',gCount=1;
+function buildGuestForm(){
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div class="modal-title">Tambah Tamu</div>
+    <button class="hicon" onclick="closeModal()"><i class="ti ti-x"></i></button>
+  </div>
+  <span class="field-label">Nama Lengkap</span>
+  <input id="g-name" class="input-field" placeholder="Masukkan nama tamu atau keluarga">
+  <span class="field-label">Grup / Hubungan</span>
+  <div style="display:flex;gap:7px;flex-wrap:wrap">
+    ${['Keluarga','Teman','Rekan Kerja','Lainnya'].map(g=>`<span class="pill${g==='Keluarga'?' active':''}" id="gg-${g.replace(/ /g,'_')}" onclick="setGGroupUI('${g}')">${g}</span>`).join('')}
+  </div>
+  <span class="field-label">Kontak (Email / No. HP)</span>
+  <div style="display:flex;gap:9px;align-items:center"><i class="ti ti-mail" style="font-size:17px;color:var(--gray)"></i><input id="g-contact" class="input-field" placeholder="Email atau nomor telepon"></div>
+  <span class="field-label">Jumlah Orang</span>
+  <div style="display:flex;align-items:center;gap:18px;margin:6px 0">
+    <button onclick="adjCountUI(-1)" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray)"><i class="ti ti-minus" style="font-size:14px"></i></button>
+    <span id="g-count-disp" style="font-size:20px;font-weight:700;min-width:24px;text-align:center">1</span>
+    <button onclick="adjCountUI(1)" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--gray)"><i class="ti ti-plus" style="font-size:14px"></i></button>
+  </div>
+  <span class="field-label">Status RSVP</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:6px">
+    <div class="rsvp-seg active" id="rsvp-Menunggu" onclick="setRsvpUI('Menunggu')">Menunggu<br><i class="ti ti-clock" style="font-size:18px;margin-top:4px"></i></div>
+    <div class="rsvp-seg" id="rsvp-Hadir" onclick="setRsvpUI('Hadir')">Hadir<br><i class="ti ti-circle-check" style="font-size:18px;margin-top:4px"></i></div>
+    <div class="rsvp-seg" id="rsvp-Tidak_Hadir" onclick="setRsvpUI('Tidak Hadir')" style="grid-column:1/-1">Tidak Hadir<br><i class="ti ti-circle-x" style="font-size:18px;margin-top:4px"></i></div>
+  </div>
+  <button class="btn-primary" onclick="saveGuest()"><i class="ti ti-user-plus" style="font-size:15px"></i> Simpan Tamu</button>`;
+}
+function setGGroupUI(g){gGroup=g;['Keluarga','Teman','Rekan Kerja','Lainnya'].forEach(x=>{const el=document.getElementById('gg-'+x.replace(/ /g,'_'));if(el)el.className='pill'+(x===g?' active':'');});}
+function setRsvpUI(r){gRsvp=r;['Menunggu','Hadir','Tidak Hadir'].forEach(x=>{const el=document.getElementById('rsvp-'+x.replace(/ /g,'_'));if(el)el.className='rsvp-seg'+(x===r?' active':'');});}
+function adjCountUI(d){gCount=Math.max(1,gCount+d);const el=document.getElementById('g-count-disp');if(el)el.textContent=gCount;}
+function saveGuest(){
+  const name=document.getElementById('g-name').value.trim();
+  if(!name){showToast('Isi nama tamu terlebih dahulu');return;}
+  state.guests.push({id:Date.now(),name,group:gGroup,contact:document.getElementById('g-contact').value,count:gCount,vip:false,rsvp:gRsvp});
+  closeModal();renderPage('tamu');showToast('Tamu berhasil ditambahkan');
+  gCount=1;gGroup='Keluarga';gRsvp='Menunggu';
+}
+
+/* ── DOC FORM ── */
+let docSt='Belum Diurus';
+function buildDocForm(){
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div class="modal-title">Tambah Dokumen</div>
+    <button class="hicon" onclick="closeModal()"><i class="ti ti-x"></i></button>
+  </div>
+  <span class="field-label">Nama Dokumen</span>
+  <input id="doc-name" class="input-field" placeholder="e.g., Surat Pengantar Nikah">
+  <span class="field-label">Deskripsi Singkat</span>
+  <input id="doc-desc" class="input-field" placeholder="Deskripsi persyaratan dokumen">
+  <span class="field-label">Status Dokumen</span>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+    ${['Belum Diurus','Sedang Diproses','Selesai'].map(s=>`<span class="pill${s==='Belum Diurus'?' active':''}" id="ds-${s.replace(/ /g,'_')}" onclick="setDocStUI('${s}')">${s}</span>`).join('')}
+  </div>
+  <span class="field-label">Catatan (Opsional)</span>
+  <textarea id="doc-note" class="input-field" placeholder="Persyaratan khusus, deadline, atau lokasi kantor..."></textarea>
+  <button class="btn-primary" onclick="saveDoc()"><i class="ti ti-device-floppy" style="font-size:15px"></i> Simpan Dokumen</button>`;
+}
+function setDocStUI(s){docSt=s;['Belum Diurus','Sedang Diproses','Selesai'].forEach(x=>{const el=document.getElementById('ds-'+x.replace(/ /g,'_'));if(el)el.className='pill'+(x===s?' active':'');});}
+function saveDoc(){
+  const name=document.getElementById('doc-name').value.trim();
+  if(!name){showToast('Isi nama dokumen terlebih dahulu');return;}
+  state.documents.push({id:Date.now(),name,desc:document.getElementById('doc-desc').value,status:docSt,notes:document.getElementById('doc-note').value});
+  closeModal();renderPage('dokumen');showToast('Dokumen berhasil ditambahkan');docSt='Belum Diurus';
+}
+
+/* ── VENDOR FORM ── */
+function buildVendorForm(){
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <div class="modal-title">Tambah Vendor</div>
+    <button class="hicon" onclick="closeModal()"><i class="ti ti-x"></i></button>
+  </div>
+  <span class="field-label">Nama Vendor</span>
+  <input id="v-name" class="input-field" placeholder="Misal: The Grand Blooming">
+  <span class="field-label">Kategori</span>
+  <select id="v-cat" class="input-field">
+    <option value="">Pilih Kategori</option>
+    ${['Katering','Dekorasi','Fotografer','Busana','Cincin','Lokasi','Hiburan','Lainnya'].map(c=>`<option>${c}</option>`).join('')}
+  </select>
+  <span class="field-label">Deskripsi Layanan</span>
+  <input id="v-desc" class="input-field" placeholder="Paket atau layanan yang ditawarkan">
+  <span class="field-label">No. Telepon / WhatsApp</span>
+  <div style="display:flex;gap:9px;align-items:center"><i class="ti ti-phone" style="font-size:17px;color:var(--gray)"></i><input id="v-phone" class="input-field" placeholder="+62 812 3456 7890"></div>
+  <span class="field-label">Email</span>
+  <div style="display:flex;gap:9px;align-items:center"><i class="ti ti-mail" style="font-size:17px;color:var(--gray)"></i><input id="v-email" class="input-field" type="email" placeholder="hello@vendor.com"></div>
+  <span class="field-label">Estimasi Biaya (Rp)</span>
+  <div style="display:flex;gap:7px;align-items:baseline"><span style="color:var(--gray)">Rp</span><input id="v-cost" class="input-field" type="number" placeholder="0"></div>
+  <span class="field-label">Catatan Tambahan</span>
+  <input id="v-note" class="input-field" placeholder="Informasi detail paket atau kontak person...">
+  <button class="btn-primary" onclick="saveVendor()"><i class="ti ti-device-floppy" style="font-size:15px"></i> Simpan Vendor</button>`;
+}
+function saveVendor(){
+  const name=document.getElementById('v-name').value.trim();
+  if(!name){showToast('Isi nama vendor terlebih dahulu');return;}
+  state.vendors.push({id:Date.now(),name,cat:document.getElementById('v-cat').value||'Lainnya',desc:document.getElementById('v-desc').value,phone:document.getElementById('v-phone').value,email:document.getElementById('v-email').value,cost:parseFloat(document.getElementById('v-cost').value)||0,ok:false});
+  closeModal();renderPage('vendor');showToast('Vendor berhasil ditambahkan');
+}
+
+/* ── PROFILE / SUBPAGE ── */
+let selectedTheme=null;
+function goProfile(){openSubpage('main');}
+function openSubpage(sub){
+  const sp=document.getElementById('subpage-container');
+  sp.classList.add('open');
+  const pages={main:buildProfileMain,detail:buildDetailPage,security:buildSecurityPage,notif:buildNotifPage,bantuan:buildBantuanPage};
+  sp.innerHTML=pages[sub]?pages[sub]():'';
+}
+function closeSubpage(){document.getElementById('subpage-container').classList.remove('open');}
+
+function buildProfileMain(){
+  const d=new Date(state.couple.date);
+  const days=Math.max(0,Math.ceil((d-new Date())/(1000*60*60*24)));
+  return `
+  <div class="back-header">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--teal);font-style:italic;font-weight:600">Union & Grace</span>
+    <div style="margin-left:auto;display:flex;gap:6px">
+      <button class="hicon" onclick="showToast('Tidak ada notifikasi')"><i class="ti ti-bell"></i></button>
+      <button class="hicon"><i class="ti ti-user-circle"></i></button>
+    </div>
+  </div>
+  <div class="couple-card">
+    <div class="avatar"><i class="ti ti-heart-handshake"></i></div>
+    <div class="couple-name">${state.couple.p1} &amp; ${state.couple.p2}</div>
+    <div class="couple-date">${new Date(state.couple.date).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
+    <div class="days-pill">
+      <div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase">Menuju Hari Bahagia</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-top:2px">${days} <span style="font-size:14px;font-weight:400">Hari</span></div>
+    </div>
+  </div>
+  <div style="padding:0 18px 20px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:14px">Pengaturan</div>
+    <div class="setting-row" onclick="">
+      <div class="setting-icon" style="background:#E8EDF5"><i class="ti ti-moon" style="color:#4A6FA5"></i></div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:500">Mode Gelap</div></div>
+      <button class="toggle-sw" style="background:${state.darkMode?'var(--teal)':'var(--border)'}" onclick="toggleDarkMode(this)">
+        <div class="knob" style="left:${state.darkMode?'23px':'3px'}"></div>
+      </button>
+    </div>
+    <div class="setting-row" onclick="openSubpage('detail')" style="cursor:pointer">
+      <div class="setting-icon" style="background:var(--pink-bg)"><i class="ti ti-heart" style="color:var(--rose)"></i></div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:500">Detail Pernikahan</div></div>
+      <i class="ti ti-chevron-right" style="color:var(--gray);font-size:16px"></i>
+    </div>
+    <div class="setting-row" onclick="openSubpage('security')" style="cursor:pointer">
+      <div class="setting-icon" style="background:var(--teal-light)"><i class="ti ti-shield-check" style="color:var(--teal)"></i></div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:500">Keamanan Akun</div></div>
+      <i class="ti ti-chevron-right" style="color:var(--gray);font-size:16px"></i>
+    </div>
+    <div class="setting-row" onclick="showToast('Bahasa: Bahasa Indonesia')" style="cursor:pointer">
+      <div class="setting-icon" style="background:var(--gray-light)"><i class="ti ti-world" style="color:var(--gray)"></i></div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:500">Bahasa</div><div style="font-size:12px;color:var(--gray)">Bahasa Indonesia</div></div>
+      <i class="ti ti-chevron-right" style="color:var(--gray);font-size:16px"></i>
+    </div>
+    <div class="setting-row" onclick="openSubpage('notif')" style="cursor:pointer">
+      <div class="setting-icon" style="background:var(--amber-bg)"><i class="ti ti-bell" style="color:var(--amber)"></i></div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:500">Notifikasi</div></div>
+      <i class="ti ti-chevron-right" style="color:var(--gray);font-size:16px"></i>
+    </div>
+    <div class="setting-row" onclick="openSubpage('bantuan')" style="cursor:pointer">
+      <div class="setting-icon" style="background:var(--gray-light)"><i class="ti ti-help-circle" style="color:var(--gray)"></i></div>
+      <div style="flex:1"><div style="font-size:14px;font-weight:500">Bantuan & Dukungan</div></div>
+      <i class="ti ti-chevron-right" style="color:var(--gray);font-size:16px"></i>
+    </div>
+    <button class="btn-outline-danger" onclick="closeSubpage()">
+      <i class="ti ti-logout" style="font-size:16px"></i> Keluar
+    </button>
+  </div>`;
+}
+function toggleDarkMode(btn){
+  state.darkMode=!state.darkMode;
+  btn.style.background=state.darkMode?'var(--teal)':'var(--border)';
+  btn.querySelector('.knob').style.left=state.darkMode?'23px':'3px';
+  showToast(state.darkMode?'Mode gelap aktif':'Mode gelap nonaktif');
+}
+
+function buildDetailPage(){
+  return `
+  <div class="back-header">
+    <button class="back-btn" onclick="openSubpage('main')"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--rose)">Detail Pernikahan</span>
+  </div>
+  <div style="padding:18px 18px 32px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;margin-bottom:3px">Edit Details</div>
+    <div style="font-size:13px;color:var(--gray);margin-bottom:16px">Perbarui informasi dasar untuk hari istimewa Anda.</div>
+    <div style="height:130px;background:linear-gradient(135deg,#F9E4EE,#DFF0EB);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative">
+      <i class="ti ti-flower" style="font-size:44px;color:var(--rose-mid);opacity:.5"></i>
+      <div style="position:absolute;bottom:10px;left:12px;background:rgba(255,255,255,.88);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--gray);cursor:pointer;display:flex;align-items:center;gap:5px"><i class="ti ti-pencil" style="font-size:13px"></i>Edit Cover</div>
+    </div>
+    <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:16px">
+      <div style="font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.7px;text-transform:uppercase;margin-bottom:10px">Pasangan</div>
+      <div style="font-size:11.5px;color:var(--gray);margin-bottom:4px">Partner 1</div>
+      <input id="dp1" class="input-field" value="${state.couple.p1}">
+      <div style="font-size:11.5px;color:var(--gray);margin-bottom:4px;margin-top:12px">Partner 2</div>
+      <input id="dp2" class="input-field" value="${state.couple.p2}">
+      <div style="font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.7px;text-transform:uppercase;margin-top:16px;margin-bottom:6px">Tanggal Pernikahan</div>
+      <input id="ddate" type="date" class="input-field" value="${state.couple.date}">
+      <div style="font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.7px;text-transform:uppercase;margin-top:16px;margin-bottom:3px">Lokasi</div>
+      <div style="font-size:11.5px;color:var(--gray);margin-bottom:4px">Nama Venue & Kota</div>
+      <input id="dvenue" class="input-field" value="${state.couple.venue}">
+      <div style="font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.7px;text-transform:uppercase;margin-top:16px;margin-bottom:8px">Tema</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap">
+        ${['Ethereal Minimal','Classic Romance','Modern Chic'].map(t=>`<span class="pill${state.couple.theme===t?' active':''}" id="theme-${t.replace(/ /g,'_')}" onclick="setThemeUI('${t}')">${t}</span>`).join('')}
+      </div>
+    </div>
+    <button class="btn-primary" onclick="saveDetail()"><i class="ti ti-circle-check" style="font-size:16px"></i> Simpan Detail</button>
+  </div>`;
+}
+function setThemeUI(t){selectedTheme=t;['Ethereal Minimal','Classic Romance','Modern Chic'].forEach(x=>{const el=document.getElementById('theme-'+x.replace(/ /g,'_'));if(el)el.className='pill'+(x===t?' active':'');});}
+function saveDetail(){
+  state.couple.p1=document.getElementById('dp1').value||state.couple.p1;
+  state.couple.p2=document.getElementById('dp2').value||state.couple.p2;
+  state.couple.date=document.getElementById('ddate').value||state.couple.date;
+  state.couple.venue=document.getElementById('dvenue').value||state.couple.venue;
+  if(selectedTheme)state.couple.theme=selectedTheme;
+  selectedTheme=null;
+  openSubpage('main');renderPage(currentTab);showToast('Detail berhasil disimpan');
+}
+
+function buildSecurityPage(){
+  let twofa=false;
+  return `
+  <div class="back-header">
+    <button class="back-btn" onclick="openSubpage('main')"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--rose)">Keamanan Akun</span>
+  </div>
+  <div style="padding:16px 18px">
+    <p style="font-size:13px;color:var(--gray);text-align:center;margin-bottom:18px">Kelola kata sandi dan amankan akses ke perencanaan pernikahan Anda.</p>
+    <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:13px">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:14px"><i class="ti ti-lock" style="font-size:18px;color:var(--rose)"></i>Ubah Kata Sandi</div>
+      ${['Kata Sandi Saat Ini','Kata Sandi Baru','Konfirmasi Kata Sandi'].map(l=>`<span class="field-label">${l.toUpperCase()}</span><input type="password" class="input-field" value="••••••••">`).join('')}
+      <button style="width:100%;background:linear-gradient(135deg,var(--rose-light),var(--teal-light));color:var(--teal-dark);border:none;border-radius:50px;padding:12px;font-family:'DM Sans',sans-serif;font-size:13.5px;cursor:pointer;font-weight:600;margin-top:14px;letter-spacing:.2px" onclick="showToast('Kata sandi berhasil diperbarui')">Simpan Perubahan</button>
+    </div>
+    <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:13px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:5px"><i class="ti ti-shield-check" style="font-size:18px;color:var(--teal)"></i>Autentikasi 2 Langkah</div>
+          <div style="font-size:12.5px;color:var(--gray)">Tambahkan lapisan keamanan ekstra dengan meminta kode login dari perangkat Anda.</div>
+        </div>
+        <button class="toggle-sw" style="background:var(--border);margin-top:3px" id="twofa-sw" onclick="toggleTwofa(this)">
+          <div class="knob" style="left:3px"></div>
+        </button>
+      </div>
+    </div>
+    <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:14px"><i class="ti ti-devices" style="font-size:18px;color:var(--gray)"></i>Perangkat Terhubung</div>
+      ${[{name:'iPhone 14 Pro',info:'Aktif sekarang · Jakarta',icon:'ti-device-mobile',active:true},{name:'MacBook Air',info:'Kemarin 14:20 · Bandung',icon:'ti-device-laptop',active:false}].map((d,i)=>`
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;${i===0?'border-bottom:1px solid var(--border-light)':''}">
+        <div style="width:40px;height:40px;border-radius:12px;background:${d.active?'var(--teal-light)':'var(--gray-light)'};display:flex;align-items:center;justify-content:center">
+          <i class="ti ${d.icon}" style="font-size:20px;color:${d.active?'var(--teal)':'var(--gray)'}"></i>
+        </div>
+        <div style="flex:1"><div style="font-weight:600;font-size:14px">${d.name}</div><div style="font-size:12px;color:var(--gray)">${d.info}</div></div>
+        ${!d.active?'<button onclick="showToast(\'Perangkat berhasil dikeluarkan\')" style="font-size:12px;font-weight:700;color:var(--danger);background:none;border:none;cursor:pointer;font-family:\'DM Sans\',sans-serif;text-transform:uppercase;letter-spacing:.3px">Logout</button>':''}
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+function toggleTwofa(btn){
+  const isOn=btn.style.background.includes('teal');
+  btn.style.background=isOn?'var(--border)':'var(--teal)';
+  btn.querySelector('.knob').style.left=isOn?'3px':'23px';
+  showToast(isOn?'Autentikasi 2 langkah dinonaktifkan':'Autentikasi 2 langkah diaktifkan');
+}
+
+function buildNotifPage(){
+  const sections=[
+    {icon:'ti-report-money',label:'Pengingat Anggaran',color:'#E8EDF5',ic:'#4A6FA5',eKey:'budgEmail',pKey:'budgPush'},
+    {icon:'ti-users',label:'Pembaruan RSVP Tamu',color:'var(--teal-light)',ic:'var(--teal)',eKey:'rsvpEmail',pKey:'rsvpPush'},
+    {icon:'ti-file-check',label:'Pengingat Dokumen',color:'var(--pink-bg)',ic:'var(--rose)',eKey:'docEmail',pKey:'docPush'},
+    {icon:'ti-building-store',label:'Berita Vendor',color:'var(--amber-bg)',ic:'var(--amber)',eKey:'vendEmail',pKey:'vendPush'},
+  ];
+  return `
+  <div class="back-header">
+    <button class="back-btn" onclick="openSubpage('main')"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--rose)">Notifikasi</span>
+  </div>
+  <div style="padding:14px 18px 0;font-size:13px;color:var(--gray);margin-bottom:4px">Pilih cara Anda menerima pembaruan perjalanan pernikahan.</div>
+  <div style="padding:10px 18px 28px">
+    ${sections.map(sec=>`
+    <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;margin-bottom:13px">
+        <div style="width:32px;height:32px;border-radius:10px;background:${sec.color};display:flex;align-items:center;justify-content:center">
+          <i class="ti ${sec.icon}" style="font-size:16px;color:${sec.ic}"></i>
+        </div>${sec.label}
+      </div>
+      ${[['Email',sec.eKey],['Notifikasi Push',sec.pKey]].map(([lbl,key])=>`
+      <div class="notif-row">
+        <span style="font-size:14px">${lbl}</span>
+        <button class="toggle-sw" style="background:${state.notif[key]?'var(--rose)':'var(--border)'}" onclick="toggleNotif('${key}',this)">
+          <div class="knob" style="left:${state.notif[key]?'23px':'3px'}"></div>
+        </button>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div>`;
+}
+function toggleNotif(key,btn){
+  state.notif[key]=!state.notif[key];
+  btn.style.background=state.notif[key]?'var(--rose)':'var(--border)';
+  btn.querySelector('.knob').style.left=state.notif[key]?'23px':'3px';
+}
+
+function buildBantuanPage(){
+  const topics=[
+    {icon:'ti-report-money',color:'#E8EDF5',ic:'#4A6FA5',title:'Budgeting',items:['Cara mengatur persentase anggaran','Menambahkan pengeluaran tak terduga']},
+    {icon:'ti-users',color:'var(--teal-light)',ic:'var(--teal)',title:'Guest List',items:['Format Excel untuk import daftar tamu','Melacak status RSVP tamu']},
+    {icon:'ti-building-store',color:'var(--amber-bg)',ic:'var(--amber)',title:'Vendors',items:['Menyimpan kontak dan kontrak vendor']},
+  ];
+  return `
+  <div class="back-header">
+    <button class="back-btn" onclick="openSubpage('main')"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:700;color:var(--rose)">Bantuan & Dukungan</span>
+  </div>
+  <div style="padding:18px 18px 28px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;margin-bottom:14px;line-height:1.1">Halo, ada yang<br>bisa kami bantu?</div>
+    <div style="background:var(--white);border-radius:12px;padding:11px 14px;border:1px solid var(--border);display:flex;gap:9px;align-items:center;margin-bottom:16px">
+      <i class="ti ti-search" style="font-size:17px;color:var(--gray);flex-shrink:0"></i>
+      <input style="border:none;outline:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13.5px;width:100%;color:var(--dark)" placeholder="Cari artikel atau topik bantuan...">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+      <div style="background:var(--white);border-radius:14px;padding:16px;border:1px solid var(--border);text-align:center;cursor:pointer" onclick="showToast('Menghubungi admin WhatsApp...')">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--pink-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 9px">
+          <i class="ti ti-brand-whatsapp" style="font-size:24px;color:var(--rose)"></i>
+        </div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--dark)">Chat Admin via WhatsApp</div>
+      </div>
+      <div style="background:var(--white);border-radius:14px;padding:16px;border:1px solid var(--border);text-align:center;cursor:pointer" onclick="showToast('Membuka video tutorial...')">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--teal-light);display:flex;align-items:center;justify-content:center;margin:0 auto 9px">
+          <i class="ti ti-player-play" style="font-size:24px;color:var(--teal)"></i>
+        </div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--dark)">Video Tutorial Penggunaan</div>
+      </div>
+    </div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;margin-bottom:12px;color:var(--rose)">Topik Populer</div>
+    ${topics.map(t=>`
+    <div class="help-topic-card">
+      <div class="help-topic-head">
+        <div style="width:28px;height:28px;border-radius:8px;background:${t.color};display:flex;align-items:center;justify-content:center">
+          <i class="ti ${t.icon}" style="font-size:15px;color:${t.ic}"></i>
+        </div>${t.title}
+      </div>
+      ${t.items.map(item=>`
+      <div class="help-topic-item" onclick="showToast('Membuka artikel: ${item}')">
+        ${item}<i class="ti ti-chevron-right" style="font-size:15px;color:var(--gray)"></i>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div>`;
+}
+
+/* ── INIT ── */
+renderPage('ringkasan');
+</script>
+</body>
+</html>
