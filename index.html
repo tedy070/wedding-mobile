@@ -121,6 +121,35 @@ textarea.input-field:focus{border-color:var(--teal)}
 .help-topic-item:hover{background:var(--cream)}
 .edit-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray);flex-shrink:0;transition:all .18s}
 .edit-btn:hover{background:var(--teal-light);border-color:var(--teal);color:var(--teal)}
+/* ── Category Picker ── */
+.cat-picker-overlay{position:fixed;inset:0;background:rgba(30,15,10,.55);z-index:300;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+.cat-picker-sheet{background:var(--cream);border-radius:24px 24px 0 0;padding:20px 16px 36px;width:100%;max-width:480px;max-height:88vh;overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none}
+.cat-picker-sheet::-webkit-scrollbar{display:none}
+.cat-picker-handle{width:40px;height:4px;background:var(--border);border-radius:4px;margin:0 auto 16px}
+.cat-picker-title{font-size:10px;font-weight:700;color:var(--teal);letter-spacing:.8px;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.cat-picker-head{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.cat-picker-sub{font-size:12.5px;color:var(--gray);margin-bottom:16px}
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.cat-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:14px 12px 12px;cursor:pointer;transition:all .18s;display:flex;flex-direction:column;gap:8px;position:relative}
+.cat-card:hover{border-color:var(--rose-mid);transform:translateY(-1px);box-shadow:0 4px 14px rgba(125,60,82,.1)}
+.cat-card.selected{border-color:var(--rose);background:var(--pink-bg);box-shadow:0 4px 14px rgba(125,60,82,.15)}
+.cat-card.selected::after{content:'✓';position:absolute;top:8px;right:10px;font-size:11px;font-weight:700;color:var(--rose);background:var(--rose-light);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px}
+.cat-icon-wrap{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-icon-wrap i{font-size:22px}
+.cat-name{font-weight:700;font-size:13.5px;color:var(--dark);line-height:1.2}
+.cat-sub{font-size:10px;font-weight:600;color:var(--gray);letter-spacing:.4px;text-transform:uppercase;margin-top:1px}
+.cat-confirm-bar{position:sticky;bottom:0;background:var(--cream);padding:12px 0 0;margin-top:4px}
+.cat-confirm-btn{width:100%;background:linear-gradient(135deg,var(--rose-dark),var(--teal-dark));color:#fff;border:none;border-radius:50px;padding:14px;font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.3px;transition:opacity .2s}
+.cat-confirm-btn:hover{opacity:.9}
+.cat-selected-label{text-align:center;font-size:10.5px;color:var(--gray);letter-spacing:.5px;text-transform:uppercase;margin-top:8px}
+/* Cat trigger button */
+.cat-trigger{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:11px 14px;background:var(--white);display:flex;align-items:center;gap:10px;cursor:pointer;transition:all .2s;margin-top:6px}
+.cat-trigger:hover{border-color:var(--teal)}
+.cat-trigger-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cat-trigger-icon i{font-size:17px}
+.cat-trigger-text{flex:1;text-align:left}
+.cat-trigger-name{font-size:14px;font-weight:600;color:var(--dark)}
+.cat-trigger-hint{font-size:11px;color:var(--gray);margin-top:1px}
 </style>
 </head>
 <body>
@@ -226,13 +255,22 @@ function bindMoney(id){
 }
 
 const CAT_ICON={
-  'Katering':'ti-tools-kitchen-2','Busana':'ti-hanger','Lokasi':'ti-building',
+  'Katering':'ti-tools-kitchen-2','Busana':'ti-shirt','Lokasi':'ti-building',
   'Dekorasi':'ti-flower','Perhiasan':'ti-diamond','Fotografer':'ti-camera',
-  'Cincin':'ti-ring','Pemasukan':'ti-wallet','Mahar':'ti-diamond',
+  'Cincin':'ti-ring','Pemasukan':'ti-wallet','Mahar':'ti-ring',
   'Fashion':'ti-shopping-bag','Perlengkapan Ibadah':'ti-star',
-  'Perawatan':'ti-leaf','Lainnya':'ti-box','Hiburan':'ti-music'
+  'Perawatan':'ti-leaf','Lainnya':'ti-box','Hiburan':'ti-music',
+  'Tabungan':'ti-piggy-bank','Adm. Dokumen':'ti-file-certificate',
+  'Prayer Set':'ti-star','Toiletries':'ti-droplet','Skincare':'ti-sparkles',
+  'Make Up':'ti-palette','Clothes':'ti-hanger','Underwear':'ti-heart',
+  'Aksesoris':'ti-diamond','Souvenir':'ti-gift','Undangan':'ti-mail-opened',
+  'Catering':'ti-tools-kitchen-2','Lain-Lain':'ti-box',
 };
-const catIcon=c=>CAT_ICON[c]||'ti-box';
+// catIcon resolves at call-time so CATS is already defined
+const catIcon=c=>{
+  const m=(typeof CATS!=='undefined')&&CATS.find(x=>x.id===c);
+  return m?m.icon:(CAT_ICON[c]||'ti-box');
+};
 
 const STATUS_CLS={
   'Siap':'badge-green','Sudah Dibeli':'badge-green','Sudah Dihias':'badge-green',
@@ -611,12 +649,122 @@ function delItem(type,id){
   closeModal();renderPage(currentTab);showToast('Item berhasil dihapus');
 }
 
+/* ━━━━━━━━━━━━━━━━ CATEGORIES DATA ━━━━━━━━━━━━━━━━ */
+const CATS=[
+  {id:'Tabungan',       name:'Tabungan',           sub:'Dana Pernikahan',     icon:'ti-piggy-bank',   bg:'#EEF3FB', ic:'#4A6FA5'},
+  {id:'Adm. Dokumen',   name:'Administrasi Dokumen',sub:'KUA & Legalitas',    icon:'ti-file-certificate',bg:'#F0F7F4',ic:'#2A7A5C'},
+  {id:'Prayer Set',     name:'Prayer Set',          sub:'Perlengkapan Ibadah', icon:'ti-star',         bg:'#FEF3E2', ic:'#8B5E1A'},
+  {id:'Toiletries',     name:'Toiletries',          sub:'Perlengkapan Mandi',  icon:'ti-droplet',      bg:'#EAF5FE', ic:'#1A6FA5'},
+  {id:'Skincare',       name:'Skincare',            sub:'Perawatan Kulit',     icon:'ti-sparkles',     bg:'#FDE8F2', ic:'#7D3C52'},
+  {id:'Make Up',        name:'Make Up',             sub:'Riasan Pengantin',    icon:'ti-palette',      bg:'#FFF0F8', ic:'#C0637D'},
+  {id:'Clothes',        name:'Clothes',             sub:'Pakaian & Busana',    icon:'ti-hanger',       bg:'#F5F0FE', ic:'#6A3AAF'},
+  {id:'Underwear',      name:'Underwear',           sub:'Pakaian Dalam',       icon:'ti-heart',        bg:'#FDE8F2', ic:'#7D3C52'},
+  {id:'Aksesoris',      name:'Aksesoris',           sub:'Perhiasan & Aksesori',icon:'ti-diamond',      bg:'#FFFAEB', ic:'#9B6B0A'},
+  {id:'Mahar',          name:'Mahar',               sub:'Maskawin',            icon:'ti-ring',         bg:'#FEF3E2', ic:'#8B5E1A'},
+  {id:'Souvenir',       name:'Souvenir',            sub:'Kenangan Tamu',       icon:'ti-gift',         bg:'#F0F7F4', ic:'#2A7A5C'},
+  {id:'Undangan',       name:'Invitation',          sub:'Undangan Pernikahan', icon:'ti-mail-opened',  bg:'#EEF3FB', ic:'#4A6FA5'},
+  {id:'Dekorasi',       name:'Dekorasi',            sub:'Hiasan & Venue',      icon:'ti-flower',       bg:'#FFF0F8', ic:'#C0637D'},
+  {id:'Fotografer',     name:'Fotografer',          sub:'Foto & Video',        icon:'ti-camera',       bg:'#F5F0FE', ic:'#6A3AAF'},
+  {id:'Catering',       name:'Catering',            sub:'Makanan & Minuman',   icon:'ti-tools-kitchen-2',bg:'#FEF3E2',ic:'#8B5E1A'},
+  {id:'Busana',         name:'Busana',              sub:'Gaun & Jas Pengantin',icon:'ti-shirt',        bg:'#F0F7F4', ic:'#2A7A5C'},
+  {id:'Lain-Lain',      name:'Lain-Lain',           sub:'Kategori Lainnya',    icon:'ti-box',          bg:'#F0EBE6', ic:'#6B6460'},
+];
+
+const CAT_MAP=Object.fromEntries(CATS.map(c=>[c.id,c]));
+function getCatMeta(id){return CAT_MAP[id]||CATS[CATS.length-1];}
+
+/* ── CATEGORY PICKER ENGINE ── */
+let pickerActive=false,pickerSel='',pickerCallback=null,pickerCtx='';
+
+function openCatPicker(currentCat,callback,ctx){
+  pickerSel=currentCat||'';pickerCallback=callback;pickerCtx=ctx||'';
+  const el=document.createElement('div');
+  el.className='cat-picker-overlay';el.id='cat-picker-overlay';
+  el.onclick=function(e){if(e.target===el)closeCatPicker();};
+  el.innerHTML=buildPickerHTML();
+  document.body.appendChild(el);
+}
+function closeCatPicker(){
+  const el=document.getElementById('cat-picker-overlay');
+  if(el)el.remove();
+}
+function selectPickerCat(id){
+  pickerSel=id;
+  document.querySelectorAll('.cat-card').forEach(c=>{
+    c.classList.toggle('selected',c.dataset.id===id);
+  });
+  const lbl=document.getElementById('cp-sel-lbl');
+  if(lbl)lbl.textContent='DIPILIH: '+id.toUpperCase();
+}
+function confirmCatPicker(){
+  if(!pickerSel){showToast('Pilih kategori terlebih dahulu');return;}
+  if(pickerCallback)pickerCallback(pickerSel);
+  closeCatPicker();
+  // update trigger button in form
+  updateCatTrigger(pickerCtx,pickerSel);
+}
+function updateCatTrigger(ctx,catId){
+  const btn=document.getElementById('cat-trigger-'+ctx);
+  if(!btn)return;
+  const m=getCatMeta(catId);
+  btn.querySelector('.cat-trigger-icon').style.background=m.bg;
+  btn.querySelector('.cat-trigger-icon i').className='ti '+m.icon;
+  btn.querySelector('.cat-trigger-icon i').style.color=m.ic;
+  btn.querySelector('.cat-trigger-name').textContent=m.name;
+  btn.querySelector('.cat-trigger-hint').textContent=m.sub;
+  const hid=document.getElementById('cat-hid-'+ctx);
+  if(hid)hid.value=catId;
+}
+function buildPickerHTML(){
+  return `
+  <div class="cat-picker-sheet">
+    <div class="cat-picker-handle"></div>
+    <div class="cat-picker-title"><i class="ti ti-plus-circle" style="font-size:14px"></i>Pilih Kategori</div>
+    <div class="cat-picker-head">Pilih <span style="color:var(--rose);font-style:italic">Kategori</span></div>
+    <div class="cat-picker-sub">Ke mana anggaran ini dialokasikan?</div>
+    <div class="cat-grid">
+      ${CATS.map(c=>`
+      <div class="cat-card${pickerSel===c.id?' selected':''}" data-id="${c.id}" onclick="selectPickerCat('${c.id}')">
+        <div class="cat-icon-wrap" style="background:${c.bg}">
+          <i class="ti ${c.icon}" style="color:${c.ic}"></i>
+        </div>
+        <div>
+          <div class="cat-name">${c.name}</div>
+          <div class="cat-sub">${c.sub}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+    <div class="cat-confirm-bar">
+      <button class="cat-confirm-btn" onclick="confirmCatPicker()">
+        <i class="ti ti-circle-check" style="font-size:17px"></i>Konfirmasi Pilihan &nbsp;→
+      </button>
+      <div class="cat-selected-label" id="cp-sel-lbl">${pickerSel?'DIPILIH: '+pickerSel.toUpperCase():'SELECTED: 0 CATEGORY'}</div>
+    </div>
+  </div>`;
+}
+
+function catTriggerHTML(ctx,currentCat){
+  const m=getCatMeta(currentCat||'');
+  const hasCat=!!currentCat;
+  return `
+  <input type="hidden" id="cat-hid-${ctx}" value="${currentCat||''}">
+  <button type="button" class="cat-trigger" id="cat-trigger-${ctx}" onclick="openCatPicker(document.getElementById('cat-hid-${ctx}').value,function(v){document.getElementById('cat-hid-${ctx}').value=v;updateCatTrigger('${ctx}',v);},'${ctx}')">
+    <div class="cat-trigger-icon" style="background:${hasCat?m.bg:'var(--gray-light)'}">
+      <i class="ti ${hasCat?m.icon:'ti-layout-grid-add'}" style="color:${hasCat?m.ic:'var(--gray)'}"></i>
+    </div>
+    <div class="cat-trigger-text">
+      <div class="cat-trigger-name">${hasCat?m.name:'Pilih Kategori'}</div>
+      <div class="cat-trigger-hint">${hasCat?m.sub:'Tap untuk memilih kategori'}</div>
+    </div>
+    <i class="ti ti-chevron-right" style="font-size:15px;color:var(--gray)"></i>
+  </button>`;
+}
+
 /* ━━━━━━━━━━━━━━━━ TX FORM ━━━━━━━━━━━━━━━━ */
 function buildTxForm(id){
   const ex=id?S.transactions.find(x=>x.id===id):null;
   if(ex){txType=ex.type;txStatus=ex.status||'Belum Dibayar';}else{txType='out';txStatus='Belum Dibayar';}
   const isEdit=!!ex;
-  const cats=['Katering','Busana','Lokasi','Dekorasi','Perhiasan','Fotografer','Pemasukan','Lainnya'];
   return `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
     <div class="modal-title">${isEdit?'Edit':'Tambah'} Anggaran</div>
@@ -635,9 +783,7 @@ function buildTxForm(id){
   <span class="field-label">Nama</span>
   <input id="m-tx-name" class="input-field" placeholder="Contoh: DP Gedung" value="${ex?ex.name:''}">
   <span class="field-label">Kategori</span>
-  <select id="m-tx-cat" class="input-field">
-    ${cats.map(c=>`<option${ex&&ex.cat===c?' selected':''}>${c}</option>`).join('')}
-  </select>
+  ${catTriggerHTML('tx',ex?ex.cat:'')}
   <span class="field-label">Status Pembayaran</span>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     ${['Belum Dibayar','DP','Lunas'].map((s,i)=>`<span class="pill${txStatus===s?' active':''}" id="txs${i}" onclick="txStatus='${s}';['txs0','txs1','txs2'].forEach((x,j)=>{const e=document.getElementById(x);if(e)e.className='pill'+(j===${i}?' active':'');})">${s}</span>`).join('')}
@@ -654,7 +800,7 @@ function setActivePill(onId,offId){
 function saveTx(id){
   const name=(document.getElementById('m-tx-name').value||'').trim();
   const amt=parseMoney(document.getElementById('m-tx-amt').value);
-  const cat=document.getElementById('m-tx-cat').value||'Lainnya';
+  const cat=document.getElementById('cat-hid-tx').value||'Lain-Lain';
   const notes=(document.getElementById('m-tx-notes').value||'');
   if(!name||!amt){showToast('Isi nama dan nominal terlebih dahulu');return;}
   if(id){
@@ -673,7 +819,6 @@ function buildSesForm(id){
   const ex=id?S.seserahan.find(x=>x.id===id):null;
   if(ex){sesParty=ex.party;sesStatus=ex.status;}else{sesParty='Pria';sesStatus='Belum Dibeli';}
   const isEdit=!!ex;
-  const cats=['Perhiasan','Perlengkapan Ibadah','Fashion','Perawatan','Mahar','Lainnya'];
   const statuses=['Belum Dibeli','Sedang Dikemas','Sudah Dibeli','Sudah Dihias','Siap'];
   return `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
@@ -683,9 +828,7 @@ function buildSesForm(id){
   <span class="field-label">Nama Barang</span>
   <input id="m-ses-name" class="input-field" placeholder="e.g., Mukena, Perhiasan" value="${ex?ex.name:''}">
   <span class="field-label">Kategori</span>
-  <select id="m-ses-cat" class="input-field">
-    ${cats.map(c=>`<option${ex&&ex.cat===c?' selected':''}>${c}</option>`).join('')}
-  </select>
+  ${catTriggerHTML('ses',ex?ex.cat:'')}
   <span class="field-label">Dari Pihak</span>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     ${['Pria','Wanita','Mahar'].map(p=>`<span class="pill${sesParty===p?' active':''}" id="sp-${p}" onclick="sesParty='${p}';['Pria','Wanita','Mahar'].forEach(x=>{const e=document.getElementById('sp-'+x);if(e)e.className='pill'+(x==='${p}'?' active':'');})">${p}</span>`).join('')}
@@ -705,7 +848,7 @@ function buildSesForm(id){
 function saveSes(id){
   const name=(document.getElementById('m-ses-name').value||'').trim();
   if(!name){showToast('Isi nama barang terlebih dahulu');return;}
-  const cat=document.getElementById('m-ses-cat').value;
+  const cat=document.getElementById('cat-hid-ses').value||'Lain-Lain';
   const price=parseMoney(document.getElementById('m-ses-price').value);
   if(id){
     const item=S.seserahan.find(x=>x.id===id);
@@ -820,7 +963,6 @@ function buildVendorForm(id){
   const ex=id?S.vendors.find(x=>x.id===id):null;
   if(ex)vOk=ex.ok;else vOk=false;
   const isEdit=!!ex;
-  const cats=['Katering','Dekorasi','Fotografer','Busana','Cincin','Lokasi','Hiburan','Lainnya'];
   return `
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
     <div class="modal-title">${isEdit?'Edit':'Tambah'} Vendor</div>
@@ -829,9 +971,7 @@ function buildVendorForm(id){
   <span class="field-label">Nama Vendor</span>
   <input id="m-v-name" class="input-field" placeholder="Misal: The Grand Blooming" value="${ex?ex.name:''}">
   <span class="field-label">Kategori</span>
-  <select id="m-v-cat" class="input-field">
-    ${cats.map(c=>`<option${ex&&ex.cat===c?' selected':''}>${c}</option>`).join('')}
-  </select>
+  ${catTriggerHTML('vendor',ex?ex.cat:'')}
   <span class="field-label">Deskripsi Layanan</span>
   <input id="m-v-desc" class="input-field" placeholder="Paket atau layanan yang ditawarkan" value="${ex?ex.desc:''}">
   <span class="field-label">No. Telepon / WhatsApp</span>
@@ -856,7 +996,7 @@ function buildVendorForm(id){
 function saveVendor(id){
   const name=(document.getElementById('m-v-name').value||'').trim();
   if(!name){showToast('Isi nama vendor terlebih dahulu');return;}
-  const cat=document.getElementById('m-v-cat').value||'Lainnya';
+  const cat=document.getElementById('cat-hid-vendor').value||'Lain-Lain';
   const desc=document.getElementById('m-v-desc').value||'';
   const phone=document.getElementById('m-v-phone').value||'';
   const email=document.getElementById('m-v-email').value||'';
