@@ -958,417 +958,396 @@ function openLangPicker(){
   document.body.appendChild(overlay);
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FIREBASE INTEGRATION
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Config: ganti dengan project Firebase kamu.
-   Aktifkan: Authentication (Email/Password) + Firestore.
-   ─────────────────────────────────────── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FIREBASE CONFIG
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const FB_CONFIG = {
-  apiKey:            "AIzaSyDEMO_GANTI_DENGAN_API_KEY_KAMU",
-  authDomain:        "union-grace.firebaseapp.com",
-  projectId:         "union-grace",
-  storageBucket:     "union-grace.appspot.com",
-  messagingSenderId: "123456789",
-  appId:             "1:123456789:web:abcdef123456"
+  apiKey:            "AIzaSyB_aIM1VgWiMkt0hnkFG7LVwLgxLElo9Ng",
+  authDomain:        "mantapps-mobilewedding.firebaseapp.com",
+  projectId:         "mantapps-mobilewedding",
+  storageBucket:     "mantapps-mobilewedding.firebasestorage.app",
+  messagingSenderId: "814668848361",
+  appId:             "1:814668848361:web:fcb33dcd6739b6bb826478",
+  measurementId:     "G-3T13MNZ6NZ"
 };
 
-/* ── Import Firebase (ESM via CDN) ── */
-let _db = null, _auth = null, _uid = null;
-let _fbReady = false;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FIREBASE STATE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _db=null,_auth=null,_uid=null,_fbReady=false,_FS=null,_AU=null;
 
+const userDocRef=(col,id)=>_FS.doc(_db,"users",_uid,col,String(id));
+const userColRef=(col)=>_FS.collection(_db,"users",_uid,col);
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FIRESTORE SAVE / DELETE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+async function fbSave(col,item){
+  if(!_fbReady||!_uid)return;
+  try{
+    const clean=JSON.parse(JSON.stringify({...item,id:String(item.id),_t:Date.now()}));
+    await _FS.setDoc(userDocRef(col,item.id),clean);
+    showSyncBadge();
+  }catch(e){console.error("fbSave",col,e.message);}
+}
+
+async function fbDelete(col,id){
+  if(!_fbReady||!_uid)return;
+  try{await _FS.deleteDoc(userDocRef(col,id));showSyncBadge();}
+  catch(e){console.error("fbDelete",col,e.message);}
+}
+
+async function fbSaveMeta(docId,data){
+  if(!_fbReady||!_uid)return;
+  try{
+    const clean=JSON.parse(JSON.stringify({...data,_t:Date.now()}));
+    await _FS.setDoc(_FS.doc(_db,"users",_uid,"meta",docId),clean);
+    showSyncBadge();
+  }catch(e){console.error("fbSaveMeta",docId,e.message);}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOAD ALL DATA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+async function loadFromFirestore(){
+  if(!_fbReady||!_uid)return;
+  try{
+    const settSnap=await _FS.getDoc(_FS.doc(_db,"users",_uid,"meta","settings"));
+    if(settSnap.exists()){
+      const d=settSnap.data();
+      if(d.couple)Object.assign(S.couple,d.couple);
+      if(d.income!=null)S.income=d.income;
+      if(d.lang)S.lang=d.lang;
+      if(d.darkMode!=null)S.darkMode=d.darkMode;
+      if(d.profilePhoto)S.profilePhoto=d.profilePhoto;
+      if(d.coverPhoto)S.coverPhoto=d.coverPhoto;
+    }
+    const notifSnap=await _FS.getDoc(_FS.doc(_db,"users",_uid,"meta","notif"));
+    if(notifSnap.exists())Object.assign(S.notif,notifSnap.data());
+
+    const cols=["transactions","seserahan","guests","documents","vendors"];
+    for(const col of cols){
+      const snap=await _FS.getDocs(userColRef(col));
+      if(!snap.empty){
+        const items=[];
+        snap.forEach(d=>{const item=d.data();delete item._t;items.push(item);});
+        if(col==="transactions")items.sort((a,b)=>String(b.id).localeCompare(String(a.id)));
+        S[col]=items;
+      }
+    }
+  }catch(e){console.error("loadFromFirestore",e.message);}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SYNC HELPERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+async function syncTx(id){const t=id?S.transactions.find(x=>String(x.id)===String(id)):S.transactions[0];if(t)await fbSave("transactions",t);}
+async function syncSes(id){const t=id?S.seserahan.find(x=>String(x.id)===String(id)):S.seserahan[S.seserahan.length-1];if(t)await fbSave("seserahan",t);}
+async function syncGuest(id){const t=id?S.guests.find(x=>String(x.id)===String(id)):S.guests[S.guests.length-1];if(t)await fbSave("guests",t);}
+async function syncDoc(id){const t=id?S.documents.find(x=>String(x.id)===String(id)):S.documents[S.documents.length-1];if(t)await fbSave("documents",t);}
+async function syncVendor(id){const t=id?S.vendors.find(x=>String(x.id)===String(id)):S.vendors[S.vendors.length-1];if(t)await fbSave("vendors",t);}
+async function syncSettings(){await fbSaveMeta("settings",{couple:S.couple,income:S.income,lang:S.lang,darkMode:S.darkMode,profilePhoto:S.profilePhoto||null,coverPhoto:S.coverPhoto||null});}
+async function syncNotif(){await fbSaveMeta("notif",{...S.notif});}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FIREBASE INIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function initFirebase(){
-  try {
-    const { initializeApp }       = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
-    const { getFirestore, doc, setDoc, getDoc, collection, getDocs, onSnapshot, deleteDoc, serverTimestamp }
-                                  = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-    const { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword,
-            signOut, onAuthStateChanged }
-                                  = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+  try{
+    const {initializeApp}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+    const fb=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+    const au=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
 
-    const app  = initializeApp(FB_CONFIG);
-    _db        = getFirestore(app);
-    _auth      = getAuth(app);
+    const app=initializeApp(FB_CONFIG);
+    _db=fb.getFirestore(app);
+    _auth=au.getAuth(app);
+    _FS={doc:fb.doc,setDoc:fb.setDoc,getDoc:fb.getDoc,collection:fb.collection,getDocs:fb.getDocs,deleteDoc:fb.deleteDoc};
+    _AU={signIn:au.signInWithEmailAndPassword,register:au.createUserWithEmailAndPassword,signOut:au.signOut,onAuthStateChanged:au.onAuthStateChanged};
+    _fbReady=true;
 
-    // Store firestore helpers globally
-    window._FS = { doc, setDoc, getDoc, collection, getDocs, onSnapshot, deleteDoc, serverTimestamp };
-    window._AU = { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged };
-
-    _fbReady = true;
-
-    // Listen for auth state
-    _AU.onAuthStateChanged(_auth, async user => {
+    _AU.onAuthStateChanged(_auth,async user=>{
       if(user){
-        _uid = user.uid;
+        _uid=user.uid;
         showLoadingOverlay("Memuat data...");
-        await loadAllFromFirestore();
+        await loadFromFirestore();
         hideLoadingOverlay();
-        showApp();
-      } else {
-        _uid = null;
+        launchApp();
+      }else{
+        _uid=null;
         showLoginScreen();
       }
     });
-
-  } catch(e){
-    console.warn("Firebase gagal dimuat, berjalan mode offline:", e.message);
-    _fbReady = false;
-    showApp(); // run offline
+  }catch(e){
+    console.warn("Firebase tidak tersedia, mode lokal:",e.message);
+    _fbReady=false;
+    launchApp();
   }
 }
 
-/* ── Firestore path helper ── */
-const userDoc  = (col, id) => _FS.doc(_db, "users", _uid, col, id);
-const userCol  = (col)     => _FS.collection(_db, "users", _uid, col);
-
-/* ── LOAD ALL DATA ── */
-async function loadAllFromFirestore(){
-  if(!_fbReady || !_uid) return;
-  try {
-    // Settings (couple info, preferences)
-    const settingsSnap = await _FS.getDoc(_FS.doc(_db, "users", _uid, "meta", "settings"));
-    if(settingsSnap.exists()){
-      const d = settingsSnap.data();
-      if(d.couple)   S.couple   = { ...S.couple, ...d.couple };
-      if(d.income)   S.income   = d.income;
-      if(d.lang)     S.lang     = d.lang;
-      if(d.darkMode !== undefined) S.darkMode = d.darkMode;
-      if(d.profilePhoto) S.profilePhoto = d.profilePhoto;
-      if(d.coverPhoto)   S.coverPhoto   = d.coverPhoto;
-    }
-
-    // Collections
-    const cols = ["transactions","seserahan","guests","documents","vendors"];
-    for(const col of cols){
-      const snap = await _FS.getDocs(userCol(col));
-      const items = [];
-      snap.forEach(d => items.push({ id: d.id, ...d.data() }));
-      // sort by createdAt if available
-      items.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
-      // map string id to int for compatibility
-      S[col] = items.map(item => ({ ...item, id: item.id }));
-    }
-
-    // Notifications
-    const notifSnap = await _FS.getDoc(_FS.doc(_db, "users", _uid, "meta", "notif"));
-    if(notifSnap.exists()) Object.assign(S.notif, notifSnap.data());
-
-    applyDark(); applyLang();
-  } catch(e){ console.error("loadAllFromFirestore error:", e); }
+/* ── Sync badge ── */
+let _syncTmr=null;
+function showSyncBadge(){
+  let b=document.getElementById("sync-badge");
+  if(!b){b=document.createElement("div");b.id="sync-badge";b.style.cssText="position:fixed;top:70px;right:14px;background:var(--teal);color:#fff;border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:5px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none";b.innerHTML='<i class="ti ti-cloud-check" style="font-size:13px"></i> Tersimpan';document.body.appendChild(b);}
+  b.style.opacity="1";clearTimeout(_syncTmr);_syncTmr=setTimeout(()=>b.style.opacity="0",2200);
 }
 
-/* ── SAVE HELPERS ── */
-async function fbSaveItem(col, item){
-  if(!_fbReady || !_uid) return;
-  try {
-    const id = String(item.id);
-    const data = { ...item, id, updatedAt: Date.now() };
-    await _FS.setDoc(userDoc(col, id), data);
-  } catch(e){ console.error("fbSaveItem error:", col, e); }
-}
-
-async function fbDeleteItem(col, id){
-  if(!_fbReady || !_uid) return;
-  try { await _FS.deleteDoc(userDoc(col, String(id))); }
-  catch(e){ console.error("fbDeleteItem error:", col, e); }
-}
-
-async function fbSaveSettings(){
-  if(!_fbReady || !_uid) return;
-  try {
-    await _FS.setDoc(_FS.doc(_db, "users", _uid, "meta", "settings"), {
-      couple: S.couple, income: S.income, lang: S.lang,
-      darkMode: S.darkMode, profilePhoto: S.profilePhoto||null,
-      coverPhoto: S.coverPhoto||null, updatedAt: Date.now()
-    });
-  } catch(e){ console.error("fbSaveSettings error:", e); }
-}
-
-async function fbSaveNotif(){
-  if(!_fbReady || !_uid) return;
-  try { await _FS.setDoc(_FS.doc(_db, "users", _uid, "meta", "notif"), { ...S.notif }); }
-  catch(e){ console.error("fbSaveNotif error:", e); }
-}
-
-/* ── Patch save* functions to also sync Firebase ── */
-const _origSaveTx      = saveTx;
-const _origSaveSes     = saveSes;
-const _origSaveGuest   = saveGuest;
-const _origSaveDoc     = saveDoc;
-const _origSaveVendor  = saveVendor;
-const _origDelItem     = delItem;
-const _origSaveDetail  = saveDetail;
-
-saveTx = async function(id){
-  _origSaveTx(id);
-  const item = S.transactions[0]; // newly added or updated
-  const target = id ? S.transactions.find(x=>x.id===id) : S.transactions[0];
-  if(target) await fbSaveItem("transactions", target);
-};
-saveSes = async function(id){
-  _origSaveSes(id);
-  const target = id ? S.seserahan.find(x=>x.id===id) : S.seserahan[S.seserahan.length-1];
-  if(target) await fbSaveItem("seserahan", target);
-};
-saveGuest = async function(id){
-  _origSaveGuest(id);
-  const target = id ? S.guests.find(x=>x.id===id) : S.guests[S.guests.length-1];
-  if(target) await fbSaveItem("guests", target);
-};
-saveDoc = async function(id){
-  _origSaveDoc(id);
-  const target = id ? S.documents.find(x=>x.id===id) : S.documents[S.documents.length-1];
-  if(target) await fbSaveItem("documents", target);
-};
-saveVendor = async function(id){
-  _origSaveVendor(id);
-  const target = id ? S.vendors.find(x=>x.id===id) : S.vendors[S.vendors.length-1];
-  if(target) await fbSaveItem("vendors", target);
-};
-delItem = async function(type, id){
-  const map={tx:"transactions",ses:"seserahan",guest:"guests",doc:"documents",vendor:"vendors"};
-  if(!confirm(L("itemDeleted")+"?"))return;
-  if(map[type]) S[map[type]] = S[map[type]].filter(x=>x.id!==id);
-  closeModal(); renderPage(curTab); showToast(L("itemDeleted"));
-  if(map[type]) await fbDeleteItem(map[type], id);
-};
-saveDetail = async function(){
-  _origSaveDetail();
-  await fbSaveSettings();
-};
-
-/* ── UI: Loading overlay ── */
+/* ── Loading overlay ── */
 function showLoadingOverlay(msg){
-  let el = document.getElementById("fb-loading");
+  let el=document.getElementById("fb-loading");
   if(!el){
-    el = document.createElement("div"); el.id = "fb-loading";
-    el.style.cssText = "position:fixed;inset:0;background:var(--cream);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font-family:'DM Sans',sans-serif";
-    el.innerHTML = `<div style="width:48px;height:48px;border-radius:50%;border:4px solid var(--rose-light);border-top-color:var(--rose);animation:spin .8s linear infinite"></div><div id="fb-loading-msg" style="font-size:14px;color:var(--gray);font-weight:500">${msg}</div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>`;
+    el=document.createElement("div");el.id="fb-loading";
+    el.style.cssText="position:fixed;inset:0;background:#FAF8F5;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;font-family:'DM Sans',sans-serif";
+    el.innerHTML="<style>@keyframes fbs{to{transform:rotate(360deg)}}</style><div style=\"width:48px;height:48px;border-radius:50%;border:4px solid #F5D6E3;border-top-color:#7D3C52;animation:fbs .8s linear infinite\"></div><div id=\"fb-lm\" style=\"font-size:14px;color:#6B6460;font-weight:500\">"+msg+"</div>";
     document.body.appendChild(el);
-  } else {
-    const m = document.getElementById("fb-loading-msg"); if(m) m.textContent = msg;
-  }
+  }else{const m=document.getElementById("fb-lm");if(m)m.textContent=msg;el.style.display="flex";}
 }
-function hideLoadingOverlay(){
-  const el = document.getElementById("fb-loading"); if(el) el.remove();
+function hideLoadingOverlay(){const el=document.getElementById("fb-loading");if(el)el.style.display="none";}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOGIN SCREEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _fbMode="login";
+
+function showLoginScreen(){
+  hideLoadingOverlay();
+  const app=document.getElementById("app-root");if(app)app.style.display="none";
+  let scr=document.getElementById("fb-login");if(scr)scr.remove();
+  scr=document.createElement("div");scr.id="fb-login";
+  scr.style.cssText="position:fixed;inset:0;background:linear-gradient(160deg,#F9D8E8,#DFF0EB);display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;padding:20px;z-index:998";
+
+  // Build login HTML safely
+  const wrapper=document.createElement("div");
+  wrapper.style.cssText="background:#fff;border-radius:24px;padding:28px 22px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.12)";
+
+  wrapper.innerHTML=""
+    +"<div style='text-align:center;margin-bottom:24px'>"
+    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Union &amp; Grace</div>"
+    +"<div style='font-size:12.5px;color:#6B6460;margin-top:4px'>Wedding Planner</div>"
+    +"</div>"
+    +"<div id='fb-tabs' style='display:flex;background:#F0EBE6;border-radius:12px;padding:3px;margin-bottom:20px'>"
+    +"<button id='fb-tl' style='flex:1;padding:9px;border:none;border-radius:9px;font-family:DM Sans,sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;background:#fff;color:#2C1A14;box-shadow:0 1px 3px rgba(0,0,0,.1)'>Masuk</button>"
+    +"<button id='fb-tr' style='flex:1;padding:9px;border:none;border-radius:9px;font-family:DM Sans,sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;background:transparent;color:#6B6460'>Daftar</button>"
+    +"</div>"
+    +"<div id='fb-rx' style='display:none'>"
+    +"<input id='fb-p1' placeholder='Nama Partner 1' style='width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:10px 13px;font-family:DM Sans,sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:8px;box-sizing:border-box'>"
+    +"<input id='fb-p2' placeholder='Nama Partner 2' style='width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:10px 13px;font-family:DM Sans,sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:8px;box-sizing:border-box'>"
+    +"<input id='fb-wd' type='date' style='width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:10px 13px;font-family:DM Sans,sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:8px;box-sizing:border-box'>"
+    +"</div>"
+    +"<label style='font-size:10px;font-weight:600;color:#6B6460;letter-spacing:.7px;text-transform:uppercase;display:block;margin-bottom:4px'>EMAIL</label>"
+    +"<input id='fb-em' type='email' placeholder='email@contoh.com' style='width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:10px 13px;font-family:DM Sans,sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:10px;box-sizing:border-box'>"
+    +"<label style='font-size:10px;font-weight:600;color:#6B6460;letter-spacing:.7px;text-transform:uppercase;display:block;margin-bottom:4px'>KATA SANDI</label>"
+    +"<div style='position:relative;margin-bottom:16px'>"
+    +"<input id='fb-pw' type='password' placeholder='Min. 6 karakter' style='width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:10px 40px 10px 13px;font-family:DM Sans,sans-serif;font-size:14px;outline:none;color:#2C1A14;box-sizing:border-box'>"
+    +"<button id='fb-eye' style='position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:#6B6460;padding:0'><i class=\"ti ti-eye\" style=\"font-size:16px\"></i></button>"
+    +"</div>"
+    +"<div id='fb-err' style='display:none;background:#FFECEC;color:#8B2020;border-radius:10px;padding:9px 13px;font-size:13px;margin-bottom:12px;border:1px solid #FFD0D0'></div>"
+    +"<button id='fb-btn' style='width:100%;background:linear-gradient(135deg,#5C2A3C,#2A5C52);color:#fff;border:none;border-radius:50px;padding:13px;font-family:DM Sans,sans-serif;font-size:14.5px;cursor:pointer;font-weight:700'>Masuk</button>"
+    +"<div style='text-align:center;margin-top:14px;font-size:12px;color:#A8A098'>Data tersimpan aman di Firebase</div>";
+
+  scr.appendChild(wrapper);
+  document.body.appendChild(scr);
+
+  // Events
+  document.getElementById("fb-tl").addEventListener("click",()=>fbSwitchMode("login"));
+  document.getElementById("fb-tr").addEventListener("click",()=>fbSwitchMode("register"));
+  document.getElementById("fb-eye").addEventListener("click",function(){
+    const pw=document.getElementById("fb-pw");
+    const show=pw.type==="password";pw.type=show?"text":"password";
+    this.innerHTML=show?'<i class="ti ti-eye-off" style="font-size:16px"></i>':'<i class="ti ti-eye" style="font-size:16px"></i>';
+  });
+  document.getElementById("fb-btn").addEventListener("click",fbDoSubmit);
+  scr.querySelectorAll("input").forEach(inp=>inp.addEventListener("keydown",e=>{if(e.key==="Enter")fbDoSubmit();}));
 }
 
-/* ── UI: Show/hide main app ── */
-function showApp(){
-  const app = document.getElementById("app-root");
-  if(app) app.style.display = "flex";
-  const login = document.getElementById("fb-login-screen");
-  if(login) login.remove();
-  applyDark(); applyLang();
+function fbSwitchMode(mode){
+  _fbMode=mode;const isReg=mode==="register";
+  const tl=document.getElementById("fb-tl"),tr=document.getElementById("fb-tr"),ex=document.getElementById("fb-rx"),btn=document.getElementById("fb-btn"),err=document.getElementById("fb-err");
+  if(tl){tl.style.background=isReg?"transparent":"#fff";tl.style.color=isReg?"#6B6460":"#2C1A14";tl.style.boxShadow=isReg?"none":"0 1px 3px rgba(0,0,0,.1)";}
+  if(tr){tr.style.background=isReg?"#fff":"transparent";tr.style.color=isReg?"#2C1A14":"#6B6460";tr.style.boxShadow=isReg?"0 1px 3px rgba(0,0,0,.1)":"none";}
+  if(ex)ex.style.display=isReg?"block":"none";
+  if(btn)btn.textContent=isReg?"Daftar Sekarang":"Masuk";
+  if(err){err.style.display="none";err.textContent="";}
+}
+
+function fbShowErr(msg){const e=document.getElementById("fb-err");if(e){e.textContent=msg;e.style.display="block";}}
+
+async function fbDoSubmit(){
+  if(!_fbReady){launchApp();return;}
+  const err=document.getElementById("fb-err");if(err){err.style.display="none";err.textContent="";}
+  const email=(document.getElementById("fb-em")||{}).value||"";
+  const pass=(document.getElementById("fb-pw")||{}).value||"";
+  if(!email){fbShowErr("Email wajib diisi.");return;}
+  if(pass.length<6){fbShowErr("Kata sandi minimal 6 karakter.");return;}
+  const btn=document.getElementById("fb-btn");
+  if(btn){btn.textContent="Memproses...";btn.disabled=true;}
+
+  const ERR={"auth/user-not-found":"Akun tidak ditemukan. Silakan daftar.","auth/wrong-password":"Kata sandi salah.","auth/invalid-email":"Format email tidak valid.","auth/email-already-in-use":"Email sudah terdaftar. Silakan masuk.","auth/weak-password":"Kata sandi minimal 6 karakter.","auth/invalid-credential":"Email atau kata sandi salah.","auth/too-many-requests":"Terlalu banyak percobaan. Tunggu sebentar.","auth/network-request-failed":"Tidak ada koneksi internet."};
+
+  try{
+    if(_fbMode==="login"){
+      await _AU.signIn(_auth,email,pass);
+    }else{
+      const cred=await _AU.register(_auth,email,pass);
+      _uid=cred.user.uid;
+      const p1=(document.getElementById("fb-p1")||{}).value||"Partner 1";
+      const p2=(document.getElementById("fb-p2")||{}).value||"Partner 2";
+      const wd=(document.getElementById("fb-wd")||{}).value||new Date().toISOString().split("T")[0];
+      S.couple.p1=p1;S.couple.p2=p2;S.couple.date=wd;
+      await syncSettings();
+    }
+  }catch(e){
+    fbShowErr(ERR[e.code]||("Error: "+e.message));
+    if(btn){btn.textContent=_fbMode==="login"?"Masuk":"Daftar Sekarang";btn.disabled=false;}
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LAUNCH APP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function launchApp(){
+  hideLoadingOverlay();
+  const scr=document.getElementById("fb-login");if(scr)scr.remove();
+  const app=document.getElementById("app-root");if(app)app.style.display="flex";
+  applyDark();applyLang();
   initTabs();
   renderPage("ringkasan");
 }
 
-/* ── UI: Login Screen ── */
-function showLoginScreen(){
-  hideLoadingOverlay();
-  const app = document.getElementById("app-root");
-  if(app) app.style.display = "none";
-
-  let screen = document.getElementById("fb-login-screen");
-  if(screen) screen.remove();
-
-  screen = document.createElement("div");
-  screen.id = "fb-login-screen";
-  screen.style.cssText = "position:fixed;inset:0;background:linear-gradient(160deg,#F9D8E8,#DFF0EB);display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;padding:24px;z-index:999";
-
-  screen.innerHTML = `
-  <div style="background:#fff;border-radius:24px;padding:32px 24px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.12)">
-    <div style="text-align:center;margin-bottom:28px">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;color:#3D7A6E;font-style:italic;font-weight:600;letter-spacing:.5px">Union &amp; Grace</div>
-      <div style="font-size:13px;color:#6B6460;margin-top:6px">Wedding Planner App</div>
-    </div>
-    <div id="fb-mode-tabs" style="display:flex;gap:0;background:#F0EBE6;border-radius:12px;padding:3px;margin-bottom:22px">
-      <button id="fb-tab-login" onclick="fbSwitchMode('login')" style="flex:1;padding:10px;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;background:#fff;color:#2C1A14;box-shadow:0 1px 4px rgba(0,0,0,.1);transition:all .2s">Masuk</button>
-      <button id="fb-tab-register" onclick="fbSwitchMode('register')" style="flex:1;padding:10px;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;background:transparent;color:#6B6460;transition:all .2s">Daftar</button>
-    </div>
-    <div id="fb-register-extra" style="display:none">
-      <label style="font-size:10px;font-weight:600;color:#6B6460;letter-spacing:.7px;text-transform:uppercase;display:block;margin-bottom:4px">NAMA PASANGAN</label>
-      <input id="fb-p1" placeholder="Nama Partner 1" style="width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:10px;box-sizing:border-box">
-      <input id="fb-p2" placeholder="Nama Partner 2" style="width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:10px;box-sizing:border-box">
-      <label style="font-size:10px;font-weight:600;color:#6B6460;letter-spacing:.7px;text-transform:uppercase;display:block;margin-bottom:4px">TANGGAL PERNIKAHAN</label>
-      <input id="fb-wdate" type="date" style="width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:10px;box-sizing:border-box">
-    </div>
-    <label style="font-size:10px;font-weight:600;color:#6B6460;letter-spacing:.7px;text-transform:uppercase;display:block;margin-bottom:4px">EMAIL</label>
-    <input id="fb-email" type="email" placeholder="email@contoh.com" style="width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:10px;box-sizing:border-box">
-    <label style="font-size:10px;font-weight:600;color:#6B6460;letter-spacing:.7px;text-transform:uppercase;display:block;margin-bottom:4px">KATA SANDI</label>
-    <input id="fb-pass" type="password" placeholder="Min. 6 karakter" style="width:100%;border:1.5px solid #E5DDD6;border-radius:10px;padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;color:#2C1A14;margin-bottom:18px;box-sizing:border-box">
-    <div id="fb-error" style="display:none;background:#FFECEC;color:#8B2020;border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:14px;border:1px solid #FFD0D0"></div>
-    <button id="fb-submit-btn" onclick="fbSubmit()" style="width:100%;background:linear-gradient(135deg,#5C2A3C,#2A5C52);color:#fff;border:none;border-radius:50px;padding:14px;font-family:'DM Sans',sans-serif;font-size:15px;cursor:pointer;font-weight:700;transition:opacity .2s">Masuk</button>
-    <div style="text-align:center;margin-top:16px;font-size:12px;color:#A8A098">Data tersimpan aman di Firebase 🔒</div>
-  </div>`;
-  document.body.appendChild(screen);
-
-  // Enter key submit
-  screen.querySelectorAll("input").forEach(inp => {
-    inp.addEventListener("keydown", e => { if(e.key === "Enter") fbSubmit(); });
-  });
-}
-
-let _fbMode = "login";
-function fbSwitchMode(mode){
-  _fbMode = mode;
-  const isReg = mode === "register";
-  const loginTab = document.getElementById("fb-tab-login");
-  const regTab   = document.getElementById("fb-tab-register");
-  const extra    = document.getElementById("fb-register-extra");
-  const btn      = document.getElementById("fb-submit-btn");
-  const err      = document.getElementById("fb-error");
-  if(loginTab){ loginTab.style.background = isReg ? "transparent" : "#fff"; loginTab.style.color = isReg ? "#6B6460" : "#2C1A14"; loginTab.style.boxShadow = isReg ? "none" : "0 1px 4px rgba(0,0,0,.1)"; }
-  if(regTab){ regTab.style.background = isReg ? "#fff" : "transparent"; regTab.style.color = isReg ? "#2C1A14" : "#6B6460"; regTab.style.boxShadow = isReg ? "0 1px 4px rgba(0,0,0,.1)" : "none"; }
-  if(extra) extra.style.display = isReg ? "block" : "none";
-  if(btn) btn.textContent = isReg ? "Daftar Sekarang" : "Masuk";
-  if(err) err.style.display = "none";
-}
-
-function fbShowError(msg){
-  const err = document.getElementById("fb-error");
-  if(err){ err.textContent = msg; err.style.display = "block"; }
-}
-
-async function fbSubmit(){
-  if(!_fbReady){ showApp(); return; }
-  const email = (document.getElementById("fb-email")||{}).value||"";
-  const pass  = (document.getElementById("fb-pass")||{}).value||"";
-  if(!email || !pass){ fbShowError("Email dan kata sandi wajib diisi."); return; }
-
-  const btn = document.getElementById("fb-submit-btn");
-  if(btn){ btn.textContent = "Memproses..."; btn.disabled = true; }
-
-  try {
-    if(_fbMode === "login"){
-      await _AU.signInWithEmailAndPassword(_auth, email, pass);
-    } else {
-      const cred = await _AU.createUserWithEmailAndPassword(_auth, email, pass);
-      _uid = cred.user.uid;
-      // Save initial couple info
-      const p1 = (document.getElementById("fb-p1")||{}).value || "Partner 1";
-      const p2 = (document.getElementById("fb-p2")||{}).value || "Partner 2";
-      const wdate = (document.getElementById("fb-wdate")||{}).value || new Date().toISOString().split("T")[0];
-      S.couple.p1 = p1; S.couple.p2 = p2; S.couple.date = wdate;
-      await fbSaveSettings();
-    }
-    // onAuthStateChanged will handle the rest
-  } catch(e){
-    const msgs = {
-      "auth/user-not-found"     : "Akun tidak ditemukan. Daftar terlebih dahulu.",
-      "auth/wrong-password"     : "Kata sandi salah. Coba lagi.",
-      "auth/invalid-email"      : "Format email tidak valid.",
-      "auth/email-already-in-use": "Email sudah terdaftar. Silakan masuk.",
-      "auth/weak-password"      : "Kata sandi minimal 6 karakter.",
-      "auth/invalid-credential" : "Email atau kata sandi salah.",
-      "auth/too-many-requests"  : "Terlalu banyak percobaan. Tunggu sebentar.",
-      "auth/network-request-failed": "Tidak ada koneksi internet."
-    };
-    fbShowError(msgs[e.code] || "Terjadi kesalahan: "+e.message);
-    if(btn){ btn.textContent = _fbMode==="login"?"Masuk":"Daftar Sekarang"; btn.disabled=false; }
-  }
-}
-
-/* ── Logout with Firebase ── */
+/* ── Logout ── */
 async function fbLogout(){
-  if(_fbReady && _auth){
-    try { await _AU.signOut(_auth); } catch(e){}
-  }
   closeSub();
+  if(_fbReady&&_auth){try{await _AU.signOut(_auth);}catch(e){}}
+  _uid=null;
   showLoginScreen();
 }
+document.addEventListener("click",function(e){
+  if(e.target.closest&&e.target.closest("#sub-logout")){
+    e.preventDefault();e.stopImmediatePropagation();fbLogout();
+  }
+},true);
 
-/* ── Patch logout button ── */
-function patchLogoutBtn(){
-  document.addEventListener("click", e => {
-    const btn = e.target.closest("#sub-logout");
-    if(btn){ e.preventDefault(); e.stopPropagation(); fbLogout(); }
-  });
-}
-
-/* ── Patch saveDetail and dark/lang/notif to sync ── */
-const _origApplyLang = applyLang;
-applyLang = function(){
-  _origApplyLang();
-  if(_uid) fbSaveSettings();
-};
-const _origApplyDark = applyDark;
-applyDark = function(){
-  _origApplyDark();
-  if(_uid) fbSaveSettings();
-};
-
-/* ── Patch notif toggle to also sync ── */
-// initSubEvents patches the toggle-sw, we do after render
-const _origInitSubEvents = initSubEvents;
-initSubEvents = function(sub){
-  _origInitSubEvents(sub);
-  if(sub==="notif"){
-    const sp = document.getElementById("subpage-container");
-    sp.querySelectorAll(".toggle-sw[data-notif-key]").forEach(sw => {
-      const orig = sw.onclick;
-      sw.onclick = function(){
-        if(orig) orig.call(this);
-        fbSaveNotif();
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HOOK ALL SAVE/DELETE FUNCTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function(){
+  /* --- saveTx --- */
+  var _sTx=saveTx;
+  saveTx=function(id){_sTx(id);syncTx(id);};
+  /* --- saveSes --- */
+  var _sSes=saveSes;
+  saveSes=function(id){_sSes(id);syncSes(id);};
+  /* --- saveGuest --- */
+  var _sG=saveGuest;
+  saveGuest=function(id){_sG(id);syncGuest(id);};
+  /* --- saveDoc --- */
+  var _sD=saveDoc;
+  saveDoc=function(id){_sD(id);syncDoc(id);};
+  /* --- saveVendor --- */
+  var _sV=saveVendor;
+  saveVendor=function(id){_sV(id);syncVendor(id);};
+  /* --- delItem --- */
+  var _del=delItem;
+  delItem=function(type,id){
+    const map={tx:"transactions",ses:"seserahan",guest:"guests",doc:"documents",vendor:"vendors"};
+    if(!confirm(L("itemDeleted")+"?"))return;
+    if(map[type])S[map[type]]=S[map[type]].filter(x=>String(x.id)!==String(id));
+    closeModal();renderPage(curTab);showToast(L("itemDeleted"));
+    if(map[type])fbDelete(map[type],id);
+  };
+  /* --- saveDetail --- */
+  var _sDet=saveDetail;
+  saveDetail=function(){_sDet();syncSettings();};
+  /* --- cycleDoc --- */
+  var _cyc=cycleDoc;
+  cycleDoc=function(id){
+    _cyc(id);
+    var d=S.documents.find(x=>String(x.id)===String(id));
+    if(d)fbSave("documents",d);
+  };
+  /* --- toggleVendorOk (inline in pgVendor via data-ok-vendor) --- */
+  /* handled via bindListEvents refreshVendorList */
+  /* --- applyDark / applyLang --- */
+  var _aD=applyDark;
+  applyDark=function(){_aD();if(_uid)syncSettings();};
+  var _aL=applyLang;
+  applyLang=function(){_aL();if(_uid)syncSettings();};
+  /* --- initSubEvents: hook notif toggles + profile/cover photo --- */
+  var _iSE=initSubEvents;
+  initSubEvents=function(sub){
+    _iSE(sub);
+    var sp=document.getElementById("subpage-container");
+    if(!sp)return;
+    /* Notif toggles */
+    if(sub==="notif"){
+      sp.querySelectorAll(".toggle-sw[data-notif-key]").forEach(function(sw){
+        var prev=sw.onclick;
+        sw.onclick=function(){if(prev)prev.call(this);syncNotif();};
+      });
+    }
+    /* Profile photo */
+    if(sub==="main"){
+      var pp=sp.querySelector("#profile-photo-btn");
+      if(pp){
+        pp.onclick=function(){
+          pickPhoto(function(d){
+            S.profilePhoto=d;
+            openSub("main");
+            showToast("Foto berhasil disimpan");
+            syncSettings();
+          });
+        };
+      }
+    }
+    /* Cover photo */
+    if(sub==="detail"){
+      var cb=sp.querySelector("#cover-photo-btn");
+      if(cb){
+        cb.onclick=function(){
+          pickPhoto(function(d){
+            S.coverPhoto=d;
+            var prev=sp.querySelector("#cover-photo-preview");
+            if(prev){
+              prev.innerHTML="";
+              var img=document.createElement("img");img.src=d;img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:14px";prev.appendChild(img);
+              var ov=document.createElement("div");ov.className="photo-overlay";ov.textContent="Ganti Cover";prev.appendChild(ov);
+            }
+            syncSettings();
+          });
+        };
+      }
+      /* Save detail button also syncs */
+      var sv=sp.querySelector("#save-detail-btn");
+      if(sv){
+        var prevSv=sv.onclick;
+        sv.onclick=function(){if(prevSv)prevSv.call(this);syncSettings();};
+      }
+    }
+  };
+  /* --- ok-vendor toggle sync --- */
+  var _rvl=refreshVendorList;
+  refreshVendorList=function(){
+    _rvl();
+    /* bind ok-vendor with sync */
+    document.querySelectorAll("[data-ok-vendor]").forEach(function(b){
+      var prev=b.onclick;
+      b.onclick=function(){
+        var vid=b.dataset.okVendor;
+        var v=S.vendors.find(x=>x.id===vid||x.id===+vid);
+        if(v){v.ok=!v.ok;refreshVendorList();fbSave("vendors",v);}
       };
     });
-  }
-};
+  };
+})();
 
-/* ── Firebase sync indicator ── */
-function showSyncBadge(){
-  let badge = document.getElementById("fb-sync-badge");
-  if(!badge){
-    badge = document.createElement("div"); badge.id = "fb-sync-badge";
-    badge.style.cssText = "position:fixed;top:70px;right:16px;background:var(--teal);color:#fff;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:600;display:flex;align-items:center;gap:4px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none";
-    badge.innerHTML = '<i class="ti ti-cloud-check" style="font-size:13px"></i> Tersimpan';
-    document.body.appendChild(badge);
-  }
-  badge.style.opacity = "1";
-  clearTimeout(badge._timer);
-  badge._timer = setTimeout(()=>badge.style.opacity="0", 2000);
-}
-
-/* ── Wrap all fb save calls to show badge ── */
-const _rawFbSaveItem     = fbSaveItem;
-const _rawFbSaveSettings = fbSaveSettings;
-const _rawFbDeleteItem   = fbDeleteItem;
-fbSaveItem = async function(...args){ await _rawFbSaveItem(...args); showSyncBadge(); };
-fbSaveSettings = async function(){ await _rawFbSaveSettings(); showSyncBadge(); };
-fbDeleteItem = async function(...args){ await _rawFbDeleteItem(...args); showSyncBadge(); };
-
-/* ── Show config guide if using demo keys ── */
-function checkFirebaseConfig(){
-  if(FB_CONFIG.apiKey.includes("DEMO") || FB_CONFIG.apiKey.includes("GANTI")){
-    const banner = document.createElement("div");
-    banner.style.cssText = "position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#2C1A14;color:#fff;padding:10px 18px;border-radius:12px;font-size:12px;z-index:500;max-width:380px;text-align:center;line-height:1.5;display:flex;align-items:flex-start;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.3)";
-    banner.innerHTML = `<i class="ti ti-info-circle" style="font-size:16px;color:#D4A050;flex-shrink:0;margin-top:1px"></i><span><b>Mode Demo</b> — Ganti <code style="background:rgba(255,255,255,.15);padding:1px 5px;border-radius:4px">FB_CONFIG</code> di kode dengan project Firebase kamu untuk menyimpan data ke cloud. <span id="fb-banner-close" style="color:#D4A050;cursor:pointer;text-decoration:underline">Tutup</span></span>`;
-    document.body.appendChild(banner);
-    document.getElementById("fb-banner-close").onclick = ()=>banner.remove();
-    setTimeout(()=>banner.remove(), 8000);
-  }
-}
-
-/* ── INIT ── */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   INIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 (async function(){
-  // Hide app initially
-  const appRoot = document.getElementById("app-root");
-  if(appRoot) appRoot.style.display = "none";
-
-  checkFirebaseConfig();
-  patchLogoutBtn();
-
-  // Show loading while Firebase loads
+  var app=document.getElementById("app-root");if(app)app.style.display="none";
   showLoadingOverlay("Menghubungkan ke server...");
-
   await initFirebase();
-
-  // If Firebase not ready (offline/demo), just show app with local data
-  if(!_fbReady){
-    hideLoadingOverlay();
-    showApp();
-  }
+  if(!_fbReady){hideLoadingOverlay();launchApp();}
 })();
 </script>
 </body>
