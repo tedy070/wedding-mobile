@@ -379,19 +379,44 @@ function cycleDoc(id){
 
 /* ── PAGES ── */
 function pgRingkasan(){
-  const t=totals();const progW=Math.min(100,Math.round(t.out/Math.max(S.income,1)*100));
+  const t=totals();
+  // Real-time from all transactions: total income = base + all 'in' tx; total expense = all 'out' tx
+  const allIn=S.income+t.xIn;
+  const allOut=t.out;
+  const saldo=allIn-allOut;
+  const progW=Math.min(100,allIn>0?Math.round(allOut/allIn*100):0);
   const circ=2*Math.PI*28;const dash=(t.hadir/Math.max(t.totalG,1)*circ).toFixed(1);
   const bg=S.darkMode?"linear-gradient(160deg,#2E1820,#0E2018)":"linear-gradient(160deg,#F9D8E8,#DFF0EB)";
+  // Seserahan progress
+  const sesPct=Math.round(t.sesDone/Math.max(S.seserahan.length,1)*100);
+  // Vendor confirmed count
+  const vendorOk=S.vendors.filter(v=>v.ok).length;
+
   return `<div class="hero-banner" style="background:${bg}"><h1>${L("budget")}</h1><p>${L("greeting")} ${S.couple.p1} &amp; ${S.couple.p2}, ${L("greetingSub")}</p></div>
   <div style="height:14px"></div>
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-weight:600;font-size:15px">${L("budget")}</span><i class="ti ti-report-money" style="font-size:20px;color:var(--gray)"></i></div>
-    <div style="display:flex;gap:24px;margin-bottom:11px">
-      <div><div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px">${L("income")}</div><div style="font-size:15px;font-weight:700;color:var(--teal)">${fmt(S.income)}</div></div>
-      <div><div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px">${L("expense")}</div><div style="font-size:15px;font-weight:700">${fmt(t.out)}</div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <span style="font-weight:600;font-size:15px">${L("budget")}</span>
+      <button id="see-all-vendors" style="display:none"></button>
+      <i class="ti ti-report-money" style="font-size:20px;color:var(--gray)"></i>
     </div>
-    <div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${progW}%;background:var(--teal)"></div></div>
-    <div style="background:var(--teal-light);padding:6px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:5px"><i class="ti ti-wallet" style="font-size:13px;color:var(--teal)"></i><span style="font-size:12px;font-weight:700;color:var(--teal)">${L("remaining")}: ${fmt(S.income-t.out)}</span></div>
+    <div style="display:flex;gap:0;margin-bottom:11px">
+      <div style="flex:1">
+        <div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px">${L("income")}</div>
+        <div style="font-size:15px;font-weight:700;color:var(--teal)">${fmt(allIn)}</div>
+        <div style="font-size:10px;color:var(--gray);margin-top:2px">${S.transactions.filter(tx=>tx.type==="in").length} transaksi masuk</div>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px">${L("expense")}</div>
+        <div style="font-size:15px;font-weight:700;color:var(--rose)">${fmt(allOut)}</div>
+        <div style="font-size:10px;color:var(--gray);margin-top:2px">${S.transactions.filter(tx=>tx.type==="out").length} transaksi keluar</div>
+      </div>
+    </div>
+    <div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${progW}%;background:${progW>80?"var(--danger)":progW>60?"var(--amber)":"var(--teal)"}"></div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div style="background:var(--teal-light);padding:6px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:5px"><i class="ti ti-wallet" style="font-size:13px;color:var(--teal)"></i><span style="font-size:12px;font-weight:700;color:var(--teal)">${L("remaining")}: ${fmt(saldo)}</span></div>
+      ${saldo<0?`<div style="background:var(--danger-bg);padding:6px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:4px"><i class="ti ti-alert-triangle" style="font-size:12px;color:var(--danger)"></i><span style="font-size:11px;font-weight:700;color:var(--danger)">Melebihi anggaran</span></div>`:""}
+    </div>
   </div>
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px"><span style="font-weight:600;font-size:15px">${L("documents")}</span><i class="ti ti-file-check" style="font-size:20px;color:var(--gray)"></i></div>
@@ -411,7 +436,20 @@ function pgRingkasan(){
     </div>
   </div>
   <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-weight:600;font-size:15px">${L("seserahanTitle")}</span><i class="ti ti-gift" style="font-size:20px;color:var(--gray)"></i></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
+      <span style="font-size:13px;color:var(--gray)">${t.sesDone} / ${S.seserahan.length} ${L("itemsReady")}</span>
+      <span style="font-size:13px;font-weight:700;color:var(--rose)">${sesPct}%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${sesPct}%"></div></div>
+    <div style="margin-top:8px;font-size:12px;color:var(--gray)">${L("estimatedCost")}: <span style="font-weight:700;color:var(--rose-dark)">${fmt(t.sesCost)}</span></div>
+  </div>
+  <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-weight:600;font-size:15px">${L("latestVendor")}</span><button id="see-all-vendors" style="font-size:11px;font-weight:700;color:var(--teal);background:none;border:none;cursor:pointer;letter-spacing:.4px;text-transform:uppercase;font-family:'DM Sans',sans-serif">${L("seeAll")}</button></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="background:var(--teal-light);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:4px"><i class="ti ti-circle-check" style="font-size:12px"></i>${vendorOk} dikonfirmasi</div>
+      <div style="background:var(--gray-light);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;color:var(--gray)">${S.vendors.length} total vendor</div>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px">
       ${S.vendors.slice(0,2).map(v=>`<div><div style="height:80px;background:var(--gray-light);border-radius:12px;margin-bottom:7px;display:flex;align-items:center;justify-content:center;overflow:hidden">${v.photo?`<img src="${v.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`:`<i class="ti ${catIcon(v.cat)}" style="font-size:30px;color:var(--gray)"></i>`}</div><div style="font-weight:600;font-size:13px">${v.name}</div><div style="font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;margin-top:2px">${v.cat}</div></div>`).join("")}
     </div>
@@ -627,6 +665,7 @@ function buildTxForm(id){
   const ex=id?S.transactions.find(x=>x.id===id):null;
   if(ex){txType=ex.type;txStatus=ex.status||"Belum Dibayar";}else{txType="out";txStatus="Belum Dibayar";}
   const isEdit=!!ex;
+  const payStatuses=[["Belum Dibayar",L("notUnpaid")],["DP",L("dp")],["Lunas",L("paid")],["Tabungan","Tabungan"]];
   return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><div class="modal-title">${isEdit?L("editBudget"):L("addBudget")}</div><button class="hicon" id="modal-close"><i class="ti ti-x"></i></button></div>
 <span class="field-label">${L("transactionType")}</span>
 <div style="display:flex;gap:8px;margin-bottom:4px">${pillRow([["out","<i class=\"ti ti-arrow-up\" style=\"font-size:12px\"></i> "+L("expenseOut")],["in","<i class=\"ti ti-arrow-down\" style=\"font-size:12px\"></i> "+L("incomeIn")]],"data-tx-type",txType)}</div>
@@ -636,7 +675,7 @@ function buildTxForm(id){
 <input id="m-tx-name" class="input-field" placeholder="Contoh: DP Gedung" value="${ex?ex.name:""}">
 <span class="field-label">${L("category")}</span>${catTriggerHTML("tx",ex?ex.cat:"")}
 <span class="field-label">${L("paymentStatus")}</span>
-<div style="display:flex;gap:8px;flex-wrap:wrap">${pillRow([["Belum Dibayar",L("notUnpaid")],["DP",L("dp")],["Lunas",L("paid")]],"data-tx-st",txStatus)}</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">${pillRow(payStatuses,"data-tx-st",txStatus)}</div>
 <span class="field-label">${L("notes")}</span>
 <input id="m-tx-notes" class="input-field" placeholder="${L("notesPh")}" value="${ex&&ex.notes?ex.notes:""}">
 ${isEdit?`<button class="btn-danger" data-del="tx"><i class="ti ti-trash" style="font-size:15px"></i>${L("deleteBudget")}</button>`:""}
@@ -845,7 +884,13 @@ function initSubEvents(sub){
 function subMain(){
   const d=new Date(S.couple.date);const days=Math.max(0,Math.ceil((d-new Date())/(1000*60*60*24)));
   const avatar=S.profilePhoto?`<img src="${S.profilePhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:`<i class="ti ti-heart-handshake" style="font-size:34px;color:var(--rose)"></i>`;
-  return `<div class="back-header"><span class="brand">Union &amp; Grace</span><div style="margin-left:auto;display:flex;gap:6px"><button class="hicon"><i class="ti ti-bell"></i></button><button class="hicon"><i class="ti ti-user-circle"></i></button></div></div>
+  return `<div class="back-header">
+    <button class="back-btn" id="sub-logout" title="Kembali"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
+    <span class="brand">Union &amp; Grace</span>
+    <div style="margin-left:auto;display:flex;gap:6px">
+      <button class="hicon" onclick="showToast(L('noNotif'))"><i class="ti ti-bell"></i></button>
+    </div>
+  </div>
   <div class="couple-card">
     <div style="position:relative;width:78px;margin:0 auto 12px;cursor:pointer" id="profile-photo-btn">
       <div class="avatar">${avatar}</div>
