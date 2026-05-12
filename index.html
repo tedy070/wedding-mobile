@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Tedi & Nadya — Wedding Planner</title>
+<title>Wedding Planner</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="180x180" href="maNTapps_MobileWedding_iphone.PNG">
@@ -351,13 +351,13 @@ function afterRender(name){
 }
 
 function bindListEvents(){
-  document.querySelectorAll("[data-edit-tx]").forEach(b=>{ b.onclick=()=>openModal("tx",+b.dataset.editTx); });
-  document.querySelectorAll("[data-edit-ses]").forEach(b=>{ b.onclick=()=>openModal("ses",+b.dataset.editSes); });
-  document.querySelectorAll("[data-edit-guest]").forEach(b=>{ b.onclick=()=>openModal("guest",+b.dataset.editGuest); });
-  document.querySelectorAll("[data-edit-doc]").forEach(b=>{ b.onclick=()=>openModal("doc",+b.dataset.editDoc); });
-  document.querySelectorAll("[data-edit-vendor]").forEach(b=>{ b.onclick=()=>openModal("vendor",+b.dataset.editVendor); });
-  document.querySelectorAll("[data-ok-vendor]").forEach(b=>{ b.onclick=()=>{const v=S.vendors.find(x=>x.id===+b.dataset.okVendor);if(v){v.ok=!v.ok;refreshVendorList();}}; });
-  document.querySelectorAll("[data-cycle-doc]").forEach(b=>{ b.onclick=()=>cycleDoc(+b.dataset.cycleDoc); });
+  document.querySelectorAll("[data-edit-tx]").forEach(b=>{ b.onclick=()=>openModal("tx",b.dataset.editTx); });
+  document.querySelectorAll("[data-edit-ses]").forEach(b=>{ b.onclick=()=>openModal("ses",b.dataset.editSes); });
+  document.querySelectorAll("[data-edit-guest]").forEach(b=>{ b.onclick=()=>openModal("guest",b.dataset.editGuest); });
+  document.querySelectorAll("[data-edit-doc]").forEach(b=>{ b.onclick=()=>openModal("doc",b.dataset.editDoc); });
+  document.querySelectorAll("[data-edit-vendor]").forEach(b=>{ b.onclick=()=>openModal("vendor",b.dataset.editVendor); });
+  document.querySelectorAll("[data-ok-vendor]").forEach(b=>{ b.onclick=()=>{const v=S.vendors.find(x=>String(x.id)===String(b.dataset.okVendor));if(v){v.ok=!v.ok;refreshVendorList();}}; });
+  document.querySelectorAll("[data-cycle-doc]").forEach(b=>{ b.onclick=()=>cycleDoc(b.dataset.cycleDoc); });
   document.querySelectorAll("[data-bud-filter]").forEach(b=>{ b.onclick=()=>{S.budFilter=b.dataset.budFilter;renderPage("anggaran");}; });
   document.querySelectorAll("[data-ses-filter]").forEach(b=>{ b.onclick=()=>{S.sesFilter=b.dataset.sesFilter;renderPage("seserahan");}; });
   const fabTx=document.getElementById("fab-tx");if(fabTx)fabTx.onclick=()=>openModal("tx",null);
@@ -379,7 +379,7 @@ function refreshVendorList(){
   const el=document.getElementById("vendor-list");if(el){el.innerHTML=filtered.map(vendorCard).join("");bindListEvents();}
 }
 function cycleDoc(id){
-  const d=S.documents.find(x=>x.id===id);if(!d)return;
+  const d=S.documents.find(x=>String(x.id)===String(id));if(!d)return;
   const cy=["Belum Diurus","Sedang Diproses","Selesai"];d.status=cy[(cy.indexOf(d.status)+1)%cy.length];
   renderPage("dokumen");showToast(L("statusUpdated")+": "+d.status);
 }
@@ -610,7 +610,7 @@ function bindModalEvents(type,id){
 function delItem(type,id){
   if(!confirm(L("itemDeleted")+"?"))return;
   const map={tx:"transactions",ses:"seserahan",guest:"guests",doc:"documents",vendor:"vendors"};
-  if(map[type])S[map[type]]=S[map[type]].filter(x=>x.id!==id);
+  if(map[type])S[map[type]]=S[map[type]].filter(x=>String(x.id)!==String(id));
   closeModal();renderPage(curTab);showToast(L("itemDeleted"));
 }
 
@@ -669,7 +669,7 @@ function updateCatTrigger(ctx,catId){
 function pillRow(items,attr,cur){return items.map(([v,lbl])=>`<span class="pill${cur===v?" active":""}" ${attr}="${v}">${lbl}</span>`).join("");}
 
 function buildTxForm(id){
-  const ex=id?S.transactions.find(x=>x.id===id):null;
+  const ex=id?S.transactions.find(x=>String(x.id)===String(id)):null;
   if(ex){txType=ex.type;txStatus=ex.status||"Belum Dibayar";}else{txType="out";txStatus="Belum Dibayar";}
   const isEdit=!!ex;
   const payStatuses=[["Belum Dibayar",L("notUnpaid")],["DP",L("dp")],["Lunas",L("paid")],["Tabungan","Tabungan"]];
@@ -694,13 +694,13 @@ function saveTx(id){
   if(!name||!amt){showToast(L("fillRequired"));return;}
   const cat=(document.getElementById("cat-hid-tx")||{}).value||"Lain-Lain";
   const notes=(document.getElementById("m-tx-notes").value||"");
-  if(id){const tx=S.transactions.find(x=>x.id===id);if(tx)Object.assign(tx,{name,cat,type:txType,amount:amt,status:txStatus,notes});showToast(L("budgetUpdated"));}
+  if(id){const tx=S.transactions.find(x=>String(x.id)===String(id));if(tx)Object.assign(tx,{name,cat,type:txType,amount:amt,status:txStatus,notes});showToast(L("budgetUpdated"));}
   else{S.transactions.unshift({id:Date.now(),name,cat,type:txType,amount:amt,status:txStatus,notes,date:new Date().toISOString().split("T")[0]});showToast(L("budgetAdded"));}
   closeModal();renderPage("anggaran");
 }
 
 function buildSesForm(id){
-  const ex=id?S.seserahan.find(x=>x.id===id):null;
+  const ex=id?S.seserahan.find(x=>String(x.id)===String(id)):null;
   if(ex){sesParty=ex.party;sesStatus=ex.status;}else{sesParty="Pria";sesStatus="Belum Dibeli";}
   const isEdit=!!ex;
   const sts=[["Belum Dibeli",L("notBought")],["Sedang Dikemas",L("beingPacked")],["Sudah Dibeli",L("bought")],["Sudah Dihias",L("decorated")],["Siap",L("ready")]];
@@ -722,13 +722,13 @@ function saveSes(id){
   if(!name){showToast(L("fillName"));return;}
   const cat=(document.getElementById("cat-hid-ses")||{}).value||"Lain-Lain";
   const price=moneyVal("m-ses-price");
-  if(id){const item=S.seserahan.find(x=>x.id===id);if(item)Object.assign(item,{name,cat,party:sesParty,price,status:sesStatus});showToast(L("sesUpdated"));}
+  if(id){const item=S.seserahan.find(x=>String(x.id)===String(id));if(item)Object.assign(item,{name,cat,party:sesParty,price,status:sesStatus});showToast(L("sesUpdated"));}
   else{S.seserahan.push({id:Date.now(),name,cat,party:sesParty,price,status:sesStatus});showToast(L("sesAdded"));}
   closeModal();renderPage("seserahan");
 }
 
 function buildGuestForm(id){
-  const ex=id?S.guests.find(x=>x.id===id):null;
+  const ex=id?S.guests.find(x=>String(x.id)===String(id)):null;
   if(ex){gGroup=ex.group;gRsvp=ex.rsvp;gCount=ex.count;gVip=ex.vip;}else{gGroup="Keluarga";gRsvp="Menunggu";gCount=1;gVip=false;}
   const isEdit=!!ex;
   const grps=[["Keluarga",L("family")],["Teman",L("friend")],["Rekan Kerja",L("colleague")],["Lainnya",L("other")]];
@@ -761,13 +761,13 @@ function saveGuest(id){
   if(!name){showToast(L("fillName"));return;}
   gCount=parseInt((document.getElementById("g-cnt-disp")||{}).textContent)||1;
   const contact=(document.getElementById("m-g-contact").value||"");
-  if(id){const g=S.guests.find(x=>x.id===id);if(g)Object.assign(g,{name,group:gGroup,contact,count:gCount,vip:gVip,rsvp:gRsvp});showToast(L("guestUpdated"));}
+  if(id){const g=S.guests.find(x=>String(x.id)===String(id));if(g)Object.assign(g,{name,group:gGroup,contact,count:gCount,vip:gVip,rsvp:gRsvp});showToast(L("guestUpdated"));}
   else{S.guests.push({id:Date.now(),name,group:gGroup,contact,count:gCount,vip:gVip,rsvp:gRsvp});showToast(L("guestAdded"));}
   closeModal();renderPage("tamu");
 }
 
 function buildDocForm(id){
-  const ex=id?S.documents.find(x=>x.id===id):null;
+  const ex=id?S.documents.find(x=>String(x.id)===String(id)):null;
   if(ex)docSt=ex.status;else docSt="Belum Diurus";
   const isEdit=!!ex;
   const sts=[["Belum Diurus",L("notHandled")],["Sedang Diproses",L("inProcess")],["Selesai",L("done")]];
@@ -788,13 +788,13 @@ function saveDoc(id){
   if(!name){showToast(L("fillName"));return;}
   const desc=(document.getElementById("m-doc-desc").value||"");
   const notes=(document.getElementById("m-doc-notes").value||"");
-  if(id){const d=S.documents.find(x=>x.id===id);if(d)Object.assign(d,{name,desc,status:docSt,notes});showToast(L("docUpdated"));}
+  if(id){const d=S.documents.find(x=>String(x.id)===String(id));if(d)Object.assign(d,{name,desc,status:docSt,notes});showToast(L("docUpdated"));}
   else{S.documents.push({id:Date.now(),name,desc,status:docSt,notes});showToast(L("docAdded"));}
   closeModal();renderPage("dokumen");
 }
 
 function buildVendorForm(id){
-  const ex=id?S.vendors.find(x=>x.id===id):null;
+  const ex=id?S.vendors.find(x=>String(x.id)===String(id)):null;
   if(ex)vOk=ex.ok;else vOk=false;
   vendorPhoto=ex?(ex.photo||null):null;
   const isEdit=!!ex;
@@ -835,7 +835,7 @@ function saveVendor(id){
   const cost=moneyVal("m-v-cost");
   const notes=(document.getElementById("m-v-notes").value||"");
   const photo=vendorPhoto;
-  if(id){const v=S.vendors.find(x=>x.id===id);if(v)Object.assign(v,{name,cat,desc,phone,email,cost,ok:vOk,notes,photo});showToast(L("vendorUpdated"));}
+  if(id){const v=S.vendors.find(x=>String(x.id)===String(id));if(v)Object.assign(v,{name,cat,desc,phone,email,cost,ok:vOk,notes,photo});showToast(L("vendorUpdated"));}
   else{S.vendors.push({id:Date.now(),name,cat,desc,phone,email,cost,ok:false,notes,photo});showToast(L("vendorAdded"));}
   closeModal();renderPage("vendor");vendorPhoto=null;
 }
@@ -1027,14 +1027,14 @@ function openLangPicker(){
    FIREBASE CONFIG
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const FB_CONFIG = {
-  apiKey: "AIzaSyB_aIM1VgWiMkt0hnkFG7LVwLgxLElo9Ng",
-  authDomain: "mantapps-mobilewedding.firebaseapp.com",
-  databaseURL: "https://mantapps-mobilewedding-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "mantapps-mobilewedding",
-  storageBucket: "mantapps-mobilewedding.firebasestorage.app",
+  apiKey:            "AIzaSyB_aIM1VgWiMkt0hnkFG7LVwLgxLElo9Ng",
+  authDomain:        "mantapps-mobilewedding.firebaseapp.com",
+  projectId:         "mantapps-mobilewedding",
+  storageBucket:     "mantapps-mobilewedding.firebasestorage.app",
   messagingSenderId: "814668848361",
-  appId: "1:814668848361:web:fcb33dcd6739b6bb826478",
-  measurementId: "G-3T13MNZ6NZ"
+  appId:             "1:814668848361:web:fcb33dcd6739b6bb826478",
+  measurementId:     "G-3T13MNZ6NZ",
+  databaseURL:       "https://mantapps-mobilewedding-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1189,11 +1189,26 @@ function startRTDBListener(){
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SYNC HELPERS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-async function syncTx(id){const t=id?S.transactions.find(x=>String(x.id)===String(id)):S.transactions[0];if(t)await fbSave("transactions",t);}
-async function syncSes(id){const t=id?S.seserahan.find(x=>String(x.id)===String(id)):S.seserahan[S.seserahan.length-1];if(t)await fbSave("seserahan",t);}
-async function syncGuest(id){const t=id?S.guests.find(x=>String(x.id)===String(id)):S.guests[S.guests.length-1];if(t)await fbSave("guests",t);}
-async function syncDoc(id){const t=id?S.documents.find(x=>String(x.id)===String(id)):S.documents[S.documents.length-1];if(t)await fbSave("documents",t);}
-async function syncVendor(id){const t=id?S.vendors.find(x=>String(x.id)===String(id)):S.vendors[S.vendors.length-1];if(t)await fbSave("vendors",t);}
+async function syncTx(id){
+  const t=id?S.transactions.find(x=>String(x.id)===String(id)):S.transactions[0];
+  if(t)await fbSave("transactions",t);
+}
+async function syncSes(id){
+  const t=id?S.seserahan.find(x=>String(x.id)===String(id)):S.seserahan[S.seserahan.length-1];
+  if(t)await fbSave("seserahan",t);
+}
+async function syncGuest(id){
+  const t=id?S.guests.find(x=>String(x.id)===String(id)):S.guests[S.guests.length-1];
+  if(t)await fbSave("guests",t);
+}
+async function syncDoc(id){
+  const t=id?S.documents.find(x=>String(x.id)===String(id)):S.documents[S.documents.length-1];
+  if(t)await fbSave("documents",t);
+}
+async function syncVendor(id){
+  const t=id?S.vendors.find(x=>String(x.id)===String(id)):S.vendors[S.vendors.length-1];
+  if(t)await fbSave("vendors",t);
+}
 async function syncSettings(){await fbSaveMeta("settings",{couple:S.couple,income:S.income,lang:S.lang,darkMode:S.darkMode,profilePhoto:S.profilePhoto||null,coverPhoto:S.coverPhoto||null});}
 async function syncNotif(){await fbSaveMeta("notif",{...S.notif});}
 
@@ -1283,7 +1298,7 @@ function showLoginScreen(){
 
   wrapper.innerHTML=""
     +"<div style='text-align:center;margin-bottom:24px'>"
-    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding amp; Planner</div>"
+    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding Planner</div>"
     +"<div style='font-size:12.5px;color:#6B6460;margin-top:4px'>by Tedi & Nadya</div>"
     +"</div>"
     +"<div id='fb-tabs' style='display:flex;background:#F0EBE6;border-radius:12px;padding:3px;margin-bottom:20px'>"
@@ -1394,19 +1409,40 @@ document.addEventListener("click",function(e){
 (function(){
   /* --- saveTx --- */
   var _sTx=saveTx;
-  saveTx=function(id){_sTx(id);syncTx(id);};
+  saveTx=function(id){
+    _sTx(id);
+    /* Jika add baru (id null), ambil item terbaru dari array */
+    var syncId=id||S.transactions[0].id;
+    syncTx(syncId);
+  };
   /* --- saveSes --- */
   var _sSes=saveSes;
-  saveSes=function(id){_sSes(id);syncSes(id);};
+  saveSes=function(id){
+    _sSes(id);
+    var syncId=id||S.seserahan[S.seserahan.length-1].id;
+    syncSes(syncId);
+  };
   /* --- saveGuest --- */
   var _sG=saveGuest;
-  saveGuest=function(id){_sG(id);syncGuest(id);};
+  saveGuest=function(id){
+    _sG(id);
+    var syncId=id||S.guests[S.guests.length-1].id;
+    syncGuest(syncId);
+  };
   /* --- saveDoc --- */
   var _sD=saveDoc;
-  saveDoc=function(id){_sD(id);syncDoc(id);};
+  saveDoc=function(id){
+    _sD(id);
+    var syncId=id||S.documents[S.documents.length-1].id;
+    syncDoc(syncId);
+  };
   /* --- saveVendor --- */
   var _sV=saveVendor;
-  saveVendor=function(id){_sV(id);syncVendor(id);};
+  saveVendor=function(id){
+    _sV(id);
+    var syncId=id||S.vendors[S.vendors.length-1].id;
+    syncVendor(syncId);
+  };
   /* --- delItem --- */
   var _del=delItem;
   delItem=function(type,id){
@@ -1494,7 +1530,7 @@ document.addEventListener("click",function(e){
       var prev=b.onclick;
       b.onclick=function(){
         var vid=b.dataset.okVendor;
-        var v=S.vendors.find(x=>x.id===vid||x.id===+vid);
+        var v=S.vendors.find(x=>String(x.id)===String(vid));
         if(v){v.ok=!v.ok;refreshVendorList();fbSave("vendors",v);}
       };
     });
