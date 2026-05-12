@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Union & Grace — Wedding Planner</title>
+<title>Tedy & Nadya — Wedding Planner</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="maNTapps_MobileWedding_iphone.PNG">
+<link rel="icon" type="image/png" sizes="192x192" href="maNTapps_MobileWedding_android.PNG">
+<link rel="icon" type="image/png" sizes="512x512" href="maNTapps_MobileWedding_splash.PNG">
+<meta name="apple-mobile-web-app-title" content="Mobile Wedding">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#061a0e">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--rose:#7D3C52;--rose-light:#F5D6E3;--rose-dark:#5C2A3C;--rose-mid:#C0637D;--teal:#3D7A6E;--teal-light:#E2F5F0;--teal-dark:#2A5C52;--cream:#FAF8F5;--white:#FFFFFF;--border:#E5DDD6;--border-light:#EEE8E2;--gray:#6B6460;--gray-light:#F0EBE6;--dark:#2C1A14;--pink-bg:#FDE8F2;--pink-card:#F9EEF4;--amber-bg:#FEF3E2;--amber:#8B5E1A;--success-bg:#E2F5F0;--success:#1A6B55;--danger-bg:#FFECEC;--danger:#8B2020;--bg-page:#E0D8D0;--shadow:rgba(0,0,0,.15);}
@@ -136,7 +143,7 @@ textarea.input-field:focus{border-color:var(--teal)}
 <body>
 <div class="app" id="app-root">
   <div class="header">
-    <span class="brand">Union &amp; Grace</span>
+    <span class="brand">Tedy &amp; Nadya</span>
     <div class="hicons">
       <button class="hicon" id="btn-notif"><i class="ti ti-bell"></i></button>
       <button class="hicon" id="btn-profile"><i class="ti ti-user-circle"></i></button>
@@ -174,7 +181,7 @@ en:{tabOverview:"Overview",tabBudget:"Budget",tabSeserahan:"Dowry",tabGuests:"Gu
 
 /* ── STATE ── */
 const S={
-  couple:{p1:"Sarah",p2:"James",date:"2024-10-12",venue:"The Glasshouse, New York",theme:"Ethereal Minimal"},
+  couple:{p1:"Nadya",p2:"Tedy",date:"2024-10-12",venue:"The Glasshouse, New York",theme:"Ethereal Minimal"},
   income:250000000,
   transactions:[
     {id:1,name:"DP Katering Utama",cat:"Catering",type:"out",amount:20000000,status:"Lunas",date:"2024-10-05",notes:""},
@@ -870,6 +877,16 @@ function initSubEvents(sub){
     if(dm2)dm2.onclick=function(){const on=this.style.background.includes("teal");this.style.background=on?"var(--border)":"var(--teal)";this.querySelector(".knob").style.left=on?"3px":"23px";showToast(on?L("twoFAOff"):L("twoFAOn"));};
     const sp2=sp.querySelector("#save-pass-btn");if(sp2)sp2.onclick=()=>showToast(L("passUpdated"));
     sp.querySelectorAll("[data-logout-dev]").forEach(b=>b.onclick=()=>showToast(L("deviceLogout")));
+    sp.querySelectorAll(".pass-eye-btn").forEach(btn=>{
+      btn.onclick=function(){
+        const inp=sp.querySelector("#"+this.dataset.target);
+        if(!inp)return;
+        const show=inp.type==="password";
+        inp.type=show?"text":"password";
+        this.innerHTML=show?"<i class=\"ti ti-eye-off\" style=\"font-size:16px\"></i>":"<i class=\"ti ti-eye\" style=\"font-size:16px\"></i>";
+        this.style.color=show?"var(--teal)":"var(--gray)";
+      };
+    });
   }
   if(sub==="notif"){
     sp.querySelectorAll(".toggle-sw[data-notif-key]").forEach(sw=>sw.onclick=function(){const k=this.dataset.notifKey;S.notif[k]=!S.notif[k];this.style.background=S.notif[k]?"var(--rose)":"var(--border)";this.querySelector(".knob").style.left=S.notif[k]?"23px":"3px";});
@@ -885,8 +902,8 @@ function subMain(){
   const d=new Date(S.couple.date);const days=Math.max(0,Math.ceil((d-new Date())/(1000*60*60*24)));
   const avatar=S.profilePhoto?`<img src="${S.profilePhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:`<i class="ti ti-heart-handshake" style="font-size:34px;color:var(--rose)"></i>`;
   return `<div class="back-header">
-    <button class="back-btn" id="sub-logout" title="Kembali"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
-    <span class="brand">Union &amp; Grace</span>
+    <button class="back-btn" id="sub-back-main" title="Kembali" onclick="closeSub()"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
+    <span class="brand">Tedy &amp; Nadya</span>
     <div style="margin-left:auto;display:flex;gap:6px">
       <button class="hicon" onclick="showToast(L('noNotif'))"><i class="ti ti-bell"></i></button>
     </div>
@@ -947,9 +964,12 @@ function subSecurity(){
   <div style="padding:16px 18px 28px">
     <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:13px">
       <div style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:14px"><i class="ti ti-lock" style="font-size:18px;color:var(--rose)"></i>${L("changePass")}</div>
-      <span class="field-label">${L("currentPass").toUpperCase()}</span><input type="password" class="input-field" value="••••••••">
-      <span class="field-label">${L("newPass").toUpperCase()}</span><input type="password" class="input-field" value="••••••••">
-      <span class="field-label">${L("confirmPass").toUpperCase()}</span><input type="password" class="input-field" value="••••••••">
+      <span class="field-label">${L("currentPass").toUpperCase()}</span>
+      <div style="position:relative"><input type="password" id="pass-current" class="input-field" placeholder="••••••••" style="padding-right:32px"><button type="button" class="pass-eye-btn" data-target="pass-current" style="position:absolute;right:0;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:var(--gray);padding:4px"><i class="ti ti-eye" style="font-size:16px"></i></button></div>
+      <span class="field-label">${L("newPass").toUpperCase()}</span>
+      <div style="position:relative"><input type="password" id="pass-new" class="input-field" placeholder="••••••••" style="padding-right:32px"><button type="button" class="pass-eye-btn" data-target="pass-new" style="position:absolute;right:0;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:var(--gray);padding:4px"><i class="ti ti-eye" style="font-size:16px"></i></button></div>
+      <span class="field-label">${L("confirmPass").toUpperCase()}</span>
+      <div style="position:relative"><input type="password" id="pass-confirm" class="input-field" placeholder="••••••••" style="padding-right:32px"><button type="button" class="pass-eye-btn" data-target="pass-confirm" style="position:absolute;right:0;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;color:var(--gray);padding:4px"><i class="ti ti-eye" style="font-size:16px"></i></button></div>
       <button id="save-pass-btn" style="width:100%;background:linear-gradient(135deg,var(--rose-light),var(--teal-light));color:var(--teal-dark);border:none;border-radius:50px;padding:12px;font-family:'DM Sans',sans-serif;font-size:13.5px;cursor:pointer;font-weight:600;margin-top:14px">${L("saveChanges")}</button>
     </div>
     <div style="background:var(--white);border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:13px">
@@ -1167,8 +1187,8 @@ function showLoginScreen(){
 
   wrapper.innerHTML=""
     +"<div style='text-align:center;margin-bottom:24px'>"
-    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Union &amp; Grace</div>"
-    +"<div style='font-size:12.5px;color:#6B6460;margin-top:4px'>Wedding Planner</div>"
+    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding &amp; Planner</div>"
+    +"<div style='font-size:12.5px;color:#6B6460;margin-top:4px'>by Tedi & Nadya</div>"
     +"</div>"
     +"<div id='fb-tabs' style='display:flex;background:#F0EBE6;border-radius:12px;padding:3px;margin-bottom:20px'>"
     +"<button id='fb-tl' style='flex:1;padding:9px;border:none;border-radius:9px;font-family:DM Sans,sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;background:#fff;color:#2C1A14;box-shadow:0 1px 3px rgba(0,0,0,.1)'>Masuk</button>"
