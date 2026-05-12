@@ -143,7 +143,7 @@ textarea.input-field:focus{border-color:var(--teal)}
 <body>
 <div class="app" id="app-root">
   <div class="header">
-    <span class="brand">Tedi &amp; Nadya</span>
+    <span class="brand">Wedding Planne</span>
     <div class="hicons">
       <button class="hicon" id="btn-notif"><i class="ti ti-bell"></i></button>
       <button class="hicon" id="btn-profile"><i class="ti ti-user-circle"></i></button>
@@ -866,8 +866,15 @@ function initSubEvents(sub){
     const cb=sp.querySelector("#cover-photo-btn");
     if(cb)cb.onclick=()=>pickPhoto(d=>{
       S.coverPhoto=d;
+      /* Update preview di subDetail */
       const prev=sp.querySelector("#cover-photo-preview");
-      if(prev){prev.innerHTML="";const img=document.createElement("img");img.src=d;img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:14px";prev.appendChild(img);const ov2=document.createElement("div");ov2.className="photo-overlay";ov2.textContent=L("changeCover");prev.appendChild(ov2);}
+      if(prev){
+        prev.innerHTML="";
+        const img=document.createElement("img");img.src=d;img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:14px";prev.appendChild(img);
+        const ov2=document.createElement("div");ov2.className="photo-overlay";ov2.textContent=L("changeCover");prev.appendChild(ov2);
+      }
+      /* Langsung sync cover ke Firestore */
+      syncSettings();
     });
     sp.querySelectorAll("[data-theme]").forEach(p=>p.onclick=()=>{selTheme=p.dataset.theme;sp.querySelectorAll("[data-theme]").forEach(x=>x.classList.toggle("active",x===p));});
     const sv=sp.querySelector("#save-detail-btn");if(sv)sv.onclick=saveDetail;
@@ -875,7 +882,40 @@ function initSubEvents(sub){
   if(sub==="security"){
     const dm2=sp.querySelector(".toggle-sw");
     if(dm2)dm2.onclick=function(){const on=this.style.background.includes("teal");this.style.background=on?"var(--border)":"var(--teal)";this.querySelector(".knob").style.left=on?"3px":"23px";showToast(on?L("twoFAOff"):L("twoFAOn"));};
-    const sp2=sp.querySelector("#save-pass-btn");if(sp2)sp2.onclick=()=>showToast(L("passUpdated"));
+    const sp2=sp.querySelector("#save-pass-btn");
+    if(sp2)sp2.onclick=async function(){
+      const curInp=sp.querySelector("#pass-current");
+      const newInp=sp.querySelector("#pass-new");
+      const cfmInp=sp.querySelector("#pass-confirm");
+      const cur=(curInp.value||"").trim();
+      const nw=(newInp.value||"").trim();
+      const cfm=(cfmInp.value||"").trim();
+      if(!cur||!nw||!cfm){showToast("Semua field wajib diisi");return;}
+      if(nw.length<6){showToast("Kata sandi baru minimal 6 karakter");return;}
+      if(nw!==cfm){showToast("Konfirmasi kata sandi tidak cocok");return;}
+      if(!_fbReady||!_auth||!_auth.currentUser){showToast("Tidak terhubung ke akun");return;}
+      sp2.textContent="Menyimpan...";sp2.disabled=true;
+      try{
+        /* Re-authenticate dulu dengan kata sandi lama */
+        const cred=_AU.credential(_auth.currentUser.email,cur);
+        await _AU.reauthenticate(_auth.currentUser,cred);
+        /* Update password */
+        await _AU.updatePassword(_auth.currentUser,nw);
+        /* Kosongkan form */
+        curInp.value="";newInp.value="";cfmInp.value="";
+        /* Reset eye icons ke password mode */
+        sp.querySelectorAll(".pass-eye-btn").forEach(btn=>{
+          const target=sp.querySelector("#"+btn.dataset.target);
+          if(target)target.type="password";
+          btn.innerHTML='<i class="ti ti-eye" style="font-size:16px"></i>';
+          btn.style.color="var(--gray)";
+        });
+        showToast(L("passUpdated"));
+      }catch(e){
+        const ERR={"auth/wrong-password":"Kata sandi saat ini salah","auth/invalid-credential":"Kata sandi saat ini salah","auth/too-many-requests":"Terlalu banyak percobaan, coba lagi nanti","auth/weak-password":"Kata sandi baru terlalu lemah"};
+        showToast(ERR[e.code]||("Gagal: "+e.message));
+      }finally{sp2.textContent=L("saveChanges");sp2.disabled=false;}
+    };
     sp.querySelectorAll("[data-logout-dev]").forEach(b=>b.onclick=()=>showToast(L("deviceLogout")));
     sp.querySelectorAll(".pass-eye-btn").forEach(btn=>{
       btn.onclick=function(){
@@ -908,14 +948,17 @@ function subMain(){
       <button class="hicon" onclick="showToast(L('noNotif'))"><i class="ti ti-bell"></i></button>
     </div>
   </div>
-  <div class="couple-card">
+  <div class="couple-card" id="couple-card-wrap" style="${S.coverPhoto?`background:none;padding:0;overflow:hidden;position:relative`:``}">
+    ${S.coverPhoto?`<img src="${S.coverPhoto}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;z-index:0"><div style="position:absolute;inset:0;background:rgba(0,0,0,.35);border-radius:20px;z-index:1"></div>`:""}
+    <div style="position:relative;z-index:2;padding:${S.coverPhoto?"24px 18px":"0"}">
     <div style="position:relative;width:78px;margin:0 auto 12px;cursor:pointer" id="profile-photo-btn">
       <div class="avatar">${avatar}</div>
       <div style="position:absolute;bottom:0;right:0;width:24px;height:24px;border-radius:50%;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid var(--white)"><i class="ti ti-camera" style="font-size:11px"></i></div>
     </div>
-    <div class="couple-name" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark)">${S.couple.p1} &amp; ${S.couple.p2}</div>
-    <div style="font-size:13px;color:var(--gray);margin-top:3px">${new Date(S.couple.date).toLocaleDateString(S.lang==="en"?"en-US":"id-ID",{day:"numeric",month:"long",year:"numeric"})}</div>
+    <div class="couple-name" style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:${S.coverPhoto?"#fff":"var(--dark)"}">${S.couple.p1} &amp; ${S.couple.p2}</div>
+    <div style="font-size:13px;color:${S.coverPhoto?"rgba(255,255,255,.8)":"var(--gray)"};margin-top:3px">${new Date(S.couple.date).toLocaleDateString(S.lang==="en"?"en-US":"id-ID",{day:"numeric",month:"long",year:"numeric"})}</div>
     <div class="days-pill"><div style="font-size:9.5px;font-weight:600;color:var(--gray);letter-spacing:.6px;text-transform:uppercase">${L("daysToGo")}</div><div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-top:2px">${days} <span style="font-size:14px;font-weight:400">${L("days")}</span></div></div>
+    </div>
   </div>
   <div style="padding:0 18px 28px">
     <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:14px">${L("settings")}</div>
@@ -1044,60 +1087,47 @@ let _db=null,_auth=null,_uid=null,_fbReady=false,_FS=null,_AU=null;
 let _rtdb=null,_RD=null,_rtdbReady=false; /* Realtime Database */
 const rtPath=(path)=>`users/${_uid}/${path}`;
 
-const userDocRef=(col,id)=>_FS.doc(_db,"users",_uid,col,String(id));
-const userColRef=(col)=>_FS.collection(_db,"users",_uid,col);
+/* userDocRef & userColRef tidak digunakan — collections hanya ke RTDB */
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   DUAL-WRITE: FIRESTORE + REALTIME DB
+   COLLECTIONS → RTDB ONLY
+   META/SETTINGS → FIRESTORE ONLY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function fbSave(col,item){
-  if(!_uid)return;
-  const clean=JSON.parse(JSON.stringify({...item,id:String(item.id),_t:Date.now()}));
-  const writes=[];
-  /* Firestore */
-  if(_fbReady&&_FS){
-    writes.push(_FS.setDoc(userDocRef(col,item.id),clean).catch(e=>console.error("FS save",col,e.message)));
-  }
-  /* Realtime Database */
-  if(_rtdbReady&&_RD){
+  /* Data collections (tx, tamu, vendor, dll) HANYA ke RTDB */
+  if(!_rtdbReady||!_RD||!_uid)return;
+  try{
+    const clean=JSON.parse(JSON.stringify({...item,id:String(item.id),_t:Date.now()}));
     const ref=_RD.ref(_rtdb,rtPath(`${col}/${String(item.id)}`));
-    writes.push(_RD.set(ref,clean).catch(e=>console.error("RTDB save",col,e.message)));
-  }
-  await Promise.all(writes);
-  showSyncBadge();
+    await _RD.set(ref,clean);
+    showSyncBadge();
+  }catch(e){console.error("RTDB save",col,e.message);}
 }
 
 async function fbDelete(col,id){
-  if(!_uid)return;
-  const writes=[];
-  if(_fbReady&&_FS){
-    writes.push(_FS.deleteDoc(userDocRef(col,id)).catch(e=>console.error("FS delete",col,e.message)));
-  }
-  if(_rtdbReady&&_RD){
+  /* Hapus collection item HANYA dari RTDB */
+  if(!_rtdbReady||!_RD||!_uid)return;
+  try{
     const ref=_RD.ref(_rtdb,rtPath(`${col}/${String(id)}`));
-    writes.push(_RD.remove(ref).catch(e=>console.error("RTDB delete",col,e.message)));
-  }
-  await Promise.all(writes);
-  showSyncBadge();
+    await _RD.remove(ref);
+    showSyncBadge();
+  }catch(e){console.error("RTDB delete",col,e.message);}
 }
 
 async function fbSaveMeta(docId,data){
-  if(!_uid)return;
-  const clean=JSON.parse(JSON.stringify({...data,_t:Date.now()}));
-  const writes=[];
-  if(_fbReady&&_FS){
-    writes.push(_FS.setDoc(_FS.doc(_db,"users",_uid,"meta",docId),clean).catch(e=>console.error("FS meta",docId,e.message)));
-  }
-  if(_rtdbReady&&_RD){
-    const ref=_RD.ref(_rtdb,rtPath(`meta/${docId}`));
-    writes.push(_RD.set(ref,clean).catch(e=>console.error("RTDB meta",docId,e.message)));
-  }
-  await Promise.all(writes);
-  showSyncBadge();
+  /* Profil & settings HANYA disimpan ke Firestore (bukan RTDB) */
+  if(!_fbReady||!_FS||!_uid)return;
+  try{
+    const clean=JSON.parse(JSON.stringify({...data,_t:Date.now()}));
+    await _FS.setDoc(_FS.doc(_db,"users",_uid,"meta",docId),clean);
+    showSyncBadge();
+  }catch(e){console.error("FS meta",docId,e.message);}
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   LOAD DATA (RTDB utama, Firestore fallback)
+   LOAD DATA
+   • Firestore → meta/settings, meta/notif
+   • RTDB      → semua collections
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function loadFromRTDB(){
   if(!_rtdbReady||!_RD||!_uid)return false;
@@ -1105,18 +1135,7 @@ async function loadFromRTDB(){
     const snap=await _RD.get(_RD.ref(_rtdb,`users/${_uid}`));
     if(!snap.exists())return false;
     const d=snap.val();
-    /* meta/settings */
-    if(d.meta&&d.meta.settings){
-      const st=d.meta.settings;
-      if(st.couple)Object.assign(S.couple,st.couple);
-      if(st.income!=null)S.income=st.income;
-      if(st.lang)S.lang=st.lang;
-      if(st.darkMode!=null)S.darkMode=st.darkMode;
-      if(st.profilePhoto)S.profilePhoto=st.profilePhoto;
-      if(st.coverPhoto)S.coverPhoto=st.coverPhoto;
-    }
-    /* meta/notif */
-    if(d.meta&&d.meta.notif)Object.assign(S.notif,d.meta.notif);
+    /* Meta/settings & notif TIDAK diload dari RTDB — hanya dari Firestore */
     /* collections */
     const cols=["transactions","seserahan","guests","documents","vendors"];
     cols.forEach(col=>{
@@ -1131,7 +1150,8 @@ async function loadFromRTDB(){
 }
 
 async function loadFromFirestore(){
-  if(!_fbReady||!_uid)return;
+  /* Firestore HANYA untuk meta: settings & notif */
+  if(!_fbReady||!_FS||!_uid)return;
   try{
     const settSnap=await _FS.getDoc(_FS.doc(_db,"users",_uid,"meta","settings"));
     if(settSnap.exists()){
@@ -1145,16 +1165,7 @@ async function loadFromFirestore(){
     }
     const notifSnap=await _FS.getDoc(_FS.doc(_db,"users",_uid,"meta","notif"));
     if(notifSnap.exists())Object.assign(S.notif,notifSnap.data());
-    const cols=["transactions","seserahan","guests","documents","vendors"];
-    for(const col of cols){
-      const snap=await _FS.getDocs(userColRef(col));
-      if(!snap.empty){
-        const items=[];
-        snap.forEach(d=>{const item=d.data();delete item._t;items.push(item);});
-        if(col==="transactions")items.sort((a,b)=>String(b.id).localeCompare(String(a.id)));
-        S[col]=items;
-      }
-    }
+    /* Collections tidak dibaca dari Firestore — semua dari RTDB */
   }catch(e){console.error("loadFromFirestore",e.message);}
 }
 
@@ -1231,17 +1242,17 @@ async function initFirebase(){
     _rtdbReady=true;
 
     _FS={doc:fb.doc,setDoc:fb.setDoc,getDoc:fb.getDoc,collection:fb.collection,getDocs:fb.getDocs,deleteDoc:fb.deleteDoc};
-    _AU={signIn:au.signInWithEmailAndPassword,register:au.createUserWithEmailAndPassword,signOut:au.signOut,onAuthStateChanged:au.onAuthStateChanged};
+    _AU={signIn:au.signInWithEmailAndPassword,register:au.createUserWithEmailAndPassword,signOut:au.signOut,onAuthStateChanged:au.onAuthStateChanged,credential:(email,pass)=>au.EmailAuthProvider.credential(email,pass),reauthenticate:au.reauthenticateWithCredential,updatePassword:au.updatePassword};
     _fbReady=true;
 
     _AU.onAuthStateChanged(_auth,async user=>{
       if(user){
         _uid=user.uid;
         showLoadingOverlay("Memuat data...");
-        /* Try RTDB first (faster), fallback to Firestore */
-        const loaded=await loadFromRTDB();
-        if(!loaded)await loadFromFirestore();
-        startRTDBListener(); /* live sync */
+        /* Settings/profil SELALU dari Firestore, collections dari RTDB (lebih cepat) */
+        await loadFromFirestore(); /* settings, notif — Firestore only */
+        await loadFromRTDB();     /* collections (tx, tamu, dll) — RTDB */
+        startRTDBListener();      /* live sync untuk collections */
         hideLoadingOverlay();
         launchApp();
       }else{
@@ -1262,9 +1273,9 @@ let _syncTmr=null;
 function showSyncBadge(mode){
   let b=document.getElementById("sync-badge");
   if(!b){b=document.createElement("div");b.id="sync-badge";b.style.cssText="position:fixed;top:70px;right:14px;background:var(--teal);color:#fff;border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:5px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none";document.body.appendChild(b);}
-  const dual=_fbReady&&_rtdbReady;
-  b.innerHTML=(dual?'<i class="ti ti-shield-check" style="font-size:13px"></i> Tersimpan (2 lapisan)':'<i class="ti ti-cloud-check" style="font-size:13px"></i> Tersimpan');
-  b.style.background=dual?"var(--teal)":"var(--rose-mid)";
+  const hasRTDB=_rtdbReady;
+  b.innerHTML=(hasRTDB?'<i class="ti ti-cloud-check" style="font-size:13px"></i> Tersimpan':'<i class="ti ti-device-floppy" style="font-size:13px"></i> Tersimpan lokal');
+  b.style.background=hasRTDB?"var(--teal)":"var(--rose-mid)";
   b.style.opacity="1";clearTimeout(_syncTmr);_syncTmr=setTimeout(()=>b.style.opacity="0",2800);
 }
 
@@ -1298,7 +1309,7 @@ function showLoginScreen(){
 
   wrapper.innerHTML=""
     +"<div style='text-align:center;margin-bottom:24px'>"
-    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding Planner</div>"
+    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding Planne</div>"
     +"<div style='font-size:12.5px;color:#6B6460;margin-top:4px'>by Tedi & Nadya</div>"
     +"</div>"
     +"<div id='fb-tabs' style='display:flex;background:#F0EBE6;border-radius:12px;padding:3px;margin-bottom:20px'>"
@@ -1513,6 +1524,7 @@ document.addEventListener("click",function(e){
           });
         };
       }
+      /* Re-bind after hook: ensure saveDetail also refreshes couple-card */
       /* Save detail button also syncs */
       var sv=sp.querySelector("#save-detail-btn");
       if(sv){
