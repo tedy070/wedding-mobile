@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Tedy & Nadya — Wedding Planner</title>
+<title>Tedi & Nadya — Wedding Planner</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="180x180" href="maNTapps_MobileWedding_iphone.PNG">
@@ -143,7 +143,7 @@ textarea.input-field:focus{border-color:var(--teal)}
 <body>
 <div class="app" id="app-root">
   <div class="header">
-    <span class="brand">Tedy &amp; Nadya</span>
+    <span class="brand">Tedi &amp; Nadya</span>
     <div class="hicons">
       <button class="hicon" id="btn-notif"><i class="ti ti-bell"></i></button>
       <button class="hicon" id="btn-profile"><i class="ti ti-user-circle"></i></button>
@@ -181,8 +181,8 @@ en:{tabOverview:"Overview",tabBudget:"Budget",tabSeserahan:"Dowry",tabGuests:"Gu
 
 /* ── STATE ── */
 const S={
-  couple:{p1:"Nadya",p2:"Tedy",date:"2024-10-12",venue:"The Glasshouse, New York",theme:"Ethereal Minimal"},
-  income:250000000,
+  couple:{p1:"Nadya",p2:"Tedi",date:"2024-10-12",venue:"The Glasshouse, New York",theme:"Ethereal Minimal"},
+  income:0,
   transactions:[
     {id:1,name:"DP Katering Utama",cat:"Catering",type:"out",amount:20000000,status:"Lunas",date:"2024-10-05",notes:""},
     {id:2,name:"Tabungan Bersama",cat:"Tabungan",type:"in",amount:50000000,status:"Selesai",date:"2024-10-03",notes:""},
@@ -903,7 +903,7 @@ function subMain(){
   const avatar=S.profilePhoto?`<img src="${S.profilePhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:`<i class="ti ti-heart-handshake" style="font-size:34px;color:var(--rose)"></i>`;
   return `<div class="back-header">
     <button class="back-btn" id="sub-back-main" title="Kembali" onclick="closeSub()"><i class="ti ti-arrow-left" style="font-size:16px"></i></button>
-    <span class="brand">Tedy &amp; Nadya</span>
+    <span class="brand">Tedi &amp; Nadya</span>
     <div style="margin-left:auto;display:flex;gap:6px">
       <button class="hicon" onclick="showToast(L('noNotif'))"><i class="ti ti-bell"></i></button>
     </div>
@@ -1027,53 +1027,109 @@ function openLangPicker(){
    FIREBASE CONFIG
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const FB_CONFIG = {
-  apiKey:            "AIzaSyB_aIM1VgWiMkt0hnkFG7LVwLgxLElo9Ng",
-  authDomain:        "mantapps-mobilewedding.firebaseapp.com",
-  projectId:         "mantapps-mobilewedding",
-  storageBucket:     "mantapps-mobilewedding.firebasestorage.app",
+  apiKey: "AIzaSyB_aIM1VgWiMkt0hnkFG7LVwLgxLElo9Ng",
+  authDomain: "mantapps-mobilewedding.firebaseapp.com",
+  databaseURL: "https://mantapps-mobilewedding-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "mantapps-mobilewedding",
+  storageBucket: "mantapps-mobilewedding.firebasestorage.app",
   messagingSenderId: "814668848361",
-  appId:             "1:814668848361:web:fcb33dcd6739b6bb826478",
-  measurementId:     "G-3T13MNZ6NZ"
+  appId: "1:814668848361:web:fcb33dcd6739b6bb826478",
+  measurementId: "G-3T13MNZ6NZ"
 };
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FIREBASE STATE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 let _db=null,_auth=null,_uid=null,_fbReady=false,_FS=null,_AU=null;
+let _rtdb=null,_RD=null,_rtdbReady=false; /* Realtime Database */
+const rtPath=(path)=>`users/${_uid}/${path}`;
 
 const userDocRef=(col,id)=>_FS.doc(_db,"users",_uid,col,String(id));
 const userColRef=(col)=>_FS.collection(_db,"users",_uid,col);
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FIRESTORE SAVE / DELETE
+   DUAL-WRITE: FIRESTORE + REALTIME DB
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function fbSave(col,item){
-  if(!_fbReady||!_uid)return;
-  try{
-    const clean=JSON.parse(JSON.stringify({...item,id:String(item.id),_t:Date.now()}));
-    await _FS.setDoc(userDocRef(col,item.id),clean);
-    showSyncBadge();
-  }catch(e){console.error("fbSave",col,e.message);}
+  if(!_uid)return;
+  const clean=JSON.parse(JSON.stringify({...item,id:String(item.id),_t:Date.now()}));
+  const writes=[];
+  /* Firestore */
+  if(_fbReady&&_FS){
+    writes.push(_FS.setDoc(userDocRef(col,item.id),clean).catch(e=>console.error("FS save",col,e.message)));
+  }
+  /* Realtime Database */
+  if(_rtdbReady&&_RD){
+    const ref=_RD.ref(_rtdb,rtPath(`${col}/${String(item.id)}`));
+    writes.push(_RD.set(ref,clean).catch(e=>console.error("RTDB save",col,e.message)));
+  }
+  await Promise.all(writes);
+  showSyncBadge();
 }
 
 async function fbDelete(col,id){
-  if(!_fbReady||!_uid)return;
-  try{await _FS.deleteDoc(userDocRef(col,id));showSyncBadge();}
-  catch(e){console.error("fbDelete",col,e.message);}
+  if(!_uid)return;
+  const writes=[];
+  if(_fbReady&&_FS){
+    writes.push(_FS.deleteDoc(userDocRef(col,id)).catch(e=>console.error("FS delete",col,e.message)));
+  }
+  if(_rtdbReady&&_RD){
+    const ref=_RD.ref(_rtdb,rtPath(`${col}/${String(id)}`));
+    writes.push(_RD.remove(ref).catch(e=>console.error("RTDB delete",col,e.message)));
+  }
+  await Promise.all(writes);
+  showSyncBadge();
 }
 
 async function fbSaveMeta(docId,data){
-  if(!_fbReady||!_uid)return;
-  try{
-    const clean=JSON.parse(JSON.stringify({...data,_t:Date.now()}));
-    await _FS.setDoc(_FS.doc(_db,"users",_uid,"meta",docId),clean);
-    showSyncBadge();
-  }catch(e){console.error("fbSaveMeta",docId,e.message);}
+  if(!_uid)return;
+  const clean=JSON.parse(JSON.stringify({...data,_t:Date.now()}));
+  const writes=[];
+  if(_fbReady&&_FS){
+    writes.push(_FS.setDoc(_FS.doc(_db,"users",_uid,"meta",docId),clean).catch(e=>console.error("FS meta",docId,e.message)));
+  }
+  if(_rtdbReady&&_RD){
+    const ref=_RD.ref(_rtdb,rtPath(`meta/${docId}`));
+    writes.push(_RD.set(ref,clean).catch(e=>console.error("RTDB meta",docId,e.message)));
+  }
+  await Promise.all(writes);
+  showSyncBadge();
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   LOAD ALL DATA
+   LOAD DATA (RTDB utama, Firestore fallback)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+async function loadFromRTDB(){
+  if(!_rtdbReady||!_RD||!_uid)return false;
+  try{
+    const snap=await _RD.get(_RD.ref(_rtdb,`users/${_uid}`));
+    if(!snap.exists())return false;
+    const d=snap.val();
+    /* meta/settings */
+    if(d.meta&&d.meta.settings){
+      const st=d.meta.settings;
+      if(st.couple)Object.assign(S.couple,st.couple);
+      if(st.income!=null)S.income=st.income;
+      if(st.lang)S.lang=st.lang;
+      if(st.darkMode!=null)S.darkMode=st.darkMode;
+      if(st.profilePhoto)S.profilePhoto=st.profilePhoto;
+      if(st.coverPhoto)S.coverPhoto=st.coverPhoto;
+    }
+    /* meta/notif */
+    if(d.meta&&d.meta.notif)Object.assign(S.notif,d.meta.notif);
+    /* collections */
+    const cols=["transactions","seserahan","guests","documents","vendors"];
+    cols.forEach(col=>{
+      if(d[col]){
+        const items=Object.values(d[col]).map(it=>{const c={...it};delete c._t;return c;});
+        if(col==="transactions")items.sort((a,b)=>String(b.id).localeCompare(String(a.id)));
+        S[col]=items;
+      }
+    });
+    return true;
+  }catch(e){console.error("loadFromRTDB",e.message);return false;}
+}
+
 async function loadFromFirestore(){
   if(!_fbReady||!_uid)return;
   try{
@@ -1089,7 +1145,6 @@ async function loadFromFirestore(){
     }
     const notifSnap=await _FS.getDoc(_FS.doc(_db,"users",_uid,"meta","notif"));
     if(notifSnap.exists())Object.assign(S.notif,notifSnap.data());
-
     const cols=["transactions","seserahan","guests","documents","vendors"];
     for(const col of cols){
       const snap=await _FS.getDocs(userColRef(col));
@@ -1104,6 +1159,34 @@ async function loadFromFirestore(){
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REALTIME LISTENER (live sync antar perangkat)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let _rtListener=null;
+function startRTDBListener(){
+  if(!_rtdbReady||!_RD||!_uid)return;
+  if(_rtListener)_rtListener();
+  const ref=_RD.ref(_rtdb,`users/${_uid}`);
+  _rtListener=()=>_RD.off(ref);
+  _RD.onValue(ref,snap=>{
+    if(!snap.exists())return;
+    const d=snap.val();
+    let changed=false;
+    /* Update collections if remote is newer */
+    const cols=["transactions","seserahan","guests","documents","vendors"];
+    cols.forEach(col=>{
+      if(d[col]){
+        const items=Object.values(d[col]).map(it=>{const c={...it};delete c._t;return c;});
+        if(col==="transactions")items.sort((a,b)=>String(b.id).localeCompare(String(a.id)));
+        const localStr=JSON.stringify(S[col]);
+        const remoteStr=JSON.stringify(items);
+        if(localStr!==remoteStr){S[col]=items;changed=true;}
+      }
+    });
+    if(changed){renderPage(curTab);showSyncBadge();}
+  });
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SYNC HELPERS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function syncTx(id){const t=id?S.transactions.find(x=>String(x.id)===String(id)):S.transactions[0];if(t)await fbSave("transactions",t);}
@@ -1115,17 +1198,23 @@ async function syncSettings(){await fbSaveMeta("settings",{couple:S.couple,incom
 async function syncNotif(){await fbSaveMeta("notif",{...S.notif});}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FIREBASE INIT
+   FIREBASE INIT (Firestore + Auth + RTDB)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 async function initFirebase(){
   try{
     const {initializeApp}=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
     const fb=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
     const au=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    const rd=await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js");
 
     const app=initializeApp(FB_CONFIG);
     _db=fb.getFirestore(app);
     _auth=au.getAuth(app);
+    /* Realtime Database */
+    _rtdb=rd.getDatabase(app);
+    _RD={ref:rd.ref,set:rd.set,get:rd.get,remove:rd.remove,onValue:rd.onValue,off:rd.off};
+    _rtdbReady=true;
+
     _FS={doc:fb.doc,setDoc:fb.setDoc,getDoc:fb.getDoc,collection:fb.collection,getDocs:fb.getDocs,deleteDoc:fb.deleteDoc};
     _AU={signIn:au.signInWithEmailAndPassword,register:au.createUserWithEmailAndPassword,signOut:au.signOut,onAuthStateChanged:au.onAuthStateChanged};
     _fbReady=true;
@@ -1134,27 +1223,34 @@ async function initFirebase(){
       if(user){
         _uid=user.uid;
         showLoadingOverlay("Memuat data...");
-        await loadFromFirestore();
+        /* Try RTDB first (faster), fallback to Firestore */
+        const loaded=await loadFromRTDB();
+        if(!loaded)await loadFromFirestore();
+        startRTDBListener(); /* live sync */
         hideLoadingOverlay();
         launchApp();
       }else{
         _uid=null;
+        if(_rtListener){_rtListener();_rtListener=null;}
         showLoginScreen();
       }
     });
   }catch(e){
     console.warn("Firebase tidak tersedia, mode lokal:",e.message);
-    _fbReady=false;
+    _fbReady=false;_rtdbReady=false;
     launchApp();
   }
 }
 
 /* ── Sync badge ── */
 let _syncTmr=null;
-function showSyncBadge(){
+function showSyncBadge(mode){
   let b=document.getElementById("sync-badge");
-  if(!b){b=document.createElement("div");b.id="sync-badge";b.style.cssText="position:fixed;top:70px;right:14px;background:var(--teal);color:#fff;border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:5px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none";b.innerHTML='<i class="ti ti-cloud-check" style="font-size:13px"></i> Tersimpan';document.body.appendChild(b);}
-  b.style.opacity="1";clearTimeout(_syncTmr);_syncTmr=setTimeout(()=>b.style.opacity="0",2200);
+  if(!b){b=document.createElement("div");b.id="sync-badge";b.style.cssText="position:fixed;top:70px;right:14px;background:var(--teal);color:#fff;border-radius:20px;padding:5px 12px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:5px;z-index:400;opacity:0;transition:opacity .3s;pointer-events:none";document.body.appendChild(b);}
+  const dual=_fbReady&&_rtdbReady;
+  b.innerHTML=(dual?'<i class="ti ti-shield-check" style="font-size:13px"></i> Tersimpan (2 lapisan)':'<i class="ti ti-cloud-check" style="font-size:13px"></i> Tersimpan');
+  b.style.background=dual?"var(--teal)":"var(--rose-mid)";
+  b.style.opacity="1";clearTimeout(_syncTmr);_syncTmr=setTimeout(()=>b.style.opacity="0",2800);
 }
 
 /* ── Loading overlay ── */
@@ -1187,7 +1283,7 @@ function showLoginScreen(){
 
   wrapper.innerHTML=""
     +"<div style='text-align:center;margin-bottom:24px'>"
-    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding &amp; Planner</div>"
+    +"<div style='font-family:Cormorant Garamond,serif;font-size:30px;color:#3D7A6E;font-style:italic;font-weight:600'>Wedding amp; Planner</div>"
     +"<div style='font-size:12.5px;color:#6B6460;margin-top:4px'>by Tedi & Nadya</div>"
     +"</div>"
     +"<div id='fb-tabs' style='display:flex;background:#F0EBE6;border-radius:12px;padding:3px;margin-bottom:20px'>"
