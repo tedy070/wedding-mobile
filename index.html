@@ -220,7 +220,7 @@ const S={
   notif:{budgEmail:true,budgPush:true,rsvpEmail:true,rsvpPush:true,docEmail:true,docPush:false,vendEmail:false,vendPush:false},
   darkMode:false,lang:"id",
   budFilter:"semua",sesFilter:"Semua",guestSearch:"",vendSearch:"",
-  profilePhoto:null,coverPhoto:null
+  profilePhoto:"Foto_Profil.jpeg"||null,coverPhoto:"Cover_Profil.jpeg"||null
 };
 
 const CATS=[
@@ -1220,7 +1220,7 @@ async function syncVendor(id){
   const t=id?S.vendors.find(x=>String(x.id)===String(id)):S.vendors[S.vendors.length-1];
   if(t)await fbSave("vendors",t);
 }
-async function syncSettings(){await fbSaveMeta("settings",{couple:S.couple,income:S.income,lang:S.lang,darkMode:S.darkMode,profilePhoto:S.profilePhoto||null,coverPhoto:S.coverPhoto||null});}
+async function syncSettings(){await fbSaveMeta("settings",{couple:S.couple,income:S.income,lang:S.lang,darkMode:S.darkMode,profilePhoto:"Foto_Profil.jpeg"||null,coverPhoto:"Cover_Profil.jpeg"||null});}
 async function syncNotif(){await fbSaveMeta("notif",{...S.notif});}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
